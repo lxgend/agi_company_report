@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中国 AGI 科创独角兽企业深度调研</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        // Chart.js CDN fallback: jsdelivr -> unpkg -> cdnjs
+        if (typeof Chart === 'undefined') {
+            document.write('<script src="https://unpkg.com/chart.js@4.4.0/dist/chart.umd.min.js"><\/script>');
+        }
+    </script>
+    <script>
+        if (typeof Chart === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"><\/script>');
+        }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -609,14 +620,19 @@
                 <div class="info-item"><div class="info-label">派系</div><div class="info-value">清华系</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">唐杰/张鹏</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2019</div></div>
-                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~511 亿港元</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~511 亿港元（IPO）</div></div>
             </div>
-            <p class="card-desc">清华系国产大模型第一梯队，GLM-5 带动商业范式转型。本地化部署见长，AutoGLM 智能体矩阵完善。</p>
+            <p class="card-desc">清华系国产大模型第一梯队，GLM-5 带动商业范式转型。本地化部署见长，AutoGLM 智能体矩阵完善。2026.01 港股上市。</p>
             <div class="paper-section">
                 <div class="paper-title">📄 关键论文 / 技术报告</div>
                 <a class="paper-link" href="https://arxiv.org/abs/2602.15763" target="_blank">
                     <span class="paper-name">GLM-5: from Vibe Coding to Agentic Engineering</span>
                     <span class="paper-venue">arXiv:2602.15763 · 2026.02 · 744B MoE，a16z 誉为"最好的开源模型"</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2508.06471" target="_blank">
+                    <span class="paper-name">GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models</span>
+                    <span class="paper-venue">arXiv:2508.06471 · 2025.08 · 355B MoE，统一 ARC 能力的开源旗舰</span>
                     <span class="paper-arrow">↗</span>
                 </a>
                 <a class="paper-link" href="https://arxiv.org/abs/2406.12793" target="_blank">
@@ -643,6 +659,16 @@
             <p class="card-desc">端侧大模型领导者，MiniCPM 系列以小参数大能力著称。端侧百万级装机，定义"AI 触达每个终端"。</p>
             <div class="paper-section">
                 <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2604.27393" target="_blank">
+                    <span class="paper-name">MiniCPM-o 4.5: Towards Real-Time Full-Duplex Omni-Modal Interaction</span>
+                    <span class="paper-venue">arXiv:2604.27393 · 2026.04 · Omni-Flow 流式全模态框架，实时全双工交互</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2506.07900" target="_blank">
+                    <span class="paper-name">MiniCPM4: Ultra-Efficient LLMs on End Devices</span>
+                    <span class="paper-venue">arXiv:2506.07900 · 2025.06 · 端侧超高效 LLM，220 倍性能提升 + 90% 模型压缩</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
                 <a class="paper-link" href="https://arxiv.org/abs/2404.06395" target="_blank">
                     <span class="paper-name">MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies</span>
                     <span class="paper-venue">arXiv:2404.06395 · 2024.04 · 1.2B/2.4B 端侧模型可扩展训练</span>
@@ -667,7 +693,7 @@
                 <div class="info-item"><div class="info-label">派系</div><div class="info-value">清华系</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">杨植麟</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023</div></div>
-                <div class="info-item"><div class="info-label">估值</div><div class="info-value">~300 亿美元</div></div>
+                <div class="info-item"><div class="info-label">估值</div><div class="info-value">~200 亿美元</div></div>
             </div>
             <p class="card-desc">以"不被定义的 LLM"为愿景，专挑底层动刀。Kimi 以长文本与 Agent 集群著称，组织极简、技术审美驱动。</p>
             <div class="paper-section">
@@ -675,6 +701,11 @@
                 <a class="paper-link" href="https://arxiv.org/abs/2602.02276" target="_blank">
                     <span class="paper-name">Kimi K2.5: Visual Agentic Intelligence</span>
                     <span class="paper-venue">arXiv:2602.02276 · 2026.02 · 开源多模态智能体模型，编程/视觉/推理 SOTA</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://huggingface.co/moonshotai/Kimi-K2.6" target="_blank">
+                    <span class="paper-name">Kimi K2.6 · 模型卡（HuggingFace）</span>
+                    <span class="paper-venue">HuggingFace · 2026.04 · 12 小时自主编码，300 Agent 集群，对标 GPT-5.4/Claude Opus 4.6</span>
                     <span class="paper-arrow">↗</span>
                 </a>
                 <a class="paper-link" href="https://arxiv.org/abs/2507.20534" target="_blank">
@@ -701,14 +732,14 @@
             <p class="card-desc">中国多模态大模型领跑者，30+ Step 系列模型。坚持"多模态+终端生态"，与吉利、OPPO、荣耀深度合作。</p>
             <div class="paper-section">
                 <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2507.19427" target="_blank">
+                    <span class="paper-name">Step-3 is Large yet Affordable: Model-system Co-design for Cost-effective Multimodal Reasoning</span>
+                    <span class="paper-venue">arXiv:2507.19427 · 2025.07 · 321B MoE/38B 激活，模型-系统协同设计降低解码成本</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
                 <a class="paper-link" href="https://zhuanlan.zhihu.com/p/1996365249390085454" target="_blank">
                     <span class="paper-name">STEP3-VL-10B Technical Report</span>
                     <span class="paper-venue">阶跃星辰 Multimodal Intelligence Team · 2026.01 · 10B 轻量化多模态基础模型</span>
-                    <span class="paper-arrow">↗</span>
-                </a>
-                <a class="paper-link" href="https://baike.baidu.com/item/Step%203/66250288" target="_blank">
-                    <span class="paper-name">Step-3 原生多模态推理模型</span>
-                    <span class="paper-venue">2025.07 开源 · MoE 321B 总参/38B 激活，多模态推理 SOTA</span>
                     <span class="paper-arrow">↗</span>
                 </a>
             </div>
@@ -725,7 +756,7 @@
                 <div class="info-item"><div class="info-label">派系</div><div class="info-value">商汤系</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">闫俊杰</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2021.12</div></div>
-                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~700 亿港元</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~700 亿港元（IPO）</div></div>
             </div>
             <p class="card-desc">中国 AI 出海标杆，Talkie 全球月活破亿。海螺 AI 视频生成商业化领先，"技术-产品-全球化变现"闭环验证。</p>
             <div class="paper-section">
@@ -759,7 +790,7 @@
                 <div class="info-item"><div class="info-label">派系</div><div class="info-value">A股转型系</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">周亚辉 / 方汉</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2008</div></div>
-                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~509 亿元</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~509 亿元（2025.11）</div></div>
             </div>
             <p class="card-desc">A股稀缺"芯片-大模型-平台-应用"全栈 AI 企业。All in AGI 战略，Skywork 系列开源 + 天工超级智能体 + Opera/DramaWave 全球化应用矩阵，海外收入占比 93%。</p>
             <div class="paper-section">
@@ -1120,7 +1151,7 @@
             <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🐋 深度求索</h5><p><strong>组织：</strong>200 人，工程文化驱动<br><strong>人才：</strong>年轻工程师为主，无大厂包袱<br><strong>资本：</strong>幻方自有资金，不依赖外部融资<br><strong>算力：</strong>幻方万卡集群自有</p></div>
             <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧠 智谱</h5><p><strong>组织：</strong>900 人，清华系学术血统<br><strong>人才：</strong>学术+工程双轨团队<br><strong>资本：</strong>港股上市募资 43 亿港元<br><strong>算力：</strong>上市资金支撑持续训练</p></div>
             <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#64748b;"><h5 style="color:#64748b;">📱 面壁智能</h5><p><strong>组织：</strong>300 人，清华+OpenBMB 背景<br><strong>人才：</strong>端侧模型优化专家<br><strong>资本：</strong>中国电信领投，运营商渠道加持<br><strong>算力：</strong>端侧训练需求相对低</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌙 月之暗面</h5><p><strong>组织：</strong>300 人精锐，无 OKR 无部门墙，联创直管<br><strong>人才：</strong>偏好偏执、有抽象能力者<br><strong>资本：</strong>D 轮 20 亿美元，估值 300 亿<br><strong>算力：</strong>融资支撑大规模训练</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌙 月之暗面</h5><p><strong>组织：</strong>300 人精锐，无 OKR 无部门墙，联创直管<br><strong>人才：</strong>偏好偏执、有抽象能力者<br><strong>资本：</strong>D 轮 20 亿美元，估值 200 亿<br><strong>算力：</strong>融资支撑大规模训练</p></div>
             <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚡ 阶跃星辰</h5><p><strong>组织：</strong>800 人，产业联盟型（印奇董事长）<br><strong>人才：</strong>多模态研究 + 行业 BD 复合团队<br><strong>资本：</strong>B+ 轮 50 亿元，刷新纪录<br><strong>算力：</strong>融资支撑多模态训练</p></div>
             <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌊 MiniMax</h5><p><strong>组织：</strong>700 人，商汤系团队<br><strong>人才：</strong>多模态 + 社交产品运营<br><strong>资本：</strong>港股上市，市值 700 亿港元<br><strong>算力：</strong>视频生成需高算力投入</p></div>
             <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🦅 昆仑万维</h5><p><strong>组织：</strong>数千人，集团化运营<br><strong>人才：</strong>AI 研究 + 海外产品运营双轨<br><strong>资本：</strong>A 股上市，市值 509 亿，现金 36 亿+<br><strong>算力：</strong>控股艾捷科芯芯片，自研算力</p></div>
@@ -1157,7 +1188,7 @@
             <div class="chart-wrapper"><canvas id="teamChart"></canvas></div>
         </div>
         <div class="chart-container">
-            <div class="chart-title">2025-2026 年化收入对比（亿美元）</div>
+            <div class="chart-title">2025-2026 年化收入对比（亿美元，估算）</div>
             <div class="chart-wrapper"><canvas id="arrChart"></canvas></div>
         </div>
     </div>
@@ -1197,11 +1228,11 @@
     <!-- Company 1: 智谱 -->
     <div class="dimension-block" style="border-top:4px solid #10b981;">
         <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#10b981,#059669);">Z</span>智谱（2513.HK）· 港股上市 2026.01</div>
-        <div class="dimension-sub">市值 ~511 亿港元 · IPO 募资 43 亿港元 · 清华系政企本地化部署龙头</div>
+        <div class="dimension-sub">市值 ~511 亿港元（IPO 2026.01）· IPO 募资 43 亿港元 · 清华系政企本地化部署龙头</div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card" style="border-left-color:#1e40af;">
                 <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>GLM-5 模型矩阵 + 政企本地化部署现金流 + AutoGLM 智能体生态<br><strong>市场价格：</strong>511 亿港元对应高增长预期，PS 估值偏高<br><strong>安全边际：</strong>⚠️ 偏薄。当前估值已反映高增长预期，若政企订单增速放缓，估值承压。格雷厄姆或认为"价格不够便宜"。</p>
+                <p><strong>内在价值：</strong>GLM-5 模型矩阵 + 政企本地化部署现金流 + AutoGLM 智能体生态<br><strong>市场价格：</strong>511 亿港元（IPO 价），对应高增长预期，PS 估值偏高<br><strong>安全边际：</strong>⚠️ 偏薄。当前估值已反映高增长预期，若政企订单增速放缓，估值承压。格雷厄姆或认为"价格不够便宜"。</p>
             </div>
             <div class="dim-mini-card" style="border-left-color:#b45309;">
                 <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
@@ -1221,11 +1252,11 @@
     <!-- Company 2: MiniMax -->
     <div class="dimension-block" style="border-top:4px solid #06b6d4;">
         <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">X</span>MiniMax（00100.HK）· 港股上市 2026.01</div>
-        <div class="dimension-sub">市值 ~700 亿港元 · 阿里/米哈游/腾讯加持 · AI 出海标杆 + 视频生成领先</div>
+        <div class="dimension-sub">市值 ~700 亿港元（IPO 2026.01）· 阿里/米哈游/腾讯加持 · AI 出海标杆 + 视频生成领先</div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card" style="border-left-color:#1e40af;">
                 <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>Talkie 全球月活破亿 + 海螺视频生成 + 开放平台 API 三条收入线<br><strong>市场价格：</strong>700 亿港元，2025 AI 原生收入仅 5310 万美元，PS 极高<br><strong>安全边际：</strong>🔴 不足。格雷厄姆原则会回避——当前价格完全基于未来增长预期，无安全垫。营收与市值严重不匹配。</p>
+                <p><strong>内在价值：</strong>Talkie 全球月活破亿 + 海螺视频生成 + 开放平台 API 三条收入线<br><strong>市场价格：</strong>700 亿港元（IPO 价），2025 AI 原生收入仅 5310 万美元，PS 极高<br><strong>安全边际：</strong>🔴 不足。格雷厄姆原则会回避——当前价格完全基于未来增长预期，无安全垫。营收与市值严重不匹配。</p>
             </div>
             <div class="dim-mini-card" style="border-left-color:#b45309;">
                 <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
@@ -1245,11 +1276,11 @@
     <!-- Company 3: 昆仑万维 -->
     <div class="dimension-block" style="border-top:4px solid #f97316;">
         <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);">K</span>昆仑万维（300418.SZ）· 深交所上市 2015</div>
-        <div class="dimension-sub">市值 ~509 亿元 · 2025 前三季度营收 58 亿 · 海外收入占比 93% · 全栈 AI 布局</div>
+        <div class="dimension-sub">市值 ~509 亿元（2025.11）· 2025 前三季度营收 58 亿 · 海外收入占比 93% · 全栈 AI 布局</div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card" style="border-left-color:#1e40af;">
                 <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>Opera 全球流量 + DramaWave 短剧 + Skywork 模型 + 艾捷科芯芯片，多元资产组合<br><strong>市场价格：</strong>509 亿元，2025 前三季度营收 58 亿，PS 约 5-6 倍<br><strong>安全边际：</strong>🟢 相对充足。有真实营收和现金流支撑（非纯概念），PS 低于纯 AI 公司。资产负债率仅 19.6%，现金 36 亿+。格雷厄姆会认可财务稳健性。</p>
+                <p><strong>内在价值：</strong>Opera 全球流量 + DramaWave 短剧 + Skywork 模型 + 艾捷科芯芯片，多元资产组合<br><strong>市场价格：</strong>509 亿元（2025.11），2025 前三季度营收 58 亿（含非 AI 业务），PS 约 5-6 倍<br><strong>安全边际：</strong>🟢 相对充足。有真实营收和现金流支撑（非纯概念），PS 低于纯 AI 公司。资产负债率仅 19.6%，现金 36 亿+。格雷厄姆会认可财务稳健性。</p>
             </div>
             <div class="dim-mini-card" style="border-left-color:#b45309;">
                 <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
@@ -1337,12 +1368,12 @@
 <script>
     const companyData = {
         deepseek: { name:'深度求索', color:'#3b82f6', funding:0,   team:200, arr:0.5, fundingNote:'幻方自有' },
-        zhipu:    { name:'智谱',     color:'#10b981', funding:43,  team:900, arr:2.0, fundingNote:'港股募资43亿港元' },
+        zhipu:    { name:'智谱',     color:'#10b981', funding:43,  team:900, arr:1.0, fundingNote:'港股募资43亿港元（估值未公开）' },
         mianbi:   { name:'面壁智能', color:'#ec4899', funding:5,   team:300, arr:0.4, fundingNote:'电信领投数亿' },
         moon:     { name:'月之暗面', color:'#6366f1', funding:140, team:300, arr:2.0, fundingNote:'D轮20亿美元' },
-        step:     { name:'阶跃星辰', color:'#f59e0b', funding:50,  team:800, arr:1.4, fundingNote:'B+轮50亿' },
+        step:     { name:'阶跃星辰', color:'#f59e0b', funding:50,  team:800, arr:1.0, fundingNote:'B+轮50亿（2025目标10亿RMB）' },
         minimax:  { name:'MiniMax', color:'#06b6d4', funding:0,   team:700, arr:0.8, fundingNote:'港股上市' },
-        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,   team:3000, arr:8.0, fundingNote:'A股上市市值509亿' },
+        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,   team:3000, arr:10.0, fundingNote:'A股上市（总营收含非AI业务）' },
         dify:     { name:'Dify',    color:'#8b5cf6', funding:2.1, team:100, arr:0.15,fundingNote:'Pre-A 3000万美元' },
         silicon:  { name:'硅基流动', color:'#64748b', funding:20,  team:200, arr:0.6, fundingNote:'B轮20亿' }
     };
@@ -1352,6 +1383,13 @@
     let fundingChart, teamChart, arrChart;
 
     function initCharts() {
+        if (typeof Chart === 'undefined') {
+            // Chart.js 加载失败时显示降级提示
+            document.querySelectorAll('.chart-wrapper').forEach(w => {
+                w.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#94a3b8;font-size:0.9rem;">📊 图表库加载失败，请检查网络后刷新页面</div>';
+            });
+            return;
+        }
         Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
         fundingChart = new Chart(document.getElementById('fundingChart'), {
             type: 'bar',
@@ -1396,6 +1434,7 @@
     }
 
     function updateCharts() {
+        if (!fundingChart || !teamChart || !arrChart) return;
         const keys = allKeys.filter(k => selected.has(k));
         const labels = keys.map(k => companyData[k].name);
         const colors = keys.map(k => companyData[k].color);
