@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国 AGI 科创独角兽企业深度调研</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --moon: #6366f1;
+            --step: #f59e0b;
+            --deepseek: #3b82f6;
+            --zhipu: #10b981;
+            --mianbi: #ec4899;
+            --minimax: #06b6d4;
+            --dify: #8b5cf6;
+            --silicon: #64748b;
+            --kunlun: #f97316;
+            --bg-dark: #0f172a;
+            --bg-card: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-light: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e3a8a 100%);
+            padding: 60px 20px 40px;
+            text-align: center;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1);opacity:.5;} 50%{transform:scale(1.1);opacity:.8;} }
+        .hero-content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+        .hero h1 {
+            font-size: 2.4rem; font-weight: 800; margin-bottom: 14px;
+            background: linear-gradient(90deg, #a5b4fc, #fbbf24, #67e8f9);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero .subtitle { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 20px; }
+        .report-meta { margin-top: 16px; font-size: 0.86rem; color: #94a3b8; }
+
+        /* Selector Panel */
+        .selector-panel {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .selector-inner {
+            max-width: 1300px; margin: 0 auto;
+            display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+        }
+        .selector-label { font-weight: 700; color: var(--text-primary); font-size: 0.95rem; white-space: nowrap; }
+        .company-checkboxes { display: flex; flex-wrap: wrap; gap: 10px; flex: 1; }
+        .company-check {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 14px; border-radius: 50px; cursor: pointer;
+            border: 2px solid; background: white; transition: all .2s ease;
+            font-size: 0.9rem; font-weight: 600; user-select: none;
+        }
+        .company-check input { display: none; }
+        .company-check .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .company-check.unchecked { opacity: 0.4; background: #f8fafc; }
+        .company-check.unchecked .dot { opacity: 0.4; }
+
+        .company-check.c-moon { border-color: var(--moon); color: var(--moon); }
+        .company-check.c-moon .dot { background: var(--moon); }
+        .company-check.c-moon.checked { background: var(--moon); color: white; }
+        .company-check.c-moon.checked .dot { background: white; }
+
+        .company-check.c-step { border-color: var(--step); color: var(--step); }
+        .company-check.c-step .dot { background: var(--step); }
+        .company-check.c-step.checked { background: var(--step); color: white; }
+        .company-check.c-step.checked .dot { background: white; }
+
+        .company-check.c-deepseek { border-color: var(--deepseek); color: var(--deepseek); }
+        .company-check.c-deepseek .dot { background: var(--deepseek); }
+        .company-check.c-deepseek.checked { background: var(--deepseek); color: white; }
+        .company-check.c-deepseek.checked .dot { background: white; }
+
+        .company-check.c-zhipu { border-color: var(--zhipu); color: var(--zhipu); }
+        .company-check.c-zhipu .dot { background: var(--zhipu); }
+        .company-check.c-zhipu.checked { background: var(--zhipu); color: white; }
+        .company-check.c-zhipu.checked .dot { background: white; }
+
+        .company-check.c-mianbi { border-color: var(--mianbi); color: var(--mianbi); }
+        .company-check.c-mianbi .dot { background: var(--mianbi); }
+        .company-check.c-mianbi.checked { background: var(--mianbi); color: white; }
+        .company-check.c-mianbi.checked .dot { background: white; }
+
+        .company-check.c-minimax { border-color: var(--minimax); color: var(--minimax); }
+        .company-check.c-minimax .dot { background: var(--minimax); }
+        .company-check.c-minimax.checked { background: var(--minimax); color: white; }
+        .company-check.c-minimax.checked .dot { background: white; }
+
+        .company-check.c-dify { border-color: var(--dify); color: var(--dify); }
+        .company-check.c-dify .dot { background: var(--dify); }
+        .company-check.c-dify.checked { background: var(--dify); color: white; }
+        .company-check.c-dify.checked .dot { background: white; }
+
+        .company-check.c-silicon { border-color: var(--silicon); color: var(--silicon); }
+        .company-check.c-silicon .dot { background: var(--silicon); }
+        .company-check.c-silicon.checked { background: var(--silicon); color: white; }
+        .company-check.c-silicon.checked .dot { background: white; }
+
+        .company-check.c-kunlun { border-color: var(--kunlun); color: var(--kunlun); }
+        .company-check.c-kunlun .dot { background: var(--kunlun); }
+        .company-check.c-kunlun.checked { background: var(--kunlun); color: white; }
+        .company-check.c-kunlun.checked .dot { background: white; }
+
+        .selector-actions { display: flex; gap: 8px; }
+        .action-btn {
+            padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border-color);
+            background: #f8fafc; color: var(--text-secondary); cursor: pointer;
+            font-size: 0.85rem; font-weight: 600; transition: all .2s;
+        }
+        .action-btn:hover { background: var(--text-primary); color: white; border-color: var(--text-primary); }
+        .selected-count { font-size: 0.82rem; color: var(--text-secondary); font-weight: 600; }
+
+        /* Container */
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 50px 0; }
+        .section-title {
+            font-size: 1.8rem; font-weight: 700; color: var(--text-light);
+            margin-bottom: 10px; text-align: center;
+        }
+        .section-subtitle {
+            text-align: center; color: #94a3b8; margin-bottom: 40px; font-size: 1rem;
+        }
+
+        /* Filtered elements */
+        .filterable { transition: opacity .3s ease; }
+        .filterable.hidden { display: none !important; }
+
+        /* Company grid */
+        .company-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px;
+        }
+        .company-card {
+            background: var(--bg-card); border-radius: 16px; padding: 24px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            border-top: 4px solid;
+        }
+        .company-card.moon { border-top-color: var(--moon); }
+        .company-card.step { border-top-color: var(--step); }
+        .company-card.deepseek { border-top-color: var(--deepseek); }
+        .company-card.zhipu { border-top-color: var(--zhipu); }
+        .company-card.mianbi { border-top-color: var(--mianbi); }
+        .company-card.minimax { border-top-color: var(--minimax); }
+        .company-card.dify { border-top-color: var(--dify); }
+        .company-card.silicon { border-top-color: var(--silicon); }
+        .company-card.kunlun { border-top-color: var(--kunlun); }
+
+        .card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .card-icon {
+            width: 46px; height: 46px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: white; font-weight: 700;
+        }
+        .moon .card-icon { background: linear-gradient(135deg,#6366f1,#8b5cf6); }
+        .step .card-icon { background: linear-gradient(135deg,#f59e0b,#ef4444); }
+        .deepseek .card-icon { background: linear-gradient(135deg,#3b82f6,#1d4ed8); }
+        .zhipu .card-icon { background: linear-gradient(135deg,#10b981,#059669); }
+        .mianbi .card-icon { background: linear-gradient(135deg,#ec4899,#db2777); }
+        .minimax .card-icon { background: linear-gradient(135deg,#06b6d4,#0891b2); }
+        .dify .card-icon { background: linear-gradient(135deg,#8b5cf6,#7c3aed); }
+        .silicon .card-icon { background: linear-gradient(135deg,#64748b,#475569); }
+        .kunlun .card-icon { background: linear-gradient(135deg,#f97316,#ea580c); }
+
+        .card-name { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        .card-en { font-size: 0.82rem; color: var(--text-secondary); }
+        .card-tag {
+            display: inline-block; padding: 3px 10px; border-radius: 6px;
+            font-size: 0.74rem; font-weight: 600; margin-bottom: 10px;
+        }
+        .moon .card-tag { background:#eef2ff; color: var(--moon); }
+        .step .card-tag { background:#fef3c7; color:#92400e; }
+        .deepseek .card-tag { background:#dbeafe; color:#1d4ed8; }
+        .zhipu .card-tag { background:#d1fae5; color:#065f46; }
+        .mianbi .card-tag { background:#fce7f3; color:#9d174d; }
+        .minimax .card-tag { background:#cffafe; color:#0e7490; }
+        .dify .card-tag { background:#ede9fe; color:#6d28d9; }
+        .silicon .card-tag { background:#e2e8f0; color:#334155; }
+        .kunlun .card-tag { background:#ffedd5; color:#9a3412; }
+
+        .card-info { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+        .info-item { background:#f8fafc; padding: 9px; border-radius: 8px; }
+        .info-label { font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2px; }
+        .info-value { font-size: 0.88rem; font-weight: 600; color: var(--text-primary); }
+        .card-desc { color: var(--text-secondary); font-size: 0.86rem; line-height: 1.7; margin-bottom: 14px; }
+
+        .paper-section {
+            margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border-color);
+        }
+        .paper-title {
+            font-size: 0.76rem; font-weight: 700; color: var(--text-secondary);
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .paper-link {
+            display: block; padding: 8px 12px; background: #f8fafc; border-radius: 8px;
+            text-decoration: none; color: var(--text-primary); font-size: 0.82rem;
+            margin-bottom: 6px; border-left: 3px solid; transition: all .2s;
+        }
+        .paper-link:hover { background: #f1f5f9; transform: translateX(3px); }
+        .moon .paper-link { border-left-color: var(--moon); }
+        .step .paper-link { border-left-color: var(--step); }
+        .deepseek .paper-link { border-left-color: var(--deepseek); }
+        .zhipu .paper-link { border-left-color: var(--zhipu); }
+        .mianbi .paper-link { border-left-color: var(--mianbi); }
+        .minimax .paper-link { border-left-color: var(--minimax); }
+        .dify .paper-link { border-left-color: var(--dify); }
+        .silicon .paper-link { border-left-color: var(--silicon); }
+        .kunlun .paper-link { border-left-color: var(--kunlun); }
+
+        .paper-link .paper-name { font-weight: 600; display: block; margin-bottom: 2px; }
+        .paper-link .paper-venue { font-size: 0.74rem; color: var(--text-secondary); }
+        .paper-link .paper-arrow { float: right; color: var(--text-secondary); }
+
+        /* Hill Framework */
+        .hill-intro {
+            background: var(--bg-card); border-radius: 18px; padding: 32px; margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-left: 5px solid #f59e0b;
+        }
+        .hill-intro h3 { font-size: 1.4rem; margin-bottom: 12px; color: var(--text-primary); }
+        .hill-intro p { color: var(--text-secondary); line-height: 1.85; font-size: 0.94rem; margin-bottom: 10px; }
+        .hill-concepts { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 18px; }
+        .hill-concept {
+            padding: 18px; border-radius: 12px; background: #f8fafc; border-top: 3px solid;
+        }
+        .hill-concept.q { border-top-color: #3b82f6; }
+        .hill-concept.w { border-top-color: #f59e0b; }
+        .hill-concept.l { border-top-color: #94a3b8; }
+        .hill-concept h4 { font-size: 1.05rem; margin-bottom: 8px; }
+        .hill-concept.q h4 { color: #1d4ed8; }
+        .hill-concept.w h4 { color: #b45309; }
+        .hill-concept.l h4 { color: #475569; }
+        .hill-concept p { font-size: 0.86rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+        /* Hill Steps */
+        .step-nav {
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px;
+        }
+        .step-nav-item {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 18px; border-radius: 12px; cursor: pointer;
+            background: var(--bg-card); border: 2px solid var(--border-color);
+            font-size: 0.9rem; font-weight: 600; color: var(--text-secondary);
+            transition: all .2s ease; text-decoration: none;
+        }
+        .step-nav-item:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .step-nav-item .step-num {
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem; font-weight: 800; color: white;
+        }
+        .step-nav-item.s1 .step-num { background: #3b82f6; }
+        .step-nav-item.s2 .step-num { background: #8b5cf6; }
+        .step-nav-item.s3 .step-num { background: #f59e0b; }
+        .step-nav-item.s4 .step-num { background: #10b981; }
+        .step-nav-item.s5 .step-num { background: #64748b; }
+        .step-nav-item.s1 { border-color: #3b82f6; color: #1d4ed8; }
+        .step-nav-item.s2 { border-color: #8b5cf6; color: #6d28d9; }
+        .step-nav-item.s3 { border-color: #f59e0b; color: #b45309; }
+        .step-nav-item.s4 { border-color: #10b981; color: #047857; }
+        .step-nav-item.s5 { border-color: #64748b; color: #334155; }
+
+        .step-block {
+            background: var(--bg-card); border-radius: 18px; padding: 30px; margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2); border-top: 4px solid;
+        }
+        .step-block.s1 { border-top-color: #3b82f6; }
+        .step-block.s2 { border-top-color: #8b5cf6; }
+        .step-block.s3 { border-top-color: #f59e0b; }
+        .step-block.s4 { border-top-color: #10b981; }
+        .step-block.s5 { border-top-color: #64748b; }
+
+        .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+        .step-badge {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; font-weight: 800; color: white;
+        }
+        .step-block.s1 .step-badge { background: linear-gradient(135deg,#3b82f6,#1d4ed8); }
+        .step-block.s2 .step-badge { background: linear-gradient(135deg,#8b5cf6,#7c3aed); }
+        .step-block.s3 .step-badge { background: linear-gradient(135deg,#f59e0b,#d97706); }
+        .step-block.s4 .step-badge { background: linear-gradient(135deg,#10b981,#059669); }
+        .step-block.s5 .step-badge { background: linear-gradient(135deg,#64748b,#475569); }
+
+        .step-title { font-size: 1.35rem; font-weight: 700; color: var(--text-primary); }
+        .step-en { font-size: 0.82rem; color: var(--text-secondary); font-weight: 400; }
+        .step-desc { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.75; }
+
+        .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 14px; }
+
+        /* Hill Matrix */
+        .hill-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .hill-table {
+            width: 100%; border-collapse: separate; border-spacing: 0; background: var(--bg-card);
+            min-width: 1000px;
+        }
+        .hill-table th, .hill-table td {
+            padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--border-color);
+            font-size: 0.86rem; vertical-align: top;
+        }
+        .hill-table th {
+            background: #1e293b; color: var(--text-light); font-weight: 700; position: sticky; top: 0;
+        }
+        .hill-table th.col-q { background: linear-gradient(135deg,#1e40af,#3b82f6); }
+        .hill-table th.col-w { background: linear-gradient(135deg,#b45309,#f59e0b); }
+        .hill-table th.col-l { background: linear-gradient(135deg,#334155,#64748b); }
+        .hill-table td:first-child { font-weight: 700; color: var(--text-primary); background:#f8fafc; width: 130px; }
+        .hill-table td { color: var(--text-secondary); }
+        .hill-table .tag {
+            display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.76rem;
+            font-weight: 600; margin: 2px 3px 2px 0;
+        }
+        .hill-table .tag.q { background: #dbeafe; color: #1d4ed8; }
+        .hill-table .tag.w { background: #fef3c7; color: #92400e; }
+        .hill-table .tag.l { background: #e2e8f0; color: #334155; }
+
+        /* Dimension blocks */
+        .dimension-block {
+            background: var(--bg-card); border-radius: 18px; padding: 30px; margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .dimension-title {
+            font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .dimension-icon {
+            width: 34px; height: 34px; border-radius: 9px; display:flex; align-items:center; justify-content:center;
+            font-size: 1.05rem; background: linear-gradient(135deg,#6366f1,#8b5cf6); color: white;
+        }
+        .dimension-sub { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 18px; }
+        .dim-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 16px; }
+        .dim-mini-card { padding: 18px; border-radius: 12px; background:#f8fafc; border-left: 4px solid; }
+        .dim-mini-card.moon { border-left-color: var(--moon); }
+        .dim-mini-card.step { border-left-color: var(--step); }
+        .dim-mini-card.deepseek { border-left-color: var(--deepseek); }
+        .dim-mini-card.zhipu { border-left-color: var(--zhipu); }
+        .dim-mini-card.mianbi { border-left-color: var(--mianbi); }
+        .dim-mini-card.minimax { border-left-color: var(--minimax); }
+        .dim-mini-card.dify { border-left-color: var(--dify); }
+        .dim-mini-card.silicon { border-left-color: var(--silicon); }
+        .dim-mini-card.kunlun { border-left-color: var(--kunlun); }
+        .dim-mini-card h5 { font-size: 0.98rem; margin-bottom: 8px; }
+        .dim-mini-card.moon h5 { color: var(--moon); }
+        .dim-mini-card.step h5 { color: var(--step); }
+        .dim-mini-card.deepseek h5 { color: var(--deepseek); }
+        .dim-mini-card.zhipu h5 { color: var(--zhipu); }
+        .dim-mini-card.mianbi h5 { color: var(--mianbi); }
+        .dim-mini-card.minimax h5 { color: var(--minimax); }
+        .dim-mini-card.dify h5 { color: var(--dify); }
+        .dim-mini-card.silicon h5 { color: var(--silicon); }
+        .dim-mini-card.kunlun h5 { color: var(--kunlun); }
+        .dim-mini-card p { color: var(--text-secondary); font-size: 0.84rem; line-height: 1.7; }
+
+        /* Charts */
+        .chart-container {
+            background: var(--bg-card); border-radius: 18px; padding: 28px; margin-bottom: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .chart-title { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 18px; text-align: center; }
+        .chart-wrapper { position: relative; height: 380px; }
+        .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before {
+            content: ''; position: absolute; left: 50%; top:0; bottom:0; width:3px;
+            background: linear-gradient(180deg, var(--moon), var(--step), var(--deepseek), var(--zhipu));
+            transform: translateX(-50%);
+        }
+        .timeline-item { display:flex; justify-content:flex-end; padding: 14px 0; width:50%; position:relative; }
+        .timeline-item:nth-child(even) { justify-content:flex-start; margin-left:50%; }
+        .timeline-item:nth-child(odd) { padding-right:30px; text-align:right; }
+        .timeline-item:nth-child(even) { padding-left:30px; }
+        .timeline-item::before {
+            content:''; position:absolute; top:22px; width:14px; height:14px; border-radius:50%;
+            background: var(--bg-card); border:3px solid; z-index:1;
+        }
+        .timeline-item:nth-child(odd)::before { right:-7px; }
+        .timeline-item:nth-child(even)::before { left:-7px; }
+        .timeline-content { background: var(--bg-card); padding:14px 18px; border-radius:10px; box-shadow:0 5px 20px rgba(0,0,0,0.15); max-width:340px; }
+        .timeline-date { font-size:0.8rem; font-weight:700; margin-bottom:4px; }
+        .timeline-title { font-size:0.94rem; font-weight:600; color: var(--text-primary); margin-bottom:3px; }
+        .timeline-desc { font-size:0.82rem; color: var(--text-secondary); }
+
+        /* Conclusion */
+        .conclusion {
+            background: linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);
+            border-radius: 20px; padding: 40px; color: var(--text-light); margin-bottom: 30px;
+        }
+        .conclusion h2 { font-size: 1.7rem; margin-bottom: 22px; text-align: center; }
+        .conclusion-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:22px; }
+        .conclusion-card {
+            background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+            padding: 22px; border-radius: 14px; border:1px solid rgba(255,255,255,0.1);
+        }
+        .conclusion-card h3 { font-size:1.1rem; margin-bottom:10px; }
+        .conclusion-card p { color:#cbd5e1; line-height:1.8; font-size:0.88rem; }
+        .summary-box {
+            margin-top: 24px; padding: 20px; background: rgba(255,255,255,0.05);
+            border-radius: 12px; border-left: 4px solid #fbbf24;
+        }
+        .summary-box p { color:#e2e8f0; font-size:0.92rem; line-height:1.85; }
+
+        .footer {
+            text-align:center; padding:30px 20px; color:#64748b; font-size:0.86rem;
+            border-top:1px solid rgba(255,255,255,0.1); margin-top:30px;
+        }
+
+        /* Empty state */
+        .empty-state {
+            display: none; text-align: center; padding: 60px 20px; color: #94a3b8;
+        }
+        .empty-state.show { display: block; }
+        .empty-state p { font-size: 1.1rem; margin-bottom: 10px; }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex; gap: 0; justify-content: center; flex-wrap: wrap;
+            background: var(--bg-card); border-bottom: 2px solid var(--border-color);
+            position: sticky; top: 0; z-index: 98; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .tab-btn {
+            padding: 16px 28px; border: none; background: transparent; cursor: pointer;
+            font-size: 1rem; font-weight: 600; color: var(--text-secondary);
+            border-bottom: 3px solid transparent; transition: all .25s ease;
+            font-family: inherit; display: flex; align-items: center; gap: 8px;
+        }
+        .tab-btn:hover { color: var(--text-primary); background: #f8fafc; }
+        .tab-btn.active {
+            color: #6366f1; border-bottom-color: #6366f1; background: #eef2ff;
+        }
+        .tab-btn .tab-icon { font-size: 1.15rem; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Company Logo Icons */
+        .card-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: white; font-weight: 700; flex-shrink: 0;
+        }
+        .moon .card-icon { background: linear-gradient(135deg,#6366f1,#8b5cf6); }
+        .step .card-icon { background: linear-gradient(135deg,#f59e0b,#ef4444); }
+        .deepseek .card-icon { background: linear-gradient(135deg,#3b82f6,#1d4ed8); }
+        .zhipu .card-icon { background: linear-gradient(135deg,#10b981,#059669); }
+        .mianbi .card-icon { background: linear-gradient(135deg,#ec4899,#db2777); }
+        .minimax .card-icon { background: linear-gradient(135deg,#06b6d4,#0891b2); }
+        .dify .card-icon { background: linear-gradient(135deg,#8b5cf6,#7c3aed); }
+        .silicon .card-icon { background: linear-gradient(135deg,#64748b,#475569); }
+        .kunlun .card-icon { background: linear-gradient(135deg,#f97316,#ea580c); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .charts-row { grid-template-columns: 1fr; }
+            .hill-concepts { grid-template-columns: 1fr; }
+            .tab-btn { padding: 12px 16px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>中国 AGI 科创独角兽企业深度调研</h1>
+        <p class="report-meta">报告时间：2026 年 6 月 · 数据截至 2026 年 Q2</p>
+    </div>
+</section>
+
+<!-- Selector Panel -->
+<div class="selector-panel">
+    <div class="selector-inner">
+        <span class="selector-label">勾选公司 →</span>
+        <div class="company-checkboxes" id="checkboxes">
+            <label class="company-check c-deepseek checked" data-company="deepseek">
+                <input type="checkbox" checked><span class="dot"></span>🐋 深度求索
+            </label>
+            <label class="company-check c-zhipu checked" data-company="zhipu">
+                <input type="checkbox" checked><span class="dot"></span>🧠 智谱
+            </label>
+            <label class="company-check c-mianbi checked" data-company="mianbi">
+                <input type="checkbox" checked><span class="dot"></span>📱 面壁智能
+            </label>
+            <label class="company-check c-moon checked" data-company="moon">
+                <input type="checkbox" checked><span class="dot"></span>🌙 月之暗面
+            </label>
+            <label class="company-check c-step checked" data-company="step">
+                <input type="checkbox" checked><span class="dot"></span>⚡ 阶跃星辰
+            </label>
+            <label class="company-check c-minimax checked" data-company="minimax">
+                <input type="checkbox" checked><span class="dot"></span>🌊 MiniMax
+            </label>
+            <label class="company-check c-kunlun checked" data-company="kunlun">
+                <input type="checkbox" checked><span class="dot"></span>🦅 昆仑万维
+            </label>
+            <label class="company-check c-dify checked" data-company="dify">
+                <input type="checkbox" checked><span class="dot"></span>🧩 Dify
+            </label>
+            <label class="company-check c-silicon checked" data-company="silicon">
+                <input type="checkbox" checked><span class="dot"></span>⚙️ 硅基流动
+            </label>
+        </div>
+        <div class="selector-actions">
+            <button class="action-btn" onclick="selectAll(true)">全选</button>
+            <button class="action-btn" onclick="selectAll(false)">全不选</button>
+            <span class="selected-count" id="count">9/9</span>
+        </div>
+    </div>
+</div>
+
+<!-- Empty state -->
+<div class="empty-state" id="emptyState">
+    <p>📭 未选择任何公司</p>
+    <p style="font-size:0.9rem;">请在上方勾选至少一家公司以查看对比内容</p>
+</div>
+
+<div id="mainContent">
+
+<!-- Tab Navigation -->
+<div class="tab-nav">
+    <button class="tab-btn active" data-tab="overview"><span class="tab-icon">🏢</span>公司概览</button>
+    <button class="tab-btn" data-tab="strategy"><span class="tab-icon">⚔️</span>策略阵营与维度</button>
+    <button class="tab-btn" data-tab="hill"><span class="tab-icon">📐</span>希尔运营战略框架</button>
+    <button class="tab-btn" data-tab="charts"><span class="tab-icon">📊</span>数据图表</button>
+    <button class="tab-btn" data-tab="invest"><span class="tab-icon">💰</span>价值投资分析</button>
+</div>
+
+<!-- Tab 1: Company Overview -->
+<div class="tab-content active" id="tab-overview">
+<!-- Company Overview -->
+<section class="section container">
+    <h2 class="section-title">九家公司概览与关键论文</h2>
+    <p class="section-subtitle">点击右上角勾选框可动态筛选显示的公司</p>
+
+    <div class="company-grid" id="companyGrid">
+        <!-- 深度求索 -->
+        <div class="company-card deepseek filterable" data-company="deepseek">
+            <div class="card-head">
+                <div class="card-icon">D</div>
+                <div><div class="card-name">深度求索</div><div class="card-en">DeepSeek</div></div>
+            </div>
+            <span class="card-tag">开源信仰派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">幻方系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">梁文锋</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023</div></div>
+                <div class="info-item"><div class="info-label">团队</div><div class="info-value">~200 人</div></div>
+            </div>
+            <p class="card-desc">以极致性价比与开源策略震撼全球。V3/R1 性能逼近闭源旗舰，理论成本利润率 545%，重塑行业价值分配。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2512.02556" target="_blank">
+                    <span class="paper-name">DeepSeek-V3.2: Pushing the Frontier of Open Large Language Models</span>
+                    <span class="paper-venue">arXiv:2512.02556 · 2025.12 · 高效推理 + Agent 性能跃升，思考模式融合</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2504.21801" target="_blank">
+                    <span class="paper-name">DeepSeek-Prover-V2: Advancing Formal Mathematical Reasoning via RL for Subgoal Renaming</span>
+                    <span class="paper-venue">arXiv:2504.21801 · 2025.04 · Lean 4 形式化定理证明，递归冷启动</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2501.12948" target="_blank">
+                    <span class="paper-name">DeepSeek-R1: Incentivizing Reasoning Capability via RL</span>
+                    <span class="paper-venue">arXiv:2501.12948 · 2025.01 · Nature 封面 · 纯 RL 推理能力突破</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2412.19437" target="_blank">
+                    <span class="paper-name">DeepSeek-V3 Technical Report</span>
+                    <span class="paper-venue">arXiv:2412.19437 · 2024.12 · 671B MoE，MLA 注意力 + DeepSeekMoE</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 智谱 -->
+        <div class="company-card zhipu filterable" data-company="zhipu">
+            <div class="card-head">
+                <div class="card-icon">Z</div>
+                <div><div class="card-name">智谱</div><div class="card-en">Zhipu AI · GLM</div></div>
+            </div>
+            <span class="card-tag">港股上市派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">清华系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">唐杰/张鹏</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2019</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~511 亿港元</div></div>
+            </div>
+            <p class="card-desc">清华系国产大模型第一梯队，GLM-5 带动商业范式转型。本地化部署见长，AutoGLM 智能体矩阵完善。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2602.15763" target="_blank">
+                    <span class="paper-name">GLM-5: from Vibe Coding to Agentic Engineering</span>
+                    <span class="paper-venue">arXiv:2602.15763 · 2026.02 · 744B MoE，a16z 誉为"最好的开源模型"</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2406.12793" target="_blank">
+                    <span class="paper-name">ChatGLM: A Family of Large Language Models from GLM-130B to GLM-4 All Tools</span>
+                    <span class="paper-venue">arXiv:2406.12793 · 2024.06 · GLM 全家族技术报告</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 面壁智能 -->
+        <div class="company-card mianbi filterable" data-company="mianbi">
+            <div class="card-head">
+                <div class="card-icon">M</div>
+                <div><div class="card-name">面壁智能</div><div class="card-en">ModelBest · MiniCPM</div></div>
+            </div>
+            <span class="card-tag">端侧落地派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">清华系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">李大海/刘知远</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2020</div></div>
+                <div class="info-item"><div class="info-label">领投</div><div class="info-value">中国电信</div></div>
+            </div>
+            <p class="card-desc">端侧大模型领导者，MiniCPM 系列以小参数大能力著称。端侧百万级装机，定义"AI 触达每个终端"。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2404.06395" target="_blank">
+                    <span class="paper-name">MiniCPM: Unveiling the Potential of Small Language Models with Scalable Training Strategies</span>
+                    <span class="paper-venue">arXiv:2404.06395 · 2024.04 · 1.2B/2.4B 端侧模型可扩展训练</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://hub.baai.ac.cn/view/49206" target="_blank">
+                    <span class="paper-name">MiniCPM-V 4.5 技术报告</span>
+                    <span class="paper-venue">智源社区 · 2025.09 · OpenCompass 77.0 分超越众多大模型</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 月之暗面 -->
+        <div class="company-card moon filterable" data-company="moon">
+            <div class="card-head">
+                <div class="card-icon">K</div>
+                <div><div class="card-name">月之暗面</div><div class="card-en">Moonshot AI · Kimi</div></div>
+            </div>
+            <span class="card-tag">底层重构派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">清华系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">杨植麟</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023</div></div>
+                <div class="info-item"><div class="info-label">估值</div><div class="info-value">~300 亿美元</div></div>
+            </div>
+            <p class="card-desc">以"不被定义的 LLM"为愿景，专挑底层动刀。Kimi 以长文本与 Agent 集群著称，组织极简、技术审美驱动。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2602.02276" target="_blank">
+                    <span class="paper-name">Kimi K2.5: Visual Agentic Intelligence</span>
+                    <span class="paper-venue">arXiv:2602.02276 · 2026.02 · 开源多模态智能体模型，编程/视觉/推理 SOTA</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2507.20534" target="_blank">
+                    <span class="paper-name">Kimi K2: Open Agentic Intelligence</span>
+                    <span class="paper-venue">arXiv:2507.20534 · 2025.07 · 提出 MuonClip 优化器，万亿 MoE 开源</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 阶跃星辰 -->
+        <div class="company-card step filterable" data-company="step">
+            <div class="card-head">
+                <div class="card-icon">S</div>
+                <div><div class="card-name">阶跃星辰</div><div class="card-en">StepFun</div></div>
+            </div>
+            <span class="card-tag">多模态领跑派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">微软亚研院系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">姜大昕</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023.04</div></div>
+                <div class="info-item"><div class="info-label">最新融资</div><div class="info-value">50 亿 B+</div></div>
+            </div>
+            <p class="card-desc">中国多模态大模型领跑者，30+ Step 系列模型。坚持"多模态+终端生态"，与吉利、OPPO、荣耀深度合作。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://zhuanlan.zhihu.com/p/1996365249390085454" target="_blank">
+                    <span class="paper-name">STEP3-VL-10B Technical Report</span>
+                    <span class="paper-venue">阶跃星辰 Multimodal Intelligence Team · 2026.01 · 10B 轻量化多模态基础模型</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://baike.baidu.com/item/Step%203/66250288" target="_blank">
+                    <span class="paper-name">Step-3 原生多模态推理模型</span>
+                    <span class="paper-venue">2025.07 开源 · MoE 321B 总参/38B 激活，多模态推理 SOTA</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- MiniMax -->
+        <div class="company-card minimax filterable" data-company="minimax">
+            <div class="card-head">
+                <div class="card-icon">X</div>
+                <div><div class="card-name">MiniMax</div><div class="card-en">海螺AI · Talkie · 星野</div></div>
+            </div>
+            <span class="card-tag">出海标杆派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">商汤系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">闫俊杰</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2021.12</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~700 亿港元</div></div>
+            </div>
+            <p class="card-desc">中国 AI 出海标杆，Talkie 全球月活破亿。海螺 AI 视频生成商业化领先，"技术-产品-全球化变现"闭环验证。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2606.13392" target="_blank">
+                    <span class="paper-name">MiniMax-M3 Technical Report</span>
+                    <span class="paper-venue">arXiv:2606.13392 · 2026.06 · Coding Frontier+1M 上下文+原生多模态三件套，MSA 稀疏注意力</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2605.26494" target="_blank">
+                    <span class="paper-name">The MiniMax-M2 Series: Mini Activations can unleash maximum real-world intelligence</span>
+                    <span class="paper-venue">arXiv:2605.26494 · 2026.05 · MoE 架构，mini activations 设计哲学</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2501.08313" target="_blank">
+                    <span class="paper-name">MiniMax-01: Scaling Foundation Models with Lightning Attention</span>
+                    <span class="paper-venue">arXiv:2501.08313 · 2025.01 · 闪电注意力，超长上下文处理</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 昆仑万维 -->
+        <div class="company-card kunlun filterable" data-company="kunlun">
+            <div class="card-head">
+                <div class="card-icon">K</div>
+                <div><div class="card-name">昆仑万维</div><div class="card-en">Kunlun · 天工 / Skywork</div></div>
+            </div>
+            <span class="card-tag">全栈出海派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">A股转型系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">周亚辉 / 方汉</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2008</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~509 亿元</div></div>
+            </div>
+            <p class="card-desc">A股稀缺"芯片-大模型-平台-应用"全栈 AI 企业。All in AGI 战略，Skywork 系列开源 + 天工超级智能体 + Opera/DramaWave 全球化应用矩阵，海外收入占比 93%。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 关键论文 / 技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2512.02395" target="_blank">
+                    <span class="paper-name">Skywork-R1V4: Toward Agentic Multimodal Reasoning</span>
+                    <span class="paper-venue">arXiv:2512.02395 · 2025.12 · Agentic 多模态推理，RL 后训练突破</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://arxiv.org/abs/2507.06167" target="_blank">
+                    <span class="paper-name">Skywork-R1V3 Technical Report</span>
+                    <span class="paper-venue">arXiv:2507.06167 · 2025.07 · 开源视觉语言模型，视觉推理迁移</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Dify -->
+        <div class="company-card dify filterable" data-company="dify">
+            <div class="card-head">
+                <div class="card-icon">D</div>
+                <div><div class="card-name">Dify</div><div class="card-en">LLMOps 开发平台</div></div>
+            </div>
+            <span class="card-tag">AI 应用平台派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">独立创业系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">张路宇</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023</div></div>
+                <div class="info-item"><div class="info-label">估值</div><div class="info-value">1.8 亿美元</div></div>
+            </div>
+            <p class="card-desc">开源 LLMOps 平台，AI 应用从构思到部署完整基础设施。GitHub 全球开源前 100，服务 2000+ 团队。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 开源项目（无学术论文）</div>
+                <a class="paper-link" href="https://github.com/langgenius/dify" target="_blank">
+                    <span class="paper-name">Dify · Production-grade Agentic Workflow Platform</span>
+                    <span class="paper-venue">GitHub · langgenius/dify · 10万+ Star · 开源 LLMOps 平台</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://dify.ai/zh" target="_blank">
+                    <span class="paper-name">Dify 官方文档与产品介绍</span>
+                    <span class="paper-venue">dify.ai · 可视化 Agentic AI 解决方案基础设施</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 硅基流动 -->
+        <div class="company-card silicon filterable" data-company="silicon">
+            <div class="card-head">
+                <div class="card-icon">S</div>
+                <div><div class="card-name">硅基流动</div><div class="card-en">SiliconFlow</div></div>
+            </div>
+            <span class="card-tag">AI Infra 推理云派</span>
+            <div class="card-info">
+                <div class="info-item"><div class="info-label">派系</div><div class="info-value">一流科技系</div></div>
+                <div class="info-item"><div class="info-label">创始人</div><div class="info-value">袁进辉</div></div>
+                <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023.08</div></div>
+                <div class="info-item"><div class="info-label">B 轮</div><div class="info-value">20 亿元</div></div>
+            </div>
+            <p class="card-desc">大模型时代 AI Infra 平台，"Token 工厂"模式。聚合主流开源模型提供高性价比推理云，赋能千行百业。</p>
+            <div class="paper-section">
+                <div class="paper-title">📄 相关技术 / 开源项目</div>
+                <a class="paper-link" href="https://github.com/SiliconFlow" target="_blank">
+                    <span class="paper-name">SiliconFlow · GitHub 开源项目集</span>
+                    <span class="paper-venue">GitHub · SiliconFlow · 含推理加速框架、OneFlow 等</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+                <a class="paper-link" href="https://siliconflow.cn/" target="_blank">
+                    <span class="paper-name">硅基流动 MaaS 平台与产品文档</span>
+                    <span class="paper-venue">siliconflow.cn · 企业级模型推理与部署服务</span>
+                    <span class="paper-arrow">↗</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+</div><!-- end tab-overview -->
+
+<!-- Tab 2: Strategy Camps & Dimensions -->
+<div class="tab-content" id="tab-strategy">
+<!-- Strategy Camps -->
+<section class="section container">
+    <h2 class="section-title">五大策略阵营</h2>
+    <p class="section-subtitle">按运营策略归入五大阵营，反映不同的 AGI 路径判断</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:22px;">
+        <div class="filterable" data-company="deepseek" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--deepseek);">
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🌊 开源信仰派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">以开源打破垄断，用生态换规模</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                <span class="filterable" data-company="deepseek" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#3b82f6;">深度求索</span>
+                <span class="filterable" data-company="zhipu" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#10b981;">智谱</span>
+                <span class="filterable" data-company="mianbi" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#ec4899;">面壁智能</span>
+                <span class="filterable" data-company="dify" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#8b5cf6;">Dify</span>
+                <span class="filterable" data-company="kunlun" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f97316;">昆仑万维</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">坚信开源是 AI 民主化必经之路。用规模换壁垒，用生态建护城河。</p>
+        </div>
+
+        <div class="filterable" data-company="moon" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--moon);">
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🎯 闭源精品派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">极致技术 + 精品产品，深挖价值</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                <span class="filterable" data-company="moon" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#6366f1;">月之暗面</span>
+                <span class="filterable" data-company="step" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f59e0b;">阶跃星辰</span>
+                <span class="filterable" data-company="minimax" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#06b6d4;">MiniMax</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">技术领先驱动产品精品，精品产品驱动商业变现。</p>
+        </div>
+
+        <div class="filterable" data-company="mianbi" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--mianbi);">
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">📱 端侧落地派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">让 AI 跑在每一个终端上</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                <span class="filterable" data-company="mianbi" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#ec4899;">面壁智能</span>
+                <span class="filterable" data-company="step" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f59e0b;">阶跃星辰</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">端侧解决"好用+隐私+成本"，终端装机量即护城河。</p>
+        </div>
+
+        <div class="filterable" data-company="silicon" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--silicon);">
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">⚙️ 基础设施派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">不造模型，造模型的"水电煤"</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                <span class="filterable" data-company="silicon" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#64748b;">硅基流动</span>
+                <span class="filterable" data-company="dify" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#8b5cf6;">Dify</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">在百模大战中保持中立，做生态层的整合者。</p>
+        </div>
+
+        <div class="filterable" data-company="kunlun" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--kunlun);">
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🦅 全栈出海派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">芯片到应用全链路，全球化变现</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                <span class="filterable" data-company="kunlun" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f97316;">昆仑万维</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">"芯片-大模型-平台-应用"全栈布局，以 Opera 全球流量+多应用矩阵实现"研发-验证-变现"飞轮。</p>
+        </div>
+    </div>
+</section>
+
+<!-- Dimension Comparisons -->
+<section class="section container">
+    <h2 class="section-title">六大维度策略对比</h2>
+    <p class="section-subtitle">逐维度拆解运营打法差异</p>
+
+    <div class="dimension-block">
+        <div class="dimension-title"><span class="dimension-icon">🔧</span>技术路线</div>
+        <div class="dimension-sub">从底层架构到模型形态的差异化选择</div>
+        <div class="dim-cards-grid">
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek"><h5>🐋 深度求索</h5><p>极致工程效率，MoE 架构 + MLA 注意力。V3/R1 开源性能逼近闭源旗舰，成本利润率理论 545%。</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu"><h5>🧠 智谱</h5><p>GLM 系列持续迭代至 GLM-5，覆盖语言/多模态/代码/智能体完整矩阵。开源与商用并行。</p></div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi"><h5>📱 面壁智能</h5><p>"大模型未必大"，专注端侧高效模型。MiniCPM-V 4.6 仅 1.3B 参数实现多模态小钢炮。</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon"><h5>🌙 月之暗面</h5><p>底层架构重构，自研 MuonClip 优化器、Linear 混合线性注意力。万亿 MoE + Agent 集群（300 子代理并发）。</p></div>
+            <div class="dim-mini-card step filterable" data-company="step"><h5>⚡ 阶跃星辰</h5><p>多模态全栈，30+ Step 模型覆盖语言/视觉/语音/视频。多模态 API 调用量半年增长 45 倍。</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax"><h5>🌊 MiniMax</h5><p>多模态全栈，强项在视频生成（海螺 AI）。abab 系列语言模型 + 视觉生成模型双线布局。</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun"><h5>🦅 昆仑万维</h5><p>Skywork 系列开源模型 + 天工超级智能体。控股艾捷科芯芯片，"芯片-模型-应用"全栈布局，多模态+Agent 双线。</p></div>
+            <div class="dim-mini-card dify filterable" data-company="dify"><h5>🧩 Dify</h5><p>不自研模型，提供模型无关的 Agentic 工作流引擎。支持多模型接入、可视化编排。</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon"><h5>⚙️ 硅基流动</h5><p>算法+系统+硬件协同优化，自研推理加速框架。聚合 DeepSeek/Qwen/GLM 等开源模型提供推理服务。</p></div>
+        </div>
+    </div>
+
+    <div class="dimension-block">
+        <div class="dimension-title"><span class="dimension-icon">💰</span>商业化路径</div>
+        <div class="dimension-sub">从订阅、API 到行业大单的多元变现</div>
+        <div class="dim-cards-grid">
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek"><h5>🐋 深度求索</h5><p>API 调用 + 开源生态。低成本策略倒逼行业降价，靠幻方自有算力支撑。</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu"><h5>🧠 智谱</h5><p>本地化部署为主（政企大单）+ 云端 API。港股上市后融资 43 亿港元。</p></div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi"><h5>📱 面壁智能</h5><p>端侧授权 + 行业定制 + 政务项目。端侧百万级装机 + 政务 MiniCPM 部署。</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon"><h5>🌙 月之暗面</h5><p>C 端订阅 + B 端 API，海外优先。ARR 半年从 1 亿到 2 亿美元，20 天收入超 2025 全年。</p></div>
+            <div class="dim-mini-card step filterable" data-company="step"><h5>⚡ 阶跃星辰</h5><p>行业大单 + 终端授权 + API。2025 冲击 10 亿收入，吉利/OPPO 等大客户稳定。</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax"><h5>🌊 MiniMax</h5><p>AI 原生产品收入（Talkie/星野/海螺）+ 开放平台 API。2025 年原生收入 5310 万美元，同比增 143%。</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun"><h5>🦅 昆仑万维</h5><p>多应用变现矩阵：DramaWave 短剧（月下载 400 万）+ Opera 广告 + AI 音乐/社交。2025 前三季度营收 58 亿，海外占 93%。</p></div>
+            <div class="dim-mini-card dify filterable" data-company="dify"><h5>🧩 Dify</h5><p>开源社区 → 云订阅 → 企业版三层漏斗。GitHub 10 万 Star 转化付费，2000+ 团队服务。</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon"><h5>⚙️ 硅基流动</h5><p>Token 计费推理云 + 企业 MaaS 私有化。B 轮 20 亿，阿里云/携程战投背书。</p></div>
+        </div>
+    </div>
+</section>
+</div><!-- end tab-strategy -->
+
+<!-- Tab 3: Hill Framework -->
+<div class="tab-content" id="tab-hill">
+<!-- Hill Framework -->
+<section class="section container">
+    <h2 class="section-title">希尔运营战略框架分析</h2>
+    <p class="section-subtitle">Terry Hill 教授运营战略框架 · 五大核心步骤逐层拆解</p>
+
+    <div class="hill-intro">
+        <h3>📌 框架简介</h3>
+        <p>希尔框架由伦敦商学院 Terry Hill 教授于 1989 年提出，是运营战略分析的经典工具。框架通过<strong>五个递进步骤</strong>，将企业战略目标层层转化为具体的运营决策与基础设施配置，核心逻辑是："你想赢什么 → 谁是你的客户 → 凭什么赢 → 怎么造 → 用什么撑"。</p>
+    </div>
+
+    <!-- Step Navigation -->
+    <div class="step-nav">
+        <a class="step-nav-item s1" href="#step1"><span class="step-num">1</span>企业战略目标</a>
+        <a class="step-nav-item s2" href="#step2"><span class="step-num">2</span>营销战略</a>
+        <a class="step-nav-item s3" href="#step3"><span class="step-num">3</span>资格与赢取要素</a>
+        <a class="step-nav-item s4" href="#step4"><span class="step-num">4</span>运营过程选择</a>
+        <a class="step-nav-item s5" href="#step5"><span class="step-num">5</span>基础设施</a>
+    </div>
+
+    <!-- Step 1: Corporate Objectives -->
+    <div class="step-block s1" id="step1">
+        <div class="step-header">
+            <div class="step-badge">1</div>
+            <div>
+                <div class="step-title">企业战略目标 <span class="step-en">Corporate Objectives</span></div>
+            </div>
+        </div>
+        <div class="step-desc">明确企业长期追求——是技术领先、规模扩张、盈利优先，还是生态壁垒？目标决定了后续所有运营决策的方向。</div>
+        <div class="step-cards-grid">
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🐋 深度求索</h5><p><strong>AI 民主化：</strong>以极致性价比开源重塑行业价值分配，倒逼全行业降价。不追求短期商业化，用开源影响力定义行业新秩序。</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🧠 智谱</h5><p><strong>政企市场第一：</strong>成为政企本地化部署首选，港股上市建立长期资本支撑。以学术血统+合规资质构建可持续商业闭环。</p></div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">📱 面壁智能</h5><p><strong>端侧无处不在：</strong>让 AI 跑在每一个终端上，以装机量定义新护城河。"大模型未必大"，用小参数撬动大市场。</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🌙 月之暗面</h5><p><strong>智能上限优先：</strong>做"不被定义的 LLM"，以底层架构重构追求智能天花板，ARR 高速增长冲击全球第一梯队。宁可少而精，不求大而全。</p></div>
+            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">⚡ 阶跃星辰</h5><p><strong>多模态规模化：</strong>做多模态 AGI 领跑者，通过终端生态绑定实现规模化落地。2025 冲击 10 亿收入，追求"被终端巨头选择"的产业地位。</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🌊 MiniMax</h5><p><strong>全球化变现：</strong>做中国 AI 出海标杆，视频生成+社交产品双轮驱动。以港股上市验证"技术-产品-全球化"闭环的商业天花板。</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🦅 昆仑万维</h5><p><strong>全栈 AGI 出海：</strong>做 A 股稀缺的"芯片-大模型-应用"全链路 AI 企业。All in AGI 战略，以 Opera 全球平台+多应用矩阵实现"研发-验证-变现"飞轮。</p></div>
+            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🧩 Dify</h5><p><strong>AI 应用基础设施：</strong>成为 AI 应用开发的标准基础设施，以开源换生态规模。不造模型，做模型时代的"操作系统"。</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">⚙️ 硅基流动</h5><p><strong>Token 工厂规模制胜：</strong>做大模型时代的"水电煤"，以规模效应摊薄推理成本。不赌模型胜负，只赚 Token 流量。</p></div>
+        </div>
+    </div>
+
+    <!-- Step 2: Marketing Strategy -->
+    <div class="step-block s2" id="step2">
+        <div class="step-header">
+            <div class="step-badge">2</div>
+            <div>
+                <div class="step-title">营销战略 <span class="step-en">Marketing Strategy</span></div>
+            </div>
+        </div>
+        <div class="step-desc">确定目标市场、产品定位与获客方式——服务谁、用什么产品、如何触达。营销战略直接决定了"凭什么赢"。</div>
+        <div class="step-cards-grid">
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🐋 深度求索</h5><p><strong>目标：</strong>开发者 + 大众<br><strong>产品：</strong>开源模型 + DeepSeek App<br><strong>获客：</strong>开源口碑自传播，不重营销<br><strong>定位：</strong>"性价比之王"极致工程</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🧠 智谱</h5><p><strong>目标：</strong>政企 + C 端<br><strong>产品：</strong>GLM 模型 + 智谱清言 + AutoGLM<br><strong>获客：</strong>本地化部署直销 + 清华学术背书<br><strong>定位：</strong>政企可信国产第一梯队</p></div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">📱 面壁智能</h5><p><strong>目标：</strong>终端厂商 + 政务<br><strong>产品：</strong>MiniCPM SDK + 定制部署<br><strong>获客：</strong>联合终端预装 + 运营商渠道<br><strong>定位：</strong>"端侧小钢炮"性能密度王</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🌙 月之暗面</h5><p><strong>目标：</strong>知识工作者、程序员<br><strong>产品：</strong>Kimi 超级单品<br><strong>获客：</strong>产品即营销，知识社区口碑，海外优先<br><strong>定位：</strong>"不被定义"的技术审美</p></div>
+            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">⚡ 阶跃星辰</h5><p><strong>目标：</strong>B 端行业龙头 + C 端<br><strong>产品：</strong>30+ Step 模型矩阵<br><strong>获客：</strong>终端巨头背书（吉利/OPPO/荣耀）<br><strong>定位：</strong>"多模态第一"心智</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🌊 MiniMax</h5><p><strong>目标：</strong>海外 C 端 + B 端<br><strong>产品：</strong>Talkie/星野/海螺/开放平台<br><strong>获客：</strong>社交产品病毒传播 + 视频生成种草<br><strong>定位：</strong>AI 出海标杆 + 视频生成领先</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🦅 昆仑万维</h5><p><strong>目标：</strong>全球 C 端 + B 端生产力<br><strong>产品：</strong>天工超级智能体 + Opera + DramaWave<br><strong>获客：</strong>Opera 全球流量 + 短剧/AI 音乐病毒传播<br><strong>定位：</strong>全栈 AI 出海标杆</p></div>
+            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🧩 Dify</h5><p><strong>目标：</strong>开发团队<br><strong>产品：</strong>开源 LLMOps 平台<br><strong>获客：</strong>GitHub 开源社区漏斗 → 云订阅 → 企业版<br><strong>定位：</strong>模型无关的中立开发平台</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">⚙️ 硅基流动</h5><p><strong>目标：</strong>企业开发者<br><strong>产品：</strong>推理云 + MaaS 平台<br><strong>获客：</strong>Token 计费试用 + 阿里云/携程渠道<br><strong>定位：</strong>高性价比"一价全包"推理服务</p></div>
+        </div>
+    </div>
+
+    <!-- Step 3: Order Qualifiers & Winners -->
+    <div class="step-block s3" id="step3">
+        <div class="step-header">
+            <div class="step-badge">3</div>
+            <div>
+                <div class="step-title">订单资格要素与赢取要素 <span class="step-en">Order Qualifiers &amp; Winners</span></div>
+            </div>
+        </div>
+        <div class="step-desc">将营销战略翻译为可执行的运营优先级——哪些是入场券（Qualifiers），哪些是制胜关键（Winners），哪些可低投入（Less Important）。<strong>这是希尔框架的核心步骤。</strong></div>
+
+        <div class="hill-wrap">
+            <table class="hill-table" id="hillTable">
+                <thead>
+                    <tr>
+                        <th>公司</th>
+                        <th class="col-q">🔵 Order Qualifiers<br><span style="font-weight:400;font-size:0.78rem;">订单资格要素（入场券）</span></th>
+                        <th class="col-w">🟠 Order Winners<br><span style="font-weight:400;font-size:0.78rem;">订单赢取要素（制胜关键）</span></th>
+                        <th class="col-l">⚪ Less Important<br><span style="font-weight:400;font-size:0.78rem;">次要要素（低投入）</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="filterable" data-company="deepseek">
+                        <td>🐋 深度求索</td>
+                        <td><span class="tag q">模型性能</span><span class="tag q">开源可用性</span><span class="tag q">推理能力</span><span class="tag q">社区支持</span></td>
+                        <td><span class="tag w">极致性价比（成本 1/10）</span><span class="tag w">开源生态影响力</span><span class="tag w">R1 推理突破</span><span class="tag w">545% 成本利润率</span></td>
+                        <td><span class="tag l">C 端产品运营</span><span class="tag l">销售团队</span><span class="tag l">品牌营销</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="zhipu">
+                        <td>🧠 智谱</td>
+                        <td><span class="tag q">GLM 模型性能</span><span class="tag q">本地化部署</span><span class="tag q">API 服务</span><span class="tag q">合规资质</span></td>
+                        <td><span class="tag w">政企本地化部署</span><span class="tag w">港股上市信誉背书</span><span class="tag w">AutoGLM 智能体矩阵</span><span class="tag w">清华系学术血统</span></td>
+                        <td><span class="tag l">海外市场</span><span class="tag l">C 端社交产品</span><span class="tag l">视频生成</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="mianbi">
+                        <td>📱 面壁智能</td>
+                        <td><span class="tag q">端侧模型可用性</span><span class="tag q">开源生态</span><span class="tag q">SDK 集成</span><span class="tag q">模型推理速度</span></td>
+                        <td><span class="tag w">端侧小钢炮（1.3B 大能力）</span><span class="tag w">百万级终端装机量</span><span class="tag w">MiniCPM 全栈开源</span><span class="tag w">运营商渠道（中国电信）</span></td>
+                        <td><span class="tag l">云端旗舰模型</span><span class="tag l">海外市场</span><span class="tag l">C 端应用</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="moon">
+                        <td>🌙 月之暗面</td>
+                        <td><span class="tag q">长文本理解</span><span class="tag q">编程能力</span><span class="tag q">API 稳定</span><span class="tag q">合规运营</span></td>
+                        <td><span class="tag w">Agent 集群（300 子代理）</span><span class="tag w">MuonClip 底层创新</span><span class="tag w">极致组织效率</span><span class="tag w">技术审美品牌</span></td>
+                        <td><span class="tag l">B 端行业大单</span><span class="tag l">多模态全栈</span><span class="tag l">团队规模</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="step">
+                        <td>⚡ 阶跃星辰</td>
+                        <td><span class="tag q">多模态基础能力</span><span class="tag q">API 调用</span><span class="tag q">终端适配</span><span class="tag q">模型可用性</span></td>
+                        <td><span class="tag w">多模态全栈覆盖</span><span class="tag w">终端厂商深度绑定</span><span class="tag w">产业联盟（印奇加持）</span><span class="tag w">多模态 API 45 倍增长</span></td>
+                        <td><span class="tag l">C 端心智</span><span class="tag l">海外影响力</span><span class="tag l">底层架构创新</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="minimax">
+                        <td>🌊 MiniMax</td>
+                        <td><span class="tag q">多模态能力</span><span class="tag q">API 服务</span><span class="tag q">产品体验</span><span class="tag q">合规运营</span></td>
+                        <td><span class="tag w">视频生成领先（海螺 AI）</span><span class="tag w">海外社交产品（Talkie 月活破亿）</span><span class="tag w">港股上市信誉</span><span class="tag w">全球化变现闭环</span></td>
+                        <td><span class="tag l">政企本地化部署</span><span class="tag l">B 端行业大单</span><span class="tag l">端侧模型</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="kunlun">
+                        <td>🦅 昆仑万维</td>
+                        <td><span class="tag q">模型性能</span><span class="tag q">开源可用性</span><span class="tag q">产品体验</span><span class="tag q">合规运营</span></td>
+                        <td><span class="tag w">全栈"芯片-模型-应用"闭环</span><span class="tag w">Opera 全球流量入口</span><span class="tag w">DramaWave 短剧出海</span><span class="tag w">AI 音乐/社交多场景变现</span></td>
+                        <td><span class="tag l">政企本地化部署</span><span class="tag l">国内 B 端大单</span><span class="tag l">端侧模型</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="dify">
+                        <td>🧩 Dify</td>
+                        <td><span class="tag q">平台稳定性</span><span class="tag q">多模型支持</span><span class="tag q">文档完善</span><span class="tag q">部署便捷</span></td>
+                        <td><span class="tag w">开源 LLMOps 平台</span><span class="tag w">可视化 Agentic 工作流</span><span class="tag w">GitHub 10 万 Star 生态</span><span class="tag w">模型无关中立性</span></td>
+                        <td><span class="tag l">模型自研能力</span><span class="tag l">算力资源</span><span class="tag l">C 端用户</span></td>
+                    </tr>
+                    <tr class="filterable" data-company="silicon">
+                        <td>⚙️ 硅基流动</td>
+                        <td><span class="tag q">推理服务稳定性</span><span class="tag q">多模型聚合</span><span class="tag q">API 可用性</span><span class="tag q">数据安全</span></td>
+                        <td><span class="tag w">极致性价比推理云</span><span class="tag w">"Token 工厂"规模模式</span><span class="tag w">企业级 MaaS 平台</span><span class="tag w">阿里云/携程战投背书</span></td>
+                        <td><span class="tag l">自有模型</span><span class="tag l">C 端应用</span><span class="tag l">学术研究</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Step 4: Process Choice -->
+    <div class="step-block s4" id="step4">
+        <div class="step-header">
+            <div class="step-badge">4</div>
+            <div>
+                <div class="step-title">运营过程选择 <span class="step-en">Process Choice</span></div>
+            </div>
+        </div>
+        <div class="step-desc">选择能支撑 Order Winners 的研发与交付过程——是精锐突击还是规模矩阵，是开源社区驱动还是 B 端定制交付。过程必须与制胜要素对齐。</div>
+        <div class="step-cards-grid">
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🐋 深度求索</h5><p><strong>过程类型：工程驱动+开源交付</strong><br>极简研发（200 人），发布即交付。MLA/MoE 工程优化贯穿始终，社区反馈驱动迭代。不设销售团队，靠性价比自传播。</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🧠 智谱</h5><p><strong>过程类型：双轨研发+部署交付</strong><br>开源（GLM 系列）与商用（本地化部署）并行。以项目制交付政企大单，本地化部署能力是核心过程资产，AutoGLM 智能体矩阵持续扩展。</p></div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#10b981;"><h5 style="color:#10b981;">📱 面壁智能</h5><p><strong>过程类型：端侧优化+SDK 交付</strong><br>专注端侧模型高效训练，SDK 即产品。联合终端厂商预装的过程（"模型即 SDK"），装机量是过程产出的核心指标。</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🌙 月之暗面</h5><p><strong>过程类型：精锐研发型</strong><br>300 人扁平组织，底层重构式研发。单品极致迭代（Kimi 系列），不铺多产品线。MuonClip 等底层创新驱动智能上限，研发即壁垒。</p></div>
+            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#10b981;"><h5 style="color:#10b981;">⚡ 阶跃星辰</h5><p><strong>过程类型：矩阵交付型</strong><br>30+ 模型矩阵研发，B 端定制交付 + API 标准化双轨。终端联合开发过程（与吉利/OPPO 共建），以"被选择"驱动迭代。</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🌊 MiniMax</h5><p><strong>过程类型：多产品线敏捷型</strong><br>C 端产品（Talkie/星野）敏捷迭代 + B 端 API 标准化。视频生成（海螺）研发与社交产品运营双线并行，数据飞轮驱动产品优化。</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🦅 昆仑万维</h5><p><strong>过程类型：全栈闭环飞轮型</strong><br>"芯片-大模型-平台-应用"全链路自研。Skywork 开源换影响力 + 天工智能体交付生产力 + Opera/DramaWave 应用变现，形成"研发-验证-变现"飞轮。</p></div>
+            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🧩 Dify</h5><p><strong>过程类型：开源社区驱动型</strong><br>GitHub 社区贡献驱动产品演进，云服务标准化交付。三层漏斗：开源社区 → 云订阅 → 企业定制。模型无关，专注平台层迭代。</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#10b981;"><h5 style="color:#10b981;">⚙️ 硅基流动</h5><p><strong>过程类型：推理云标准化运营</strong><br>算法+系统+硬件协同优化，推理服务标准化运营。MaaS 平台聚合多模型，按 Token 计费的规模化交付过程，边际成本持续下降。</p></div>
+        </div>
+    </div>
+
+    <!-- Step 5: Infrastructure -->
+    <div class="step-block s5" id="step5">
+        <div class="step-header">
+            <div class="step-badge">5</div>
+            <div>
+                <div class="step-title">基础设施 <span class="step-en">Infrastructure</span></div>
+            </div>
+        </div>
+        <div class="step-desc">通过组织结构、人才体系、资本与算力、系统工具等基础设施支撑运营过程落地。基础设施必须与 Order Winners 对齐，否则"想赢的赢不了"。</div>
+        <div class="step-cards-grid">
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🐋 深度求索</h5><p><strong>组织：</strong>200 人，工程文化驱动<br><strong>人才：</strong>年轻工程师为主，无大厂包袱<br><strong>资本：</strong>幻方自有资金，不依赖外部融资<br><strong>算力：</strong>幻方万卡集群自有</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧠 智谱</h5><p><strong>组织：</strong>900 人，清华系学术血统<br><strong>人才：</strong>学术+工程双轨团队<br><strong>资本：</strong>港股上市募资 43 亿港元<br><strong>算力：</strong>上市资金支撑持续训练</p></div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#64748b;"><h5 style="color:#64748b;">📱 面壁智能</h5><p><strong>组织：</strong>300 人，清华+OpenBMB 背景<br><strong>人才：</strong>端侧模型优化专家<br><strong>资本：</strong>中国电信领投，运营商渠道加持<br><strong>算力：</strong>端侧训练需求相对低</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌙 月之暗面</h5><p><strong>组织：</strong>300 人精锐，无 OKR 无部门墙，联创直管<br><strong>人才：</strong>偏好偏执、有抽象能力者<br><strong>资本：</strong>D 轮 20 亿美元，估值 300 亿<br><strong>算力：</strong>融资支撑大规模训练</p></div>
+            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚡ 阶跃星辰</h5><p><strong>组织：</strong>800 人，产业联盟型（印奇董事长）<br><strong>人才：</strong>多模态研究 + 行业 BD 复合团队<br><strong>资本：</strong>B+ 轮 50 亿元，刷新纪录<br><strong>算力：</strong>融资支撑多模态训练</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌊 MiniMax</h5><p><strong>组织：</strong>700 人，商汤系团队<br><strong>人才：</strong>多模态 + 社交产品运营<br><strong>资本：</strong>港股上市，市值 700 亿港元<br><strong>算力：</strong>视频生成需高算力投入</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🦅 昆仑万维</h5><p><strong>组织：</strong>数千人，集团化运营<br><strong>人才：</strong>AI 研究 + 海外产品运营双轨<br><strong>资本：</strong>A 股上市，市值 509 亿，现金 36 亿+<br><strong>算力：</strong>控股艾捷科芯芯片，自研算力</p></div>
+            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧩 Dify</h5><p><strong>组织：</strong>100 人，全球分布式团队<br><strong>人才：</strong>开源工程 + 开发者关系<br><strong>资本：</strong>Pre-A 3000 万美元，红杉领投<br><strong>算力：</strong>无需自建，云服务托管</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚙️ 硅基流动</h5><p><strong>组织：</strong>200 人，系统+硬件工程团队<br><strong>人才：</strong>推理加速 + 异构算力专家<br><strong>资本：</strong>B 轮 20 亿，阿里云/携程战投<br><strong>算力：</strong>核心基础设施，大规模 GPU 集群</p></div>
+        </div>
+    </div>
+
+    <div class="hill-intro" style="border-left-color:#3b82f6;">
+        <h3>💡 希尔框架五步贯通洞察</h3>
+        <p><strong>① 目标 → ③ 制胜要素必须自洽：</strong>月之暗面目标是"智能上限"，Winner 就是 MuonClip 底层创新；深度求索目标是"AI 民主化"，Winner 就是极致性价比。目标与 Winner 不一致的，运营必然失焦。</p>
+        <p><strong>④ 过程 → ③ Winner 必须对齐：</strong>面壁 Winner 是"端侧装机量"，过程选择就是"SDK 交付+联合预装"而非云端 API；Dify Winner 是"中立生态"，过程就是"开源社区驱动"而非自研模型。过程选错，Winner 再对也赢不了。</p>
+        <p><strong>⑤ 基础设施 → ④ 过程必须支撑：</strong>月之暗面过程是"精锐研发"，基础设施就是 300 人扁平+无 OKR；硅基流动过程是"推理云规模运营"，基础设施就是 GPU 集群+异构算力专家。基础设施不匹配，过程就是空谈。</p>
+        <p><strong>赢家共性：</strong>九家公司能在各自赛道突围，核心是五步贯通——目标→营销→制胜要素→过程→基础设施层层对齐、首尾一致。能在行业收敛中活下来的，必然是五步自洽的公司。</p>
+    </div>
+</section>
+</div><!-- end tab-hill -->
+
+<!-- Tab 4: Charts -->
+<div class="tab-content" id="tab-charts">
+<!-- Charts -->
+<section class="section container">
+    <h2 class="section-title">关键指标可视化</h2>
+    <p class="section-subtitle">融资规模、团队、商业化进度横向对比（随勾选动态更新）</p>
+
+    <div class="chart-container">
+        <div class="chart-title">最新一轮融资 / 估值规模对比</div>
+        <div class="chart-wrapper"><canvas id="fundingChart"></canvas></div>
+    </div>
+
+    <div class="charts-row">
+        <div class="chart-container">
+            <div class="chart-title">团队规模对比（人）</div>
+            <div class="chart-wrapper"><canvas id="teamChart"></canvas></div>
+        </div>
+        <div class="chart-container">
+            <div class="chart-title">2025-2026 年化收入对比（亿美元）</div>
+            <div class="chart-wrapper"><canvas id="arrChart"></canvas></div>
+        </div>
+    </div>
+</section>
+</div><!-- end tab-charts -->
+
+<!-- Tab 5: Value Investing Analysis -->
+<div class="tab-content" id="tab-invest">
+<section class="section container">
+    <h2 class="section-title">价值投资分析</h2>
+    <p class="section-subtitle">格雷厄姆 · 巴菲特 · 芒格 · 霍华德·马克斯 · 四大框架审视三家上市公司</p>
+
+    <!-- Framework Intro -->
+    <div class="hill-intro" style="border-left-color:#16a34a;">
+        <h3>📊 分析对象与框架</h3>
+        <p>九家公司中已上市三家：<strong>智谱（2513.HK）</strong>、<strong>MiniMax（00100.HK）</strong>、<strong>昆仑万维（300418.SZ）</strong>。本节用四位价值投资大师的经典框架逐一审视，识别投资机会与风险。</p>
+        <div class="hill-concepts">
+            <div class="hill-concept q" style="border-top-color:#1e40af;">
+                <h4 style="color:#1e40af;">🛡️ 格雷厄姆</h4>
+                <p>安全边际 · 内在价值 · 市场先生<br>关注：估值是否低于内在价值，价格是否提供足够安全垫</p>
+            </div>
+            <div class="hill-concept w" style="border-top-color:#b45309;">
+                <h4 style="color:#b45309;">🏰 巴菲特</h4>
+                <p>经济护城河 · 能力圈 · 好公司好价格<br>关注：是否有可持续竞争优势，管理层是否优秀，ROIC 是否高效</p>
+            </div>
+            <div class="hill-concept l" style="border-top-color:#7c3aed;">
+                <h4 style="color:#7c3aed;">🧠 芒格</h4>
+                <p>多元思维模型 · 反向思考 · 合理价格买伟大公司<br>关注：反过来想哪里会出错，是否值得长期持有</p>
+            </div>
+            <div class="hill-concept q" style="border-top-color:#dc2626;">
+                <h4 style="color:#dc2626;">🔄 霍华德·马克斯</h4>
+                <p>周期 · 风险 · 第二层次思维<br>关注：当前处于周期什么位置，风险是否被正确定价，是否有不对称机会</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company 1: 智谱 -->
+    <div class="dimension-block" style="border-top:4px solid #10b981;">
+        <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#10b981,#059669);">Z</span>智谱（2513.HK）· 港股上市 2026.01</div>
+        <div class="dimension-sub">市值 ~511 亿港元 · IPO 募资 43 亿港元 · 清华系政企本地化部署龙头</div>
+        <div class="dim-cards-grid">
+            <div class="dim-mini-card" style="border-left-color:#1e40af;">
+                <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
+                <p><strong>内在价值：</strong>GLM-5 模型矩阵 + 政企本地化部署现金流 + AutoGLM 智能体生态<br><strong>市场价格：</strong>511 亿港元对应高增长预期，PS 估值偏高<br><strong>安全边际：</strong>⚠️ 偏薄。当前估值已反映高增长预期，若政企订单增速放缓，估值承压。格雷厄姆或认为"价格不够便宜"。</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#b45309;">
+                <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
+                <p><strong>护城河类型：</strong>转换成本（政企本地化部署粘性高）+ 无形资产（清华学术血统 + 合规资质）<br><strong>护城河强度：</strong>🟢 中等偏强。政企客户切换成本高，但面临 DeepSeek 开源冲击<br><strong>ROIC：</strong>本地化部署重人力，资本效率待验证<br><strong>管理层：</strong>唐杰学术背景深厚，商业化执行力待观察</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#7c3aed;">
+                <h5 style="color:#7c3aed;">🧠 芒格：反向思考</h5>
+                <p><strong>哪里会出错？</strong>① DeepSeek 开源持续冲击政企付费意愿；② 港股流动性不足导致估值折价；③ 清华系人才流失到竞品<br><strong>值得长期持有吗？</strong>芒格或认为"合理价格的国产政企 AI 龙头"值得关注，但需确认护城河不被开源侵蚀。Lollapalooza 效应：学术血统 + 合规 + 政企信任三重叠加。</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#dc2626;">
+                <h5 style="color:#dc2626;">🔄 霍华德·马克斯：周期</h5>
+                <p><strong>周期位置：</strong>AI 概念高位区，港股 AI 板块情绪偏热<br><strong>风险定价：</strong>市场对政企 AI 部署增速过于乐观，风险溢价不足<br><strong>第二层次思维：</strong>"大家都知道智谱是政企龙头"→ 共识已定价。超额收益需来自"政企订单超预期"或"开源反而做大政企蛋糕"</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company 2: MiniMax -->
+    <div class="dimension-block" style="border-top:4px solid #06b6d4;">
+        <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">X</span>MiniMax（00100.HK）· 港股上市 2026.01</div>
+        <div class="dimension-sub">市值 ~700 亿港元 · 阿里/米哈游/腾讯加持 · AI 出海标杆 + 视频生成领先</div>
+        <div class="dim-cards-grid">
+            <div class="dim-mini-card" style="border-left-color:#1e40af;">
+                <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
+                <p><strong>内在价值：</strong>Talkie 全球月活破亿 + 海螺视频生成 + 开放平台 API 三条收入线<br><strong>市场价格：</strong>700 亿港元，2025 AI 原生收入仅 5310 万美元，PS 极高<br><strong>安全边际：</strong>🔴 不足。格雷厄姆原则会回避——当前价格完全基于未来增长预期，无安全垫。营收与市值严重不匹配。</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#b45309;">
+                <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
+                <p><strong>护城河类型：</strong>网络效应（Talkie 社交）+ 技术（视频生成领先）+ 资本（上市信誉）<br><strong>护城河强度：</strong>🟡 中等。社交产品有网络效应但用户粘性待验证，视频生成竞争激烈<br><strong>ROIC：</strong>亏损中，经调整亏损快速收窄但尚未盈利<br><strong>管理层：</strong>闫俊杰商汤系背景，产品+技术双能力突出</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#7c3aed;">
+                <h5 style="color:#7c3aed;">🧠 芒格：反向思考</h5>
+                <p><strong>哪里会出错？</strong>① Talkie 用户增长见顶后变现不及预期；② 视频生成被大厂（字节/腾讯）追平；③ 海外监管风险（数据合规）；④ 港股 AI 泡沫破裂<br><strong>值得长期持有吗？</strong>芒格或认为"有趣的生意但价格不够合理"。出海 + 视频是稀缺组合，但需等估值回归。反向思考：如果 Talkie 月活下滑，700 亿市值能撑住吗？</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#dc2626;">
+                <h5 style="color:#dc2626;">🔄 霍华德·马克斯：周期</h5>
+                <p><strong>周期位置：</strong>AI 出海概念顶部区域，市场情绪极度乐观<br><strong>风险定价：</strong>🔥 高风险。PS 估值隐含了未来 5 年高速增长，任何增速不及预期都将剧烈调整<br><strong>第二层次思维：</strong>"大家都知道 MiniMax 是出海标杆"→ 已定价。超额收益需来自"视频生成商业化爆发"超预期，而非社交产品线性增长。不对称性偏弱——下行风险大于上行空间。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company 3: 昆仑万维 -->
+    <div class="dimension-block" style="border-top:4px solid #f97316;">
+        <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);">K</span>昆仑万维（300418.SZ）· 深交所上市 2015</div>
+        <div class="dimension-sub">市值 ~509 亿元 · 2025 前三季度营收 58 亿 · 海外收入占比 93% · 全栈 AI 布局</div>
+        <div class="dim-cards-grid">
+            <div class="dim-mini-card" style="border-left-color:#1e40af;">
+                <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
+                <p><strong>内在价值：</strong>Opera 全球流量 + DramaWave 短剧 + Skywork 模型 + 艾捷科芯芯片，多元资产组合<br><strong>市场价格：</strong>509 亿元，2025 前三季度营收 58 亿，PS 约 5-6 倍<br><strong>安全边际：</strong>🟢 相对充足。有真实营收和现金流支撑（非纯概念），PS 低于纯 AI 公司。资产负债率仅 19.6%，现金 36 亿+。格雷厄姆会认可财务稳健性。</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#b45309;">
+                <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
+                <p><strong>护城河类型：</strong>规模效应（Opera 全球流量）+ 全栈协同（芯片-模型-应用）+ 转换成本（海外用户）<br><strong>护城河强度：</strong>🟢 中等偏强。Opera 流量入口 + DramaWave 短剧变现已验证，全栈布局形成协同<br><strong>ROIC：</strong>2025 Q3 已扭亏，机构预测 2025-2027 净利增速 75%/134%/179%<br><strong>管理层：</strong>周亚辉战略眼光独到，All in AGI 决策果断</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#7c3aed;">
+                <h5 style="color:#7c3aed;">🧠 芒格：反向思考</h5>
+                <p><strong>哪里会出错？</strong>① 芯片量产不及预期拖累全栈叙事；② 短剧赛道竞争加剧；③ A 股 AI 板块泡沫破裂联动下跌；④ 海外政策监管风险<br><strong>值得长期持有吗？</strong>✅ 芒格或最认可这家——有真实营收、全栈协同、合理估值。Lollapalooza 效应：流量 + 模型 + 芯片 + 应用四重叠加。反向思考：即使 AI 失败，Opera + 短剧仍有基本盘。</p>
+            </div>
+            <div class="dim-mini-card" style="border-left-color:#dc2626;">
+                <h5 style="color:#dc2626;">🔄 霍华德·马克斯：周期</h5>
+                <p><strong>周期位置：</strong>A 股 AI 概念中高位，但昆仑有基本面支撑，非纯泡沫<br><strong>风险定价：</strong>🟡 适中。PS 5-6 倍 + 已扭亏，下行空间相对有限<br><strong>第二层次思维：</strong>"市场只把它当短剧/游戏公司"→ AI 全栈价值未被充分定价。若芯片量产 + 天工智能体爆发，存在估值重估机会。不对称性较好——下行有营收兜底，上行有 AI 重估。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Comparison -->
+    <div class="hill-intro" style="border-left-color:#16a34a;">
+        <h3>🏆 三家上市公司投资框架横向对比</h3>
+        <div class="matrix-wrap" style="margin:20px 0; box-shadow:none;">
+            <table class="hill-table" style="min-width:700px;">
+                <thead>
+                    <tr>
+                        <th>维度</th>
+                        <th class="col-zhipu">🧠 智谱（2513.HK）</th>
+                        <th class="col-minimax">🌊 MiniMax（00100.HK）</th>
+                        <th style="background:linear-gradient(135deg,#ea580c,#f97316);">🦅 昆仑万维（300418.SZ）</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>格雷厄姆安全边际</td>
+                        <td><span class="tag q">⚠️ 偏薄</span> PS 高，政企增速预期已定价</td>
+                        <td><span class="tag l">🔴 不足</span> 营收与市值严重不匹配</td>
+                        <td><span class="tag w">🟢 相对充足</span> 有营收现金流，PS 5-6 倍</td>
+                    </tr>
+                    <tr>
+                        <td>巴菲特护城河</td>
+                        <td><span class="tag q">转换成本+无形资产</span> 政企粘性高但受开源冲击</td>
+                        <td><span class="tag q">网络效应+技术</span> 社交有粘性但竞争激烈</td>
+                        <td><span class="tag w">规模+全栈协同</span> Opera 流量+芯片模型应用</td>
+                    </tr>
+                    <tr>
+                        <td>芒格反向思考</td>
+                        <td>开源侵蚀风险 + 港股流动性折价</td>
+                        <td>Talkie 见顶 + 视频被追平 + 海外监管</td>
+                        <td><span class="tag w">AI 失败也有基本盘兜底</span></td>
+                    </tr>
+                    <tr>
+                        <td>马克斯周期位置</td>
+                        <td>AI 概念高位，共识已定价</td>
+                        <td><span class="tag l">🔥 顶部区域</span> 不对称性偏弱</td>
+                        <td><span class="tag w">🟡 适中</span> AI 价值未被充分定价</td>
+                    </tr>
+                    <tr>
+                        <td>财务稳健性</td>
+                        <td>上市募资 43 亿，现金流待验证</td>
+                        <td>亏损收窄中，尚未盈利</td>
+                        <td><span class="tag w">负债率 19.6%，现金 36 亿+</span></td>
+                    </tr>
+                    <tr>
+                        <td>投资吸引力综合</td>
+                        <td>⭐⭐⭐ 政企龙头但估值偏高</td>
+                        <td>⭐⭐ 出海标杆但泡沫风险大</td>
+                        <td><span class="tag w">⭐⭐⭐⭐ 基本面+估值+全栈叙事</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>格雷厄姆视角结论：</strong>三家都非传统"烟蒂股"，但昆仑万维有真实营收和安全垫，最接近格雷厄姆"财务稳健 + 价格合理"标准。</p>
+        <p><strong>巴菲特视角结论：</strong>昆仑全栈协同 + Opera 流量入口最接近"经济护城河"，但需观察 ROIC 能否持续改善。智谱政企转换成本是真实护城河。</p>
+        <p><strong>芒格视角结论：</strong>昆仑最符合"合理价格买好公司"——即使 AI 叙事落空，短剧+Opera 仍有价值。MiniMax 需等估值回归。</p>
+        <p><strong>马克斯视角结论：</strong>当前 AI 板块整体处于周期高位，昆仑因有基本面支撑，下行保护最好，不对称性最优。MiniMax 风险收益比最差。</p>
+        <p style="margin-top:16px; padding:14px; background:#fef2f2; border-radius:10px; border-left:4px solid #dc2626; font-size:0.88rem;"><strong>⚠️ 免责声明：</strong>以上分析基于公开信息与经典投资框架，不构成投资建议。AI 行业变化快、不确定性高，请独立判断并注意风险。</p>
+    </div>
+</section>
+</div><!-- end tab-invest -->
+
+</div><!-- end mainContent -->
+
+<div class="footer">
+    <p>本报告基于公开信息整理 · 数据截至 2026 年 6 月 · 仅供研究参考</p>
+</div>
+
+<script>
+    const companyData = {
+        deepseek: { name:'深度求索', color:'#3b82f6', funding:0,   team:200, arr:0.5, fundingNote:'幻方自有' },
+        zhipu:    { name:'智谱',     color:'#10b981', funding:43,  team:900, arr:2.0, fundingNote:'港股募资43亿港元' },
+        mianbi:   { name:'面壁智能', color:'#ec4899', funding:5,   team:300, arr:0.4, fundingNote:'电信领投数亿' },
+        moon:     { name:'月之暗面', color:'#6366f1', funding:140, team:300, arr:2.0, fundingNote:'D轮20亿美元' },
+        step:     { name:'阶跃星辰', color:'#f59e0b', funding:50,  team:800, arr:1.4, fundingNote:'B+轮50亿' },
+        minimax:  { name:'MiniMax', color:'#06b6d4', funding:0,   team:700, arr:0.8, fundingNote:'港股上市' },
+        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,   team:3000, arr:8.0, fundingNote:'A股上市市值509亿' },
+        dify:     { name:'Dify',    color:'#8b5cf6', funding:2.1, team:100, arr:0.15,fundingNote:'Pre-A 3000万美元' },
+        silicon:  { name:'硅基流动', color:'#64748b', funding:20,  team:200, arr:0.6, fundingNote:'B轮20亿' }
+    };
+    const allKeys = ['deepseek','zhipu','mianbi','moon','step','minimax','kunlun','dify','silicon'];
+    let selected = new Set(allKeys);
+
+    let fundingChart, teamChart, arrChart;
+
+    function initCharts() {
+        Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif';
+        fundingChart = new Chart(document.getElementById('fundingChart'), {
+            type: 'bar',
+            data: { labels: [], datasets: [{ label:'最新轮融资金额（亿元 RMB 等价）', data:[], backgroundColor:[], borderColor:[], borderWidth:2, borderRadius:8 }] },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color:'#475569', font:{size:13} } },
+                    tooltip: { callbacks: { label: (ctx) => companyData[allKeys[ctx.dataIndex]].fundingNote } }
+                },
+                scales: {
+                    x: { ticks: { color:'#64748b', font:{size:11} }, grid:{display:false} },
+                    y: { ticks:{color:'#64748b'}, grid:{color:'#e2e8f0'}, title:{display:true,text:'亿元 RMB（等价）',color:'#64748b'} }
+                }
+            }
+        });
+        teamChart = new Chart(document.getElementById('teamChart'), {
+            type: 'bar',
+            data: { labels: [], datasets: [{ label:'团队规模（人）', data:[], backgroundColor:[], borderColor:[], borderWidth:2, borderRadius:8 }] },
+            options: {
+                indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks:{color:'#64748b'}, grid:{color:'#e2e8f0'} },
+                    y: { ticks:{color:'#64748b', font:{size:11}}, grid:{display:false} }
+                }
+            }
+        });
+        arrChart = new Chart(document.getElementById('arrChart'), {
+            type: 'bar',
+            data: { labels: [], datasets: [{ label:'年化收入（亿美元，估算）', data:[], backgroundColor:[], borderColor:[], borderWidth:2, borderRadius:8 }] },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks:{color:'#64748b', font:{size:11}}, grid:{display:false} },
+                    y: { ticks:{color:'#64748b'}, grid:{color:'#e2e8f0'}, title:{display:true,text:'亿美元',color:'#64748b'} }
+                }
+            }
+        });
+        updateCharts();
+    }
+
+    function updateCharts() {
+        const keys = allKeys.filter(k => selected.has(k));
+        const labels = keys.map(k => companyData[k].name);
+        const colors = keys.map(k => companyData[k].color);
+        const bgColors = colors.map(c => c + 'cc');
+
+        fundingChart.data.labels = labels;
+        fundingChart.data.datasets[0].data = keys.map(k => companyData[k].funding);
+        fundingChart.data.datasets[0].backgroundColor = bgColors;
+        fundingChart.data.datasets[0].borderColor = colors;
+        fundingChart.update();
+
+        teamChart.data.labels = labels;
+        teamChart.data.datasets[0].data = keys.map(k => companyData[k].team);
+        teamChart.data.datasets[0].backgroundColor = bgColors;
+        teamChart.data.datasets[0].borderColor = colors;
+        teamChart.update();
+
+        arrChart.data.labels = labels;
+        arrChart.data.datasets[0].data = keys.map(k => companyData[k].arr);
+        arrChart.data.datasets[0].backgroundColor = bgColors;
+        arrChart.data.datasets[0].borderColor = colors;
+        arrChart.update();
+    }
+
+    function applyFilter() {
+        document.querySelectorAll('.filterable').forEach(el => {
+            const c = el.dataset.company;
+            if (selected.has(c)) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+
+        // Empty state
+        const empty = document.getElementById('emptyState');
+        const main = document.getElementById('mainContent');
+        if (selected.size === 0) {
+            empty.classList.add('show');
+            main.style.display = 'none';
+        } else {
+            empty.classList.remove('show');
+            main.style.display = 'block';
+        }
+
+        // Update count
+        document.getElementById('count').textContent = `${selected.size}/9`;
+
+        // Update checkbox visual state
+        document.querySelectorAll('.company-check').forEach(label => {
+            const c = label.dataset.company;
+            const cb = label.querySelector('input');
+            if (selected.has(c)) {
+                label.classList.add('checked');
+                label.classList.remove('unchecked');
+                cb.checked = true;
+            } else {
+                label.classList.remove('checked');
+                label.classList.add('unchecked');
+                cb.checked = false;
+            }
+        });
+
+        updateCharts();
+    }
+
+    function selectAll(val) {
+        if (val) {
+            selected = new Set(allKeys);
+        } else {
+            selected = new Set();
+        }
+        applyFilter();
+    }
+
+    document.getElementById('checkboxes').addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+            const label = e.target.closest('.company-check');
+            const c = label.dataset.company;
+            if (e.target.checked) {
+                selected.add(c);
+            } else {
+                selected.delete(c);
+            }
+            applyFilter();
+        }
+    });
+
+    // Allow clicking the label itself (not just checkbox)
+    document.querySelectorAll('.company-check').forEach(label => {
+        label.addEventListener('click', (e) => {
+            if (e.target.tagName === 'INPUT') return;
+            e.preventDefault();
+            const c = label.dataset.company;
+            if (selected.has(c)) {
+                selected.delete(c);
+            } else {
+                selected.add(c);
+            }
+            applyFilter();
+        });
+    });
+
+    initCharts();
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.dataset.tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + tabId).classList.add('active');
+            // Trigger chart resize when switching to charts tab
+            if (tabId === 'charts') {
+                setTimeout(() => {
+                    [fundingChart, teamChart, arrChart].forEach(c => c && c.resize());
+                }, 100);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
