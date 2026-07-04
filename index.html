@@ -331,6 +331,25 @@
         .step-desc { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.75; }
 
         .step-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px,1fr)); gap: 14px; }
+        .hill-card {
+            padding: 18px; border-radius: 14px; background: linear-gradient(135deg,#ffffff,#f8fafc);
+            border-left: 5px solid; position: relative; overflow: hidden;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .hill-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+        .hill-card::before {
+            content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px;
+            border-radius: 50%; opacity: 0.06; transform: translate(30px,-30px);
+        }
+        .hill-card .hill-kw {
+            display: inline-block; padding: 3px 12px; border-radius: 20px;
+            font-size: 0.72rem; font-weight: 700; margin-bottom: 8px; letter-spacing: 0.5px;
+        }
+        .hill-card h5 { font-size: 1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .hill-card p { color: var(--text-secondary); font-size: 0.82rem; line-height: 1.7; }
+        .hill-card .hill-highlight {
+            color: var(--text-primary); font-weight: 600;
+        }
 
         /* Hill Matrix */
         .hill-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
@@ -1233,16 +1252,55 @@
             </div>
         </div>
         <div class="step-desc">明确企业长期追求——是技术领先、规模扩张、盈利优先，还是生态壁垒？目标决定了后续所有运营决策的方向。</div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强都瞄准 <span class="common-tag">AGI</span>，都以 <span class="common-tag">大模型为核心</span>，都接受 <span class="common-tag">资本驱动</span>。差异在于：<span class="common-tag">"赢什么"不同</span>——有人追求技术上限，有人追求规模变现，有人追求生态壁垒。
+        </div>
         <div class="step-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🐋 深度求索</h5><p><strong>AI 民主化：</strong>以极致性价比开源重塑行业价值分配，倒逼全行业降价。不追求短期商业化，用开源影响力定义行业新秩序。</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🧠 智谱</h5><p><strong>政企市场第一：</strong>成为政企本地化部署首选，港股上市建立长期资本支撑。以学术血统+合规资质构建可持续商业闭环。</p></div>
-            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">📱 面壁智能</h5><p><strong>端侧无处不在：</strong>让 AI 跑在每一个终端上，以装机量定义新护城河。"大模型未必大"，用小参数撬动大市场。</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🌙 月之暗面</h5><p><strong>智能上限优先：</strong>做"不被定义的 LLM"，以底层架构重构追求智能天花板，ARR 高速增长冲击全球第一梯队。宁可少而精，不求大而全。</p></div>
-            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">⚡ 阶跃星辰</h5><p><strong>多模态规模化：</strong>做多模态 AGI 领跑者，通过终端生态绑定实现规模化落地。2025 冲击 10 亿收入，追求"被终端巨头选择"的产业地位。</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🌊 MiniMax</h5><p><strong>全球化变现：</strong>做中国 AI 出海标杆，视频生成+社交产品双轮驱动。以港股上市验证"技术-产品-全球化"闭环的商业天花板。</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🦅 昆仑万维</h5><p><strong>全栈 AGI 出海：</strong>做 A 股稀缺的"芯片-大模型-应用"全链路 AI 企业。All in AGI 战略，以 Opera 全球平台+多应用矩阵实现"研发-验证-变现"飞轮。</p></div>
-            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">🧩 Dify</h5><p><strong>AI 应用基础设施：</strong>成为 AI 应用开发的标准基础设施，以开源换生态规模。不造模型，做模型时代的"操作系统"。</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#3b82f6;"><h5 style="color:#3b82f6;">⚙️ 硅基流动</h5><p><strong>Token 工厂规模制胜：</strong>做大模型时代的"水电煤"，以规模效应摊薄推理成本。不赌模型胜负，只赚 Token 流量。</p></div>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">AI 民主化</div>
+                <h5 style="color:#1d4ed8;">🐋 深度求索</h5>
+                <p>以<span class="hill-highlight">极致性价比开源</span>倒逼全行业降价，不追求短期商业化</p>
+            </div>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">政企第一</div>
+                <h5 style="color:#047857;">🧠 智谱</h5>
+                <p>成为<span class="hill-highlight">政企本地化部署首选</span>，学术血统+合规资质构建闭环</p>
+            </div>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#ec4899;background:linear-gradient(135deg,#fdf2f8,#fce7f3);">
+                <div class="hill-kw" style="background:#ec4899;color:white;">端侧无处不在</div>
+                <h5 style="color:#9d174d;">📱 面壁智能</h5>
+                <p>让 AI 跑在<span class="hill-highlight">每一个终端</span>上，用小参数撬动大市场</p>
+            </div>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#6366f1;background:linear-gradient(135deg,#eef2ff,#e0e7ff);">
+                <div class="hill-kw" style="background:#6366f1;color:white;">智能上限优先</div>
+                <h5 style="color:#4338ca;">🌙 月之暗面</h5>
+                <p>做<span class="hill-highlight">"不被定义的 LLM"</span>，底层架构重构追求智能天花板</p>
+            </div>
+            <div class="hill-card filterable" data-company="step" style="border-left-color:#f59e0b;background:linear-gradient(135deg,#fffbeb,#fef3c7);">
+                <div class="hill-kw" style="background:#f59e0b;color:white;">多模态规模化</div>
+                <h5 style="color:#b45309;">⚡ 阶跃星辰</h5>
+                <p>多模态 AGI 领跑者，通过<span class="hill-highlight">终端生态绑定</span>实现规模化落地</p>
+            </div>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#06b6d4;background:linear-gradient(135deg,#ecfeff,#cffafe);">
+                <div class="hill-kw" style="background:#06b6d4;color:white;">全球化变现</div>
+                <h5 style="color:#0e7490;">🌊 MiniMax</h5>
+                <p>做中国 AI <span class="hill-highlight">出海标杆</span>，视频生成+社交产品双轮驱动</p>
+            </div>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">全栈 AGI 出海</div>
+                <h5 style="color:#9a3412;">🦅 昆仑万维</h5>
+                <p><span class="hill-highlight">"芯片-大模型-应用"全链路</span>，Opera 全球平台变现飞轮</p>
+            </div>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">应用基础设施</div>
+                <h5 style="color:#6d28d9;">🧩 Dify</h5>
+                <p>成为 AI 应用开发的<span class="hill-highlight">标准基础设施</span>，不造模型做"操作系统"</p>
+            </div>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">Token 工厂</div>
+                <h5 style="color:#334155;">⚙️ 硅基流动</h5>
+                <p>做大模型时代的<span class="hill-highlight">"水电煤"</span>，不赌模型胜负只赚 Token 流量</p>
+            </div>
         </div>
     </div>
 
@@ -1255,16 +1313,55 @@
             </div>
         </div>
         <div class="step-desc">确定目标市场、产品定位与获客方式——服务谁、用什么产品、如何触达。营销战略直接决定了"凭什么赢"。</div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强 <span class="common-tag">9 家均有 API</span>，<span class="common-tag">7 家 B+C 双线</span>，<span class="common-tag">5 家出海</span>。差异在于：<span class="common-tag">"服务谁"不同</span>——政企 vs 终端 vs C 端 vs 开发者。
+        </div>
         <div class="step-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🐋 深度求索</h5><p><strong>目标：</strong>开发者 + 大众<br><strong>产品：</strong>开源模型 + DeepSeek App<br><strong>获客：</strong>开源口碑自传播，不重营销<br><strong>定位：</strong>"性价比之王"极致工程</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🧠 智谱</h5><p><strong>目标：</strong>政企 + C 端<br><strong>产品：</strong>GLM 模型 + 智谱清言 + AutoGLM<br><strong>获客：</strong>本地化部署直销 + 清华学术背书<br><strong>定位：</strong>政企可信国产第一梯队</p></div>
-            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">📱 面壁智能</h5><p><strong>目标：</strong>终端厂商 + 政务<br><strong>产品：</strong>MiniCPM SDK + 定制部署<br><strong>获客：</strong>联合终端预装 + 运营商渠道<br><strong>定位：</strong>"端侧小钢炮"性能密度王</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🌙 月之暗面</h5><p><strong>目标：</strong>知识工作者、程序员<br><strong>产品：</strong>Kimi 超级单品<br><strong>获客：</strong>产品即营销，知识社区口碑，海外优先<br><strong>定位：</strong>"不被定义"的技术审美</p></div>
-            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">⚡ 阶跃星辰</h5><p><strong>目标：</strong>B 端行业龙头 + C 端<br><strong>产品：</strong>30+ Step 模型矩阵<br><strong>获客：</strong>终端巨头背书（吉利/OPPO/荣耀）<br><strong>定位：</strong>"多模态第一"心智</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🌊 MiniMax</h5><p><strong>目标：</strong>海外 C 端 + B 端<br><strong>产品：</strong>Talkie/星野/海螺/开放平台<br><strong>获客：</strong>社交产品病毒传播 + 视频生成种草<br><strong>定位：</strong>AI 出海标杆 + 视频生成领先</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🦅 昆仑万维</h5><p><strong>目标：</strong>全球 C 端 + B 端生产力<br><strong>产品：</strong>天工超级智能体 + Opera + DramaWave<br><strong>获客：</strong>Opera 全球流量 + 短剧/AI 音乐病毒传播<br><strong>定位：</strong>全栈 AI 出海标杆</p></div>
-            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">🧩 Dify</h5><p><strong>目标：</strong>开发团队<br><strong>产品：</strong>开源 LLMOps 平台<br><strong>获客：</strong>GitHub 开源社区漏斗 → 云订阅 → 企业版<br><strong>定位：</strong>模型无关的中立开发平台</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#8b5cf6;"><h5 style="color:#8b5cf6;">⚙️ 硅基流动</h5><p><strong>目标：</strong>企业开发者<br><strong>产品：</strong>推理云 + MaaS 平台<br><strong>获客：</strong>Token 计费试用 + 阿里云/携程渠道<br><strong>定位：</strong>高性价比"一价全包"推理服务</p></div>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤👨‍💻 性价比之王</div>
+                <h5 style="color:#6d28d9;">🐋 深度求索</h5>
+                <p>开发者+大众 · 开源模型+App · <span class="hill-highlight">不重营销</span>，口碑自传播</p>
+            </div>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">🏛️👤 政企可信</div>
+                <h5 style="color:#6d28d9;">🧠 智谱</h5>
+                <p>政企+C端 · GLM+清言+AutoGLM · <span class="hill-highlight">清华学术背书</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">🏛️🏢 端侧小钢炮</div>
+                <h5 style="color:#6d28d9;">📱 面壁智能</h5>
+                <p>终端厂商+政务 · MiniCPM SDK · <span class="hill-highlight">运营商渠道</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤🏢 不被定义</div>
+                <h5 style="color:#6d28d9;">🌙 月之暗面</h5>
+                <p>知识工作者+程序员 · Kimi 单品 · <span class="hill-highlight">产品即营销</span>，海外优先</p>
+            </div>
+            <div class="hill-card filterable" data-company="step" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">🏢👤 多模态第一</div>
+                <h5 style="color:#6d28d9;">⚡ 阶跃星辰</h5>
+                <p>B端龙头+C端 · 30+ Step 矩阵 · <span class="hill-highlight">吉利/OPPO/荣耀</span>背书</p>
+            </div>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤🏢 出海标杆</div>
+                <h5 style="color:#6d28d9;">🌊 MiniMax</h5>
+                <p>海外C端+B端 · Talkie/星野/海螺 · <span class="hill-highlight">社交病毒传播</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤🏢 全栈出海</div>
+                <h5 style="color:#6d28d9;">🦅 昆仑万维</h5>
+                <p>全球C端+B端 · 天工+Opera+DramaWave · <span class="hill-highlight">Opera 全球流量</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">👨‍💻 中立平台</div>
+                <h5 style="color:#6d28d9;">🧩 Dify</h5>
+                <p>开发团队 · 开源 LLMOps · <span class="hill-highlight">社区漏斗</span>→云订阅→企业版</p>
+            </div>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">👨‍💻 一价全包</div>
+                <h5 style="color:#6d28d9;">⚙️ 硅基流动</h5>
+                <p>企业开发者 · 推理云+MaaS · <span class="hill-highlight">阿里云/携程渠道</span></p>
+            </div>
         </div>
     </div>
 
@@ -1277,71 +1374,74 @@
             </div>
         </div>
         <div class="step-desc">将营销战略翻译为可执行的运营优先级——哪些是入场券（Qualifiers），哪些是制胜关键（Winners），哪些可低投入（Less Important）。<strong>这是希尔框架的核心步骤。</strong></div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强 <span class="common-tag">入场券相似</span>（模型性能+API+合规），<span class="common-tag">次要要素趋同</span>（都不重 C 端运营/海外/端侧的某些方面）。差异在于：<span class="common-tag">"凭什么赢"完全不同</span>——性价比 vs 政企信任 vs 端侧装机量 vs 技术审美 vs 全栈闭环。
+        </div>
 
         <div class="hill-wrap">
             <table class="hill-table" id="hillTable">
                 <thead>
                     <tr>
                         <th>公司</th>
-                        <th class="col-q">🔵 Order Qualifiers<br><span style="font-weight:400;font-size:0.78rem;">订单资格要素（入场券）</span></th>
-                        <th class="col-w">🟠 Order Winners<br><span style="font-weight:400;font-size:0.78rem;">订单赢取要素（制胜关键）</span></th>
-                        <th class="col-l">⚪ Less Important<br><span style="font-weight:400;font-size:0.78rem;">次要要素（低投入）</span></th>
+                        <th class="col-q">🔵 入场券<br><span style="font-weight:400;font-size:0.78rem;">Qualifiers</span></th>
+                        <th class="col-w">🟠 制胜关键<br><span style="font-weight:400;font-size:0.78rem;">Order Winners</span></th>
+                        <th class="col-l">⚪ 可放弃<br><span style="font-weight:400;font-size:0.78rem;">Less Important</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="filterable" data-company="deepseek">
                         <td>🐋 深度求索</td>
-                        <td><span class="tag q">模型性能</span><span class="tag q">开源可用性</span><span class="tag q">推理能力</span><span class="tag q">社区支持</span></td>
-                        <td><span class="tag w">极致性价比（成本 1/10）</span><span class="tag w">开源生态影响力</span><span class="tag w">R1 推理突破</span><span class="tag w">545% 成本利润率</span></td>
-                        <td><span class="tag l">C 端产品运营</span><span class="tag l">销售团队</span><span class="tag l">品牌营销</span></td>
+                        <td><span class="tag q">模型性能</span><span class="tag q">开源可用</span></td>
+                        <td><span class="tag w">极致性价比（成本 1/10）</span><span class="tag w">545% 成本利润率</span></td>
+                        <td><span class="tag l">销售团队</span><span class="tag l">品牌营销</span></td>
                     </tr>
                     <tr class="filterable" data-company="zhipu">
                         <td>🧠 智谱</td>
-                        <td><span class="tag q">GLM 模型性能</span><span class="tag q">本地化部署</span><span class="tag q">API 服务</span><span class="tag q">合规资质</span></td>
-                        <td><span class="tag w">政企本地化部署</span><span class="tag w">港股上市信誉背书</span><span class="tag w">AutoGLM 智能体矩阵</span><span class="tag w">清华系学术血统</span></td>
-                        <td><span class="tag l">海外市场</span><span class="tag l">C 端社交产品</span><span class="tag l">视频生成</span></td>
+                        <td><span class="tag q">GLM 性能</span><span class="tag q">合规资质</span></td>
+                        <td><span class="tag w">政企本地化部署</span><span class="tag w">清华系学术血统</span></td>
+                        <td><span class="tag l">海外市场</span><span class="tag l">C 端社交</span></td>
                     </tr>
                     <tr class="filterable" data-company="mianbi">
                         <td>📱 面壁智能</td>
-                        <td><span class="tag q">端侧模型可用性</span><span class="tag q">开源生态</span><span class="tag q">SDK 集成</span><span class="tag q">模型推理速度</span></td>
-                        <td><span class="tag w">端侧小钢炮（1.3B 大能力）</span><span class="tag w">百万级终端装机量</span><span class="tag w">MiniCPM 全栈开源</span><span class="tag w">运营商渠道（中国电信）</span></td>
-                        <td><span class="tag l">云端旗舰模型</span><span class="tag l">海外市场</span><span class="tag l">C 端应用</span></td>
+                        <td><span class="tag q">端侧可用性</span><span class="tag q">SDK 集成</span></td>
+                        <td><span class="tag w">端侧小钢炮（1.3B 大能力）</span><span class="tag w">百万级终端装机量</span></td>
+                        <td><span class="tag l">云端旗舰</span><span class="tag l">海外市场</span></td>
                     </tr>
                     <tr class="filterable" data-company="moon">
                         <td>🌙 月之暗面</td>
-                        <td><span class="tag q">长文本理解</span><span class="tag q">编程能力</span><span class="tag q">API 稳定</span><span class="tag q">合规运营</span></td>
-                        <td><span class="tag w">Agent 集群（300 子代理）</span><span class="tag w">MuonClip 底层创新</span><span class="tag w">极致组织效率</span><span class="tag w">技术审美品牌</span></td>
-                        <td><span class="tag l">B 端行业大单</span><span class="tag l">多模态全栈</span><span class="tag l">团队规模</span></td>
+                        <td><span class="tag q">长文本理解</span><span class="tag q">编程能力</span></td>
+                        <td><span class="tag w">Agent 集群（300 子代理）</span><span class="tag w">MuonClip 底层创新</span></td>
+                        <td><span class="tag l">B 端大单</span><span class="tag l">团队规模</span></td>
                     </tr>
                     <tr class="filterable" data-company="step">
                         <td>⚡ 阶跃星辰</td>
-                        <td><span class="tag q">多模态基础能力</span><span class="tag q">API 调用</span><span class="tag q">终端适配</span><span class="tag q">模型可用性</span></td>
-                        <td><span class="tag w">多模态全栈覆盖</span><span class="tag w">终端厂商深度绑定</span><span class="tag w">产业联盟（印奇加持）</span><span class="tag w">多模态 API 45 倍增长</span></td>
-                        <td><span class="tag l">C 端心智</span><span class="tag l">海外影响力</span><span class="tag l">底层架构创新</span></td>
+                        <td><span class="tag q">多模态基础</span><span class="tag q">终端适配</span></td>
+                        <td><span class="tag w">多模态全栈覆盖</span><span class="tag w">终端厂商深度绑定</span></td>
+                        <td><span class="tag l">C 端心智</span><span class="tag l">底层创新</span></td>
                     </tr>
                     <tr class="filterable" data-company="minimax">
                         <td>🌊 MiniMax</td>
-                        <td><span class="tag q">多模态能力</span><span class="tag q">API 服务</span><span class="tag q">产品体验</span><span class="tag q">合规运营</span></td>
-                        <td><span class="tag w">视频生成领先（海螺 AI）</span><span class="tag w">海外社交产品（Talkie 月活破亿）</span><span class="tag w">港股上市信誉</span><span class="tag w">全球化变现闭环</span></td>
-                        <td><span class="tag l">政企本地化部署</span><span class="tag l">B 端行业大单</span><span class="tag l">端侧模型</span></td>
+                        <td><span class="tag q">多模态能力</span><span class="tag q">产品体验</span></td>
+                        <td><span class="tag w">视频生成领先（海螺）</span><span class="tag w">Talkie 月活破亿</span></td>
+                        <td><span class="tag l">政企部署</span><span class="tag l">端侧模型</span></td>
                     </tr>
                     <tr class="filterable" data-company="kunlun">
                         <td>🦅 昆仑万维</td>
-                        <td><span class="tag q">模型性能</span><span class="tag q">开源可用性</span><span class="tag q">产品体验</span><span class="tag q">合规运营</span></td>
-                        <td><span class="tag w">全栈"芯片-模型-应用"闭环</span><span class="tag w">Opera 全球流量入口</span><span class="tag w">DramaWave 短剧出海</span><span class="tag w">AI 音乐/社交多场景变现</span></td>
-                        <td><span class="tag l">政企本地化部署</span><span class="tag l">国内 B 端大单</span><span class="tag l">端侧模型</span></td>
+                        <td><span class="tag q">模型性能</span><span class="tag q">产品体验</span></td>
+                        <td><span class="tag w">全栈"芯片-模型-应用"闭环</span><span class="tag w">Opera 全球流量入口</span></td>
+                        <td><span class="tag l">政企部署</span><span class="tag l">国内 B 端</span></td>
                     </tr>
                     <tr class="filterable" data-company="dify">
                         <td>🧩 Dify</td>
-                        <td><span class="tag q">平台稳定性</span><span class="tag q">多模型支持</span><span class="tag q">文档完善</span><span class="tag q">部署便捷</span></td>
-                        <td><span class="tag w">开源 LLMOps 平台</span><span class="tag w">可视化 Agentic 工作流</span><span class="tag w">GitHub 10 万 Star 生态</span><span class="tag w">模型无关中立性</span></td>
-                        <td><span class="tag l">模型自研能力</span><span class="tag l">算力资源</span><span class="tag l">C 端用户</span></td>
+                        <td><span class="tag q">平台稳定</span><span class="tag q">多模型支持</span></td>
+                        <td><span class="tag w">GitHub 10 万 Star 生态</span><span class="tag w">模型无关中立性</span></td>
+                        <td><span class="tag l">模型自研</span><span class="tag l">C 端用户</span></td>
                     </tr>
                     <tr class="filterable" data-company="silicon">
                         <td>⚙️ 硅基流动</td>
-                        <td><span class="tag q">推理服务稳定性</span><span class="tag q">多模型聚合</span><span class="tag q">API 可用性</span><span class="tag q">数据安全</span></td>
-                        <td><span class="tag w">极致性价比推理云</span><span class="tag w">"Token 工厂"规模模式</span><span class="tag w">企业级 MaaS 平台</span><span class="tag w">阿里云/携程战投背书</span></td>
-                        <td><span class="tag l">自有模型</span><span class="tag l">C 端应用</span><span class="tag l">学术研究</span></td>
+                        <td><span class="tag q">推理稳定</span><span class="tag q">多模型聚合</span></td>
+                        <td><span class="tag w">极致性价比推理云</span><span class="tag w">"Token 工厂"规模模式</span></td>
+                        <td><span class="tag l">自有模型</span><span class="tag l">C 端应用</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -1357,16 +1457,55 @@
             </div>
         </div>
         <div class="step-desc">选择能支撑 Order Winners 的研发与交付过程——是精锐突击还是规模矩阵，是开源社区驱动还是 B 端定制交付。过程必须与制胜要素对齐。</div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强都 <span class="common-tag">开源模型</span>，都 <span class="common-tag">API 标准化</span>。差异在于：<span class="common-tag">"怎么造"不同</span>——精锐突击 vs 规模矩阵，开源驱动 vs B 端定制。
+        </div>
         <div class="step-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🐋 深度求索</h5><p><strong>过程类型：工程驱动+开源交付</strong><br>极简研发（200 人），发布即交付。MLA/MoE 工程优化贯穿始终，社区反馈驱动迭代。不设销售团队，靠性价比自传播。</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🧠 智谱</h5><p><strong>过程类型：双轨研发+部署交付</strong><br>开源（GLM 系列）与商用（本地化部署）并行。以项目制交付政企大单，本地化部署能力是核心过程资产，AutoGLM 智能体矩阵持续扩展。</p></div>
-            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#10b981;"><h5 style="color:#10b981;">📱 面壁智能</h5><p><strong>过程类型：端侧优化+SDK 交付</strong><br>专注端侧模型高效训练，SDK 即产品。联合终端厂商预装的过程（"模型即 SDK"），装机量是过程产出的核心指标。</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🌙 月之暗面</h5><p><strong>过程类型：精锐研发型</strong><br>300 人扁平组织，底层重构式研发。单品极致迭代（Kimi 系列），不铺多产品线。MuonClip 等底层创新驱动智能上限，研发即壁垒。</p></div>
-            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#10b981;"><h5 style="color:#10b981;">⚡ 阶跃星辰</h5><p><strong>过程类型：矩阵交付型</strong><br>30+ 模型矩阵研发，B 端定制交付 + API 标准化双轨。终端联合开发过程（与吉利/OPPO 共建），以"被选择"驱动迭代。</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🌊 MiniMax</h5><p><strong>过程类型：多产品线敏捷型</strong><br>C 端产品（Talkie/星野）敏捷迭代 + B 端 API 标准化。视频生成（海螺）研发与社交产品运营双线并行，数据飞轮驱动产品优化。</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🦅 昆仑万维</h5><p><strong>过程类型：全栈闭环飞轮型</strong><br>"芯片-大模型-平台-应用"全链路自研。Skywork 开源换影响力 + 天工智能体交付生产力 + Opera/DramaWave 应用变现，形成"研发-验证-变现"飞轮。</p></div>
-            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#10b981;"><h5 style="color:#10b981;">🧩 Dify</h5><p><strong>过程类型：开源社区驱动型</strong><br>GitHub 社区贡献驱动产品演进，云服务标准化交付。三层漏斗：开源社区 → 云订阅 → 企业定制。模型无关，专注平台层迭代。</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#10b981;"><h5 style="color:#10b981;">⚙️ 硅基流动</h5><p><strong>过程类型：推理云标准化运营</strong><br>算法+系统+硬件协同优化，推理服务标准化运营。MaaS 平台聚合多模型，按 Token 计费的规模化交付过程，边际成本持续下降。</p></div>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">工程驱动·开源交付</div>
+                <h5 style="color:#047857;">🐋 深度求索</h5>
+                <p>200 人极简研发，发布即交付，<span class="hill-highlight">不设销售团队</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">双轨研发·部署交付</div>
+                <h5 style="color:#047857;">🧠 智谱</h5>
+                <p>开源+商用并行，<span class="hill-highlight">项目制交付政企大单</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">端侧优化·SDK 交付</div>
+                <h5 style="color:#047857;">📱 面壁智能</h5>
+                <p><span class="hill-highlight">SDK 即产品</span>，联合终端厂商预装</p>
+            </div>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">精锐研发型</div>
+                <h5 style="color:#047857;">🌙 月之暗面</h5>
+                <p>300 人扁平，单品极致迭代，<span class="hill-highlight">研发即壁垒</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="step" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">矩阵交付型</div>
+                <h5 style="color:#047857;">⚡ 阶跃星辰</h5>
+                <p><span class="hill-highlight">30+ 模型矩阵</span>，与吉利/OPPO 共建</p>
+            </div>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">多产品线敏捷型</div>
+                <h5 style="color:#047857;">🌊 MiniMax</h5>
+                <p>C 端敏捷迭代+B 端 API，<span class="hill-highlight">数据飞轮</span>驱动</p>
+            </div>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">全栈闭环飞轮型</div>
+                <h5 style="color:#047857;">🦅 昆仑万维</h5>
+                <p><span class="hill-highlight">"芯片-模型-平台-应用"全链路</span>自研飞轮</p>
+            </div>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">开源社区驱动型</div>
+                <h5 style="color:#047857;">🧩 Dify</h5>
+                <p><span class="hill-highlight">GitHub 社区贡献</span>驱动，社区→云→企业三层漏斗</p>
+            </div>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">推理云标准化运营</div>
+                <h5 style="color:#047857;">⚙️ 硅基流动</h5>
+                <p>MaaS 聚合多模型，<span class="hill-highlight">边际成本持续下降</span></p>
+            </div>
         </div>
     </div>
 
@@ -1379,25 +1518,98 @@
             </div>
         </div>
         <div class="step-desc">通过组织结构、人才体系、资本与算力、系统工具等基础设施支撑运营过程落地。基础设施必须与 Order Winners 对齐，否则"想赢的赢不了"。</div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强都 <span class="common-tag">资本充裕</span>，都 <span class="common-tag">高薪抢人</span>。差异在于：<span class="common-tag">"用什么撑"不同</span>——自有算力 vs 融资支撑，精锐团队 vs 集团化，自研芯片 vs 云托管。
+        </div>
         <div class="step-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🐋 深度求索</h5><p><strong>组织：</strong>200 人，工程文化驱动<br><strong>人才：</strong>年轻工程师为主，无大厂包袱<br><strong>资本：</strong>首轮 70 亿美元，投后估值 590 亿<br><strong>算力：</strong>幻方万卡集群自有</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧠 智谱</h5><p><strong>组织：</strong>900 人，清华系学术血统<br><strong>人才：</strong>学术+工程双轨团队<br><strong>资本：</strong>港股市值约 7800 亿港元<br><strong>算力：</strong>上市资金支撑持续训练</p></div>
-            <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#64748b;"><h5 style="color:#64748b;">📱 面壁智能</h5><p><strong>组织：</strong>300 人，清华+OpenBMB 背景<br><strong>人才：</strong>端侧模型优化专家<br><strong>资本：</strong>中国电信领投，运营商渠道加持<br><strong>算力：</strong>端侧训练需求相对低</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌙 月之暗面</h5><p><strong>组织：</strong>300 人精锐，无 OKR 无部门墙，联创直管<br><strong>人才：</strong>偏好偏执、有抽象能力者<br><strong>资本：</strong>D 轮 20 亿美元，新轮投前估值 315 亿<br><strong>算力：</strong>融资支撑大规模训练</p></div>
-            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚡ 阶跃星辰</h5><p><strong>组织：</strong>800 人，产业联盟型（印奇董事长）<br><strong>人才：</strong>多模态研究 + 行业 BD 复合团队<br><strong>资本：</strong>Pre-IPO 25 亿美元，估值约 120 亿美元<br><strong>算力：</strong>融资支撑多模态训练</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌊 MiniMax</h5><p><strong>组织：</strong>700 人，商汤系团队<br><strong>人才：</strong>多模态 + 社交产品运营<br><strong>资本：</strong>港股市值约 1120 亿港元<br><strong>算力：</strong>视频生成需高算力投入</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🦅 昆仑万维</h5><p><strong>组织：</strong>数千人，集团化运营<br><strong>人才：</strong>AI 研究 + 海外产品运营双轨<br><strong>资本：</strong>A 股市值约 585 亿，现金 36 亿+<br><strong>算力：</strong>控股艾捷科芯芯片，自研算力</p></div>
-            <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧩 Dify</h5><p><strong>组织：</strong>100 人，全球分布式团队<br><strong>人才：</strong>开源工程 + 开发者关系<br><strong>资本：</strong>Pre-A 3000 万美元，红杉领投<br><strong>算力：</strong>无需自建，云服务托管</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚙️ 硅基流动</h5><p><strong>组织：</strong>200 人，系统+硬件工程团队<br><strong>人才：</strong>推理加速 + 异构算力专家<br><strong>资本：</strong>B 轮 20 亿，已递表港交所<br><strong>算力：</strong>核心基础设施，大规模 GPU 集群</p></div>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">幻方自有算力</div>
+                <h5 style="color:#334155;">🐋 深度求索</h5>
+                <p>200 人 · 投后 590 亿美元 · <span class="hill-highlight">幻方万卡集群自有</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">清华学术血统</div>
+                <h5 style="color:#334155;">🧠 智谱</h5>
+                <p>900 人 · 港股市值 7800 亿 · <span class="hill-highlight">学术+工程双轨</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">运营商渠道加持</div>
+                <h5 style="color:#334155;">📱 面壁智能</h5>
+                <p>300 人 · 中国电信领投 · <span class="hill-highlight">端侧算力需求低</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">无 OKR 无部门墙</div>
+                <h5 style="color:#334155;">🌙 月之暗面</h5>
+                <p>300 人精锐 · 投前 315 亿 · <span class="hill-highlight">联创直管</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="step" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">产业联盟型</div>
+                <h5 style="color:#334155;">⚡ 阶跃星辰</h5>
+                <p>800 人 · 估值 120 亿 · <span class="hill-highlight">印奇董事长加持</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">商汤系团队</div>
+                <h5 style="color:#334155;">🌊 MiniMax</h5>
+                <p>700 人 · 港股市值 1120 亿 · <span class="hill-highlight">阿里控股 13.66%</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">自研 NPU 芯片</div>
+                <h5 style="color:#334155;">🦅 昆仑万维</h5>
+                <p>数千人 · A 股市值 585 亿 · <span class="hill-highlight">控股艾捷科芯</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">全球分布式</div>
+                <h5 style="color:#334155;">🧩 Dify</h5>
+                <p>100 人 · 红杉领投 · <span class="hill-highlight">无需自建算力</span></p>
+            </div>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
+                <div class="hill-kw" style="background:#64748b;color:white;">大规模 GPU 集群</div>
+                <h5 style="color:#334155;">⚙️ 硅基流动</h5>
+                <p>200 人 · B 轮 20 亿 · <span class="hill-highlight">大规模 GPU 集群</span></p>
+            </div>
         </div>
     </div>
 
     <div class="hill-intro" style="border-left-color:#3b82f6;">
-        <h3>💡 希尔框架五步贯通洞察</h3>
-        <p><strong>① 目标 → ③ 制胜要素必须自洽：</strong>月之暗面目标是"智能上限"，Winner 就是 MuonClip 底层创新；深度求索目标是"AI 民主化"，Winner 就是极致性价比。目标与 Winner 不一致的，运营必然失焦。</p>
-        <p><strong>④ 过程 → ③ Winner 必须对齐：</strong>面壁 Winner 是"端侧装机量"，过程选择就是"SDK 交付+联合预装"而非云端 API；Dify Winner 是"中立生态"，过程就是"开源社区驱动"而非自研模型。过程选错，Winner 再对也赢不了。</p>
-        <p><strong>⑤ 基础设施 → ④ 过程必须支撑：</strong>月之暗面过程是"精锐研发"，基础设施就是 300 人扁平+无 OKR；硅基流动过程是"推理云规模运营"，基础设施就是 GPU 集群+异构算力专家。基础设施不匹配，过程就是空谈。</p>
-        <p><strong>赢家共性：</strong>九家公司能在各自赛道突围，核心是五步贯通——目标→营销→制胜要素→过程→基础设施层层对齐、首尾一致。能在行业收敛中活下来的，必然是五步自洽的公司。</p>
+        <h3>💡 运营改进建议</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #3b82f6;">
+                <span style="font-weight:700;color:#1d4ed8;white-space:nowrap;min-width:90px;">🐋 深度求索</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">商业化薄弱——无销售无营销。建议补齐 B 端交付团队，将开源影响力转化为营收；关注幻方算力依赖风险。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #10b981;">
+                <span style="font-weight:700;color:#047857;white-space:nowrap;min-width:90px;">🧠 智谱</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">IPO 半年暴涨 15 倍，PS>1000 严重脱离基本面。建议用政企现金流证明盈利能力；C 端清言需找差异化定位。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #ec4899;">
+                <span style="font-weight:700;color:#9d174d;white-space:nowrap;min-width:90px;">📱 面壁智能</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">端侧赛道天花板有限，云端旗舰缺位。建议向云端延伸形成"端云协同"；政务依赖度高，需拓展行业多元化。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #6366f1;">
+                <span style="font-weight:700;color:#4338ca;white-space:nowrap;min-width:90px;">🌙 月之暗面</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">单品依赖（Kimi）、团队仅 300 人。建议在 Agent 基础上拓展 B 端产品线；海外需加速本地化运营。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #f59e0b;">
+                <span style="font-weight:700;color:#b45309;white-space:nowrap;min-width:90px;">⚡ 阶跃星辰</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">30+ 模型矩阵摊子大，C 端心智弱。建议聚焦 2-3 个旗舰模型做深，削减长尾；加速 IPO 验证估值。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #06b6d4;">
+                <span style="font-weight:700;color:#0e7490;white-space:nowrap;min-width:90px;">🌊 MiniMax</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">AI 原生收入仅 5310 万美元，PS 极高。建议 Talkie 加速商业化（订阅+广告），海螺拓展 B 端 API；解禁后稳定股价。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #f97316;">
+                <span style="font-weight:700;color:#9a3412;white-space:nowrap;min-width:90px;">🦅 昆仑万维</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">全栈铺得广但各线深度参差。建议聚焦 Skywork+DramaWave 两大现金牛，艾捷科芯尽快量产；削减非核心业务。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #8b5cf6;">
+                <span style="font-weight:700;color:#6d28d9;white-space:nowrap;min-width:90px;">🧩 Dify</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">团队仅 100 人，企业版转化率待提升。建议加速企业版功能（权限/审计/私有化），从 GitHub Star 转化 ARR。</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;background:#f8fafc;border-left:4px solid #64748b;">
+                <span style="font-weight:700;color:#334155;white-space:nowrap;min-width:90px;">⚙️ 硅基流动</span>
+                <span style="font-size:0.86rem;color:var(--text-secondary);line-height:1.6;">毛利薄、依赖上游模型。建议加深产业资本协同，从纯推理云向"推理+微调+部署"延伸；尽快完成港股上市。</span>
+            </div>
+        </div>
     </div>
 </section>
 </div><!-- end tab-hill -->
