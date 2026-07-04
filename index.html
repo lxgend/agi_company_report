@@ -202,6 +202,13 @@
 
         .card-name { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
         .card-en { font-size: 0.82rem; color: var(--text-secondary); }
+        .card-website {
+            margin-left: auto; font-size: 0.74rem; color: var(--text-secondary);
+            text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 10px; border-radius: 6px; background: #f1f5f9;
+            transition: all 0.2s; white-space: nowrap;
+        }
+        .card-website:hover { background: #e2e8f0; color: var(--accent); }
         .card-tag {
             display: inline-block; padding: 3px 10px; border-radius: 6px;
             font-size: 0.74rem; font-weight: 600; margin-bottom: 10px;
@@ -360,6 +367,33 @@
             font-size: 1.35rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);
             display: flex; align-items: center; gap: 10px;
         }
+        .dim-common {
+            background: linear-gradient(135deg,#f0f9ff,#e0f2fe); border:1px solid #bae6fd;
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 20px;
+            font-size: 0.84rem; line-height: 1.7; color: #0c4a6e;
+        }
+        .dim-common strong { color: #075985; }
+        .dim-common .common-tag {
+            display: inline-block; padding: 2px 8px; border-radius: 4px;
+            background: #e0f2fe; color: #0369a1; font-weight: 600; font-size: 0.78rem; margin: 0 2px;
+        }
+        .dim-attr {
+            display: grid; grid-template-columns: auto 1fr; gap: 6px 10px;
+            font-size: 0.8rem; margin-bottom: 8px;
+        }
+        .dim-attr .attr-label {
+            color: var(--text-secondary); font-weight: 600; white-space: nowrap;
+        }
+        .dim-attr .attr-value {
+            color: var(--text-primary); font-weight: 500;
+        }
+        .attr-badge {
+            display: inline-block; padding: 1px 7px; border-radius: 4px;
+            font-size: 0.72rem; font-weight: 600; margin: 0 2px;
+        }
+        .attr-badge.yes { background: #d1fae5; color: #065f46; }
+        .attr-badge.no { background: #fee2e2; color: #991b1b; }
+        .attr-badge.neutral { background: #f1f5f9; color: #475569; }
         .dimension-icon {
             width: 34px; height: 34px; border-radius: 9px; display:flex; align-items:center; justify-content:center;
             font-size: 1.05rem; background: linear-gradient(135deg,#6366f1,#8b5cf6); color: white;
@@ -396,6 +430,32 @@
         .chart-title { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 18px; text-align: center; }
         .chart-wrapper { position: relative; height: 380px; }
         .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+        .fund-table { width:100%; border-collapse:collapse; font-size:0.86rem; }
+        .fund-table th {
+            background:#1e293b; color:white; padding:12px 14px; text-align:left;
+            font-weight:600; font-size:0.8rem; white-space:nowrap;
+        }
+        .fund-table th:first-child { border-radius:8px 0 0 0; }
+        .fund-table th:last-child { border-radius:0 8px 0 0; }
+        .fund-table td {
+            padding:14px; border-bottom:1px solid #e2e8f0; color:var(--text-primary);
+            line-height:1.6; vertical-align:top;
+        }
+        .fund-table tr:hover td { background:#f8fafc; }
+        .fund-table .col-company { font-weight:700; white-space:nowrap; }
+        .fund-table .col-round {
+            display:inline-block; padding:3px 10px; border-radius:6px;
+            font-size:0.74rem; font-weight:600; white-space:nowrap;
+        }
+        .fund-table .col-note { color:var(--text-secondary); font-size:0.8rem; white-space:nowrap; }
+        .fund-legend {
+            display:flex; gap:18px; margin-bottom:14px; flex-wrap:wrap;
+            font-size:0.78rem; color:var(--text-secondary); justify-content:center;
+        }
+        .fund-legend .dot {
+            display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:middle;
+        }
 
         /* Timeline */
         .timeline { position: relative; padding: 20px 0; }
@@ -500,7 +560,7 @@
 <section class="hero">
     <div class="hero-content">
         <h1>中国 AI 科创独角兽企业深度调研</h1>
-        <p class="report-meta">报告时间：2026 年 6 月 · 数据截至 2026 年 Q2</p>
+        <p class="report-meta">报告时间：2026 年 7 月 · 数据截至 2026 年 7 月</p>
     </div>
 </section>
 
@@ -556,7 +616,7 @@
 <!-- Tab Navigation -->
 <div class="tab-nav">
     <button class="tab-btn active" data-tab="overview"><span class="tab-icon">🏢</span>公司概览</button>
-    <button class="tab-btn" data-tab="strategy"><span class="tab-icon">⚔️</span>策略阵营与维度</button>
+    <button class="tab-btn" data-tab="strategy"><span class="tab-icon">⚔️</span>战略路线分析</button>
     <button class="tab-btn" data-tab="hill"><span class="tab-icon">📐</span>希尔运营战略框架</button>
     <button class="tab-btn" data-tab="charts"><span class="tab-icon">📊</span>数据图表</button>
     <button class="tab-btn" data-tab="invest"><span class="tab-icon">💰</span>价值投资分析</button>
@@ -575,13 +635,14 @@
             <div class="card-head">
                 <div class="card-icon">D</div>
                 <div><div class="card-name">深度求索</div><div class="card-en">DeepSeek</div></div>
+                <a class="card-website" href="https://www.deepseek.com" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">文本 · 推理</span>
             <div class="card-info">
                 <div class="info-item"><div class="info-label">业务领域</div><div class="info-value">大模型 · API</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">梁文锋</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023</div></div>
-                <div class="info-item"><div class="info-label">团队</div><div class="info-value">~200 人</div></div>
+                <div class="info-item"><div class="info-label">估值</div><div class="info-value">~590 亿美元</div></div>
             </div>
             <p class="card-desc">以极致性价比与开源策略震撼全球。V3/R1 性能逼近闭源旗舰，理论成本利润率 545%，重塑行业价值分配。</p>
             <div class="paper-section">
@@ -614,13 +675,14 @@
             <div class="card-head">
                 <div class="card-icon">Z</div>
                 <div><div class="card-name">智谱</div><div class="card-en">Zhipu AI · GLM</div></div>
+                <a class="card-website" href="https://www.zhipuai.cn" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">文本 · 多模态 · Agent</span>
             <div class="card-info">
                 <div class="info-item"><div class="info-label">业务领域</div><div class="info-value">大模型 · 本地化部署</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">唐杰/张鹏</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2019</div></div>
-                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~511 亿港元（IPO）</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~7,800 亿港元（2026.07）</div></div>
             </div>
             <p class="card-desc">清华系国产大模型第一梯队，GLM-5 带动商业范式转型。本地化部署见长，AutoGLM 智能体矩阵完善。2026.01 港股上市。</p>
             <div class="paper-section">
@@ -648,6 +710,7 @@
             <div class="card-head">
                 <div class="card-icon">M</div>
                 <div><div class="card-name">面壁智能</div><div class="card-en">ModelBest · MiniCPM</div></div>
+                <a class="card-website" href="https://modelbest.cn" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">端侧 · 多模态</span>
             <div class="card-info">
@@ -682,13 +745,14 @@
             <div class="card-head">
                 <div class="card-icon">K</div>
                 <div><div class="card-name">月之暗面</div><div class="card-en">Moonshot AI · Kimi</div></div>
+                <a class="card-website" href="https://kimi.com" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">文本 · Agent · 编程</span>
             <div class="card-info">
                 <div class="info-item"><div class="info-label">业务领域</div><div class="info-value">大模型 · C 端应用</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">杨植麟</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023</div></div>
-                <div class="info-item"><div class="info-label">估值</div><div class="info-value">~200 亿美元</div></div>
+                <div class="info-item"><div class="info-label">估值</div><div class="info-value">~315 亿美元</div></div>
             </div>
             <p class="card-desc">以"不被定义的 LLM"为愿景，专挑底层动刀。Kimi 以长文本与 Agent 集群著称，组织极简、技术审美驱动。</p>
             <div class="paper-section">
@@ -721,13 +785,14 @@
             <div class="card-head">
                 <div class="card-icon">S</div>
                 <div><div class="card-name">阶跃星辰</div><div class="card-en">StepFun</div></div>
+                <a class="card-website" href="https://www.stepfun.com" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">多模态 · 语音 · 视频</span>
             <div class="card-info">
                 <div class="info-item"><div class="info-label">业务领域</div><div class="info-value">多模态 · 终端生态</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">姜大昕</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2023.04</div></div>
-                <div class="info-item"><div class="info-label">最新融资</div><div class="info-value">50 亿 B+</div></div>
+                <div class="info-item"><div class="info-label">最新融资</div><div class="info-value">25 亿美元 Pre-IPO（递表港交所）</div></div>
             </div>
             <p class="card-desc">中国多模态大模型领跑者，30+ Step 系列模型。坚持"多模态+终端生态"，与吉利、OPPO、荣耀深度合作。</p>
             <div class="paper-section">
@@ -755,13 +820,14 @@
             <div class="card-head">
                 <div class="card-icon">X</div>
                 <div><div class="card-name">MiniMax</div><div class="card-en">海螺AI · Talkie · 星野</div></div>
+                <a class="card-website" href="https://www.minimaxi.com" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">视频 · 多模态 · 社交</span>
             <div class="card-info">
                 <div class="info-item"><div class="info-label">业务领域</div><div class="info-value">视频生成 · 社交</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">闫俊杰</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2021.12</div></div>
-                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~700 亿港元（IPO）</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~1,120 亿港元（2026.07）</div></div>
             </div>
             <p class="card-desc">中国 AI 出海标杆，Talkie 全球月活破亿。海螺 AI 视频生成商业化领先，"技术-产品-全球化变现"闭环验证。</p>
             <div class="paper-section">
@@ -789,13 +855,14 @@
             <div class="card-head">
                 <div class="card-icon">K</div>
                 <div><div class="card-name">昆仑万维</div><div class="card-en">Kunlun · 天工 / Skywork</div></div>
+                <a class="card-website" href="https://www.tiangong.cn" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">全栈 · Agent · 音乐</span>
             <div class="card-info">
                 <div class="info-item"><div class="info-label">业务领域</div><div class="info-value">全栈 · 短剧 · 浏览器</div></div>
                 <div class="info-item"><div class="info-label">创始人</div><div class="info-value">周亚辉 / 方汉</div></div>
                 <div class="info-item"><div class="info-label">成立</div><div class="info-value">2008</div></div>
-                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~509 亿元（2025.11）</div></div>
+                <div class="info-item"><div class="info-label">市值</div><div class="info-value">~585 亿元（2026.07）</div></div>
             </div>
             <p class="card-desc">A股稀缺"芯片-大模型-平台-应用"全栈 AI 企业。All in AGI 战略，Skywork 系列开源 + 天工超级智能体 + Opera/DramaWave 全球化应用矩阵，海外收入占比 93%。</p>
             <div class="paper-section">
@@ -818,6 +885,7 @@
             <div class="card-head">
                 <div class="card-icon">D</div>
                 <div><div class="card-name">Dify</div><div class="card-en">LLMOps 开发平台</div></div>
+                <a class="card-website" href="https://dify.ai" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">应用平台 · Agent 工作流</span>
             <div class="card-info">
@@ -847,6 +915,7 @@
             <div class="card-head">
                 <div class="card-icon">S</div>
                 <div><div class="card-name">硅基流动</div><div class="card-en">SiliconFlow</div></div>
+                <a class="card-website" href="https://siliconflow.cn" target="_blank">🌐 官网 ↗</a>
             </div>
             <span class="card-tag">推理云 · MaaS</span>
             <div class="card-info">
@@ -878,32 +947,34 @@
 <div class="tab-content" id="tab-strategy">
 <!-- Strategy Camps -->
 <section class="section container">
-    <h2 class="section-title">五大策略阵营</h2>
-    <p class="section-subtitle">按运营策略归入五大阵营，反映不同的 AGI 路径判断</p>
+    <h2 class="section-title">策略阵营</h2>
+    <p class="section-subtitle">按运营策略归入阵营，反映不同的 AGI 路径判断。阵营可交叉，一家公司可归属多个阵营</p>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap:22px;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:22px;">
         <div class="filterable" data-company="deepseek" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--deepseek);">
-            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🌊 开源信仰派</div>
-            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">以开源打破垄断，用生态换规模</div>
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🌊 开源生态派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">开源即战略，用生态规模构建壁垒</div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
                 <span class="filterable" data-company="deepseek" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#3b82f6;">深度求索</span>
                 <span class="filterable" data-company="zhipu" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#10b981;">智谱</span>
                 <span class="filterable" data-company="mianbi" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#ec4899;">面壁智能</span>
-                <span class="filterable" data-company="dify" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#8b5cf6;">Dify</span>
-                <span class="filterable" data-company="kunlun" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f97316;">昆仑万维</span>
-            </div>
-            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">坚信开源是 AI 民主化必经之路。用规模换壁垒，用生态建护城河。</p>
-        </div>
-
-        <div class="filterable" data-company="moon" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--moon);">
-            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🎯 闭源精品派</div>
-            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">极致技术 + 精品产品，深挖价值</div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
                 <span class="filterable" data-company="moon" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#6366f1;">月之暗面</span>
                 <span class="filterable" data-company="step" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f59e0b;">阶跃星辰</span>
                 <span class="filterable" data-company="minimax" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#06b6d4;">MiniMax</span>
+                <span class="filterable" data-company="kunlun" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f97316;">昆仑万维</span>
             </div>
-            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">技术领先驱动产品精品，精品产品驱动商业变现。</p>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">2026 年九强中已有七家开源旗舰模型（DeepSeek V3/R1、GLM-5、MiniCPM、Kimi K2/K2.5、Step 3.7 Flash、MiniMax-M1、Skywork）。开源已成行业共识，用规模换壁垒，用生态建护城河。</p>
+        </div>
+
+        <div class="filterable" data-company="step" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--step);">
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🎬 多模态产品派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">多模态能力 + C 端产品双轮驱动</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
+                <span class="filterable" data-company="step" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f59e0b;">阶跃星辰</span>
+                <span class="filterable" data-company="minimax" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#06b6d4;">MiniMax</span>
+                <span class="filterable" data-company="moon" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#6366f1;">月之暗面</span>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">以多模态（视频/语音/视觉）和 C 端产品体验构建差异化。阶跃覆盖语/视/音/视频全模态，MiniMax 以视频生成 + Talkie 社交出海，月之暗面以 Kimi Agent 产品领跑。三者均同步开源核心模型，开源与商业化并行。</p>
         </div>
 
         <div class="filterable" data-company="mianbi" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--mianbi);">
@@ -913,7 +984,7 @@
                 <span class="filterable" data-company="mianbi" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#ec4899;">面壁智能</span>
                 <span class="filterable" data-company="step" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f59e0b;">阶跃星辰</span>
             </div>
-            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">端侧解决"好用+隐私+成本"，终端装机量即护城河。</p>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">端侧解决"好用+隐私+成本"，终端装机量即护城河。面壁以 MiniCPM 系列深耕端侧 SDK，阶跃以多模态模型绑定吉利/OPPO/荣耀等终端巨头。</p>
         </div>
 
         <div class="filterable" data-company="silicon" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--silicon);">
@@ -923,54 +994,210 @@
                 <span class="filterable" data-company="silicon" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#64748b;">硅基流动</span>
                 <span class="filterable" data-company="dify" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#8b5cf6;">Dify</span>
             </div>
-            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">在百模大战中保持中立，做生态层的整合者。</p>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">在百模大战中保持中立，做生态层的整合者。硅基流动聚合开源模型提供推理云 MaaS，Dify 提供应用编排与 Agent 工作流平台。</p>
         </div>
 
         <div class="filterable" data-company="kunlun" style="background:var(--bg-card); border-radius:18px; padding:26px; box-shadow:0 10px 40px rgba(0,0,0,0.2); border-left:5px solid var(--kunlun);">
-            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🦅 全栈出海派</div>
-            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">芯片到应用全链路，全球化变现</div>
+            <div style="font-size:1.25rem;font-weight:700;margin-bottom:8px;">🌍 出海全球化派</div>
+            <div style="font-size:0.84rem;color:var(--text-secondary);margin-bottom:14px;">以全球化市场为主场，海外收入为核心</div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;">
                 <span class="filterable" data-company="kunlun" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#f97316;">昆仑万维</span>
+                <span class="filterable" data-company="minimax" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#06b6d4;">MiniMax</span>
+                <span class="filterable" data-company="moon" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#6366f1;">月之暗面</span>
+                <span class="filterable" data-company="deepseek" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#3b82f6;">深度求索</span>
+                <span class="filterable" data-company="dify" style="padding:5px 12px;border-radius:50px;font-size:0.8rem;font-weight:600;color:white;background:#8b5cf6;">Dify</span>
             </div>
-            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">"芯片-大模型-平台-应用"全栈布局，以 Opera 全球流量+多应用矩阵实现"研发-验证-变现"飞轮。</p>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.75;">昆仑万维海外占 93%（Opera + DramaWave 全栈），MiniMax Talkie 全球社交领跑，月之暗面 Kimi 海外优先策略，深度求索全球访问量破 5 亿，Dify 全球分布式团队 + GitHub 10 万 Star。从被动出海到主动全球化，AI 已成中国出海新名片。</p>
         </div>
     </div>
 </section>
 
 <!-- Dimension Comparisons -->
 <section class="section container">
-    <h2 class="section-title">六大维度策略对比</h2>
-    <p class="section-subtitle">逐维度拆解运营打法差异</p>
+    <h2 class="section-title">🔧 技术路线</h2>
+    <p class="section-subtitle">从底层架构到模型形态的差异化选择</p>
 
     <div class="dimension-block">
-        <div class="dimension-title"><span class="dimension-icon">🔧</span>技术路线</div>
-        <div class="dimension-sub">从底层架构到模型形态的差异化选择</div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强中 <span class="common-tag">7 家开源旗舰模型</span>（DeepSeek/智谱/面壁/月之暗面/阶跃/MiniMax/昆仑），<span class="common-tag">8 家采用 MoE 架构</span>（面壁为 Dense 端侧），<span class="common-tag">9 家均有 API 服务</span>，<span class="common-tag">7 家覆盖多模态</span>（Dify/硅基流动/面壁除外）。差异在于：模型规模、模态侧重、算力来源、是否自研芯片。
+        </div>
         <div class="dim-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek"><h5>🐋 深度求索</h5><p>极致工程效率，MoE 架构 + MLA 注意力。V3/R1 开源性能逼近闭源旗舰，成本利润率理论 545%。</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu"><h5>🧠 智谱</h5><p>GLM 系列持续迭代至 GLM-5，覆盖语言/多模态/代码/智能体完整矩阵。开源与商用并行。</p></div>
-            <div class="dim-mini-card mianbi filterable" data-company="mianbi"><h5>📱 面壁智能</h5><p>"大模型未必大"，专注端侧高效模型。MiniCPM-V 4.6 仅 1.3B 参数实现多模态小钢炮。</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon"><h5>🌙 月之暗面</h5><p>底层架构重构，自研 MuonClip 优化器、Linear 混合线性注意力。万亿 MoE + Agent 集群（300 子代理并发）。</p></div>
-            <div class="dim-mini-card step filterable" data-company="step"><h5>⚡ 阶跃星辰</h5><p>多模态全栈，30+ Step 模型覆盖语言/视觉/语音/视频。多模态 API 调用量半年增长 45 倍。</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax"><h5>🌊 MiniMax</h5><p>多模态全栈，强项在视频生成（海螺 AI）。abab 系列语言模型 + 视觉生成模型双线布局。</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun"><h5>🦅 昆仑万维</h5><p>Skywork 系列开源模型 + 天工超级智能体。控股艾捷科芯芯片，"芯片-模型-应用"全栈布局，多模态+Agent 双线。</p></div>
-            <div class="dim-mini-card dify filterable" data-company="dify"><h5>🧩 Dify</h5><p>不自研模型，提供模型无关的 Agentic 工作流引擎。支持多模型接入、可视化编排。</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon"><h5>⚙️ 硅基流动</h5><p>算法+系统+硬件协同优化，自研推理加速框架。聚合 DeepSeek/Qwen/GLM 等开源模型提供推理服务。</p></div>
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek">
+                <h5>🐋 深度求索</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 671B / 激活 37B</span>
+                    <span class="attr-label">模态</span><span class="attr-value">文本 · 推理</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">V3/R1 开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">MLA 注意力 + DeepSeekMoE，成本利润率 545%</span>
+                </div>
+            </div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu">
+                <h5>🧠 智谱</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 744B（GLM-5）</span>
+                    <span class="attr-label">模态</span><span class="attr-value">文本 · 多模态 · Agent</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">GLM 系列开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">语言/代码/智能体完整矩阵，a16z 誉为"最好开源模型"</span>
+                </div>
+            </div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi">
+                <h5>📱 面壁智能</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">Dense 端侧（1.3B~8B）</span>
+                    <span class="attr-label">模态</span><span class="attr-value">端侧 · 多模态</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">MiniCPM 开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">"大模型未必大"，1.3B 参数实现多模态小钢炮</span>
+                </div>
+            </div>
+            <div class="dim-mini-card moon filterable" data-company="moon">
+                <h5>🌙 月之暗面</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 1T / 激活 32B</span>
+                    <span class="attr-label">模态</span><span class="attr-value">文本 · Agent · 编程</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">K2/K2.5 开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">自研 MuonClip 优化器 + Linear 注意力，300 Agent 集群并发</span>
+                </div>
+            </div>
+            <div class="dim-mini-card step filterable" data-company="step">
+                <h5>⚡ 阶跃星辰</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 321B / 激活 38B</span>
+                    <span class="attr-label">模态</span><span class="attr-value">文本 · 视觉 · 语音 · 视频</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">Step 3.7 Flash 开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">30+ 模型全模态覆盖，API 调用量半年增长 45 倍</span>
+                </div>
+            </div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax">
+                <h5>🌊 MiniMax</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 456B（M1）</span>
+                    <span class="attr-label">模态</span><span class="attr-value">文本 · 视频 · 多模态 · 社交</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">M1/VL-01 开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">abab 语言 + 海螺视频生成双线，Lightning Attention</span>
+                </div>
+            </div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun">
+                <h5>🦅 昆仑万维</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value">Skywork MoE 系列</span>
+                    <span class="attr-label">模态</span><span class="attr-value">全栈 · Agent · 音乐 · 视频</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">Skywork 开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value"><span class="attr-badge neutral">自研芯片</span> 控股艾捷科芯 7nm NPU，"芯片-模型-应用"全栈</span>
+                </div>
+            </div>
+            <div class="dim-mini-card dify filterable" data-company="dify">
+                <h5>🧩 Dify</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value"><span class="attr-badge neutral">不自研模型</span></span>
+                    <span class="attr-label">模态</span><span class="attr-value">模型无关 · 多模型接入</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">平台开源</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">Agentic 工作流引擎，可视化编排，10 万 GitHub Star</span>
+                </div>
+            </div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon">
+                <h5>⚙️ 硅基流动</h5>
+                <div class="dim-attr">
+                    <span class="attr-label">架构</span><span class="attr-value"><span class="attr-badge neutral">不自研模型</span></span>
+                    <span class="attr-label">模态</span><span class="attr-value">聚合 DeepSeek/Qwen/GLM 等</span>
+                    <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge neutral">推理服务</span></span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">算法+系统+硬件协同优化，自研推理加速框架</span>
+                </div>
+            </div>
         </div>
     </div>
 
+</section>
+
+<section class="section container">
+    <h2 class="section-title">💰 商业化路径</h2>
+    <p class="section-subtitle">从订阅、API 到行业大单的多元变现 · 客户类型标记：🏛️政企 / 🏢B端 / 👤C端 / 👨‍💻开发者</p>
+
     <div class="dimension-block">
-        <div class="dimension-title"><span class="dimension-icon">💰</span>商业化路径</div>
-        <div class="dimension-sub">从订阅、API 到行业大单的多元变现</div>
+        <div class="dim-common">
+            <strong>🟰 共同点：</strong>九强 <span class="common-tag">9 家均有 API 收入</span>，<span class="common-tag">7 家 B+C 双线</span>（面壁/Dify/硅基流动偏 B 端），<span class="common-tag">5 家有出海收入</span>（月之暗面/MiniMax/昆仑/Dify/硅基流动）。差异在于：核心客户类型（政企 vs 终端 vs C 端）、收入规模量级、变现飞轮结构。
+        </div>
         <div class="dim-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek"><h5>🐋 深度求索</h5><p>API 调用 + 开源生态。低成本策略倒逼行业降价，靠幻方自有算力支撑。</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu"><h5>🧠 智谱</h5><p>本地化部署为主（政企大单）+ 云端 API。港股上市后融资 43 亿港元。</p></div>
-            <div class="dim-mini-card mianbi filterable" data-company="mianbi"><h5>📱 面壁智能</h5><p>端侧授权 + 行业定制 + 政务项目。端侧百万级装机 + 政务 MiniCPM 部署。</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon"><h5>🌙 月之暗面</h5><p>C 端订阅 + B 端 API，海外优先。ARR 半年从 1 亿到 2 亿美元，20 天收入超 2025 全年。</p></div>
-            <div class="dim-mini-card step filterable" data-company="step"><h5>⚡ 阶跃星辰</h5><p>行业大单 + 终端授权 + API。2025 冲击 10 亿收入，吉利/OPPO 等大客户稳定。</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax"><h5>🌊 MiniMax</h5><p>AI 原生产品收入（Talkie/星野/海螺）+ 开放平台 API。2025 年原生收入 5310 万美元，同比增 143%。</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun"><h5>🦅 昆仑万维</h5><p>多应用变现矩阵：DramaWave 短剧（月下载 400 万）+ Opera 广告 + AI 音乐/社交。2025 前三季度营收 58 亿，海外占 93%。</p></div>
-            <div class="dim-mini-card dify filterable" data-company="dify"><h5>🧩 Dify</h5><p>开源社区 → 云订阅 → 企业版三层漏斗。GitHub 10 万 Star 转化付费，2000+ 团队服务。</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon"><h5>⚙️ 硅基流动</h5><p>Token 计费推理云 + 企业 MaaS 私有化。B 轮 20 亿，阿里云/携程战投背书。</p></div>
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek">
+                <h5>🐋 深度求索 <span style="font-size:0.78rem;opacity:0.6;">👤👨‍💻</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">API 调用 + 开源生态</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">👤 C 端</span> <span class="attr-badge neutral">👨‍💻 开发者</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge yes">全球访问量破 5 亿</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">低成本倒逼行业降价，幻方自有算力零融资压力</span>
+                </div>
+            </div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu">
+                <h5>🧠 智谱 <span style="font-size:0.78rem;opacity:0.6;">🏛️👤</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">本地化部署大单 + 云端 API</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">🏛️ 政企</span> <span class="attr-badge neutral">👤 C 端</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge no">国内为主</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">清华系政企信任背书，港股上市融资 43 亿港元</span>
+                </div>
+            </div>
+            <div class="dim-mini-card mianbi filterable" data-company="mianbi">
+                <h5>📱 面壁智能 <span style="font-size:0.78rem;opacity:0.6;">🏛️🏢</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">端侧授权 + 行业定制 + 政务</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">🏛️ 政务</span> <span class="attr-badge neutral">🏢 终端厂商 B 端</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge no">国内为主</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">端侧百万级装机量，运营商渠道加持</span>
+                </div>
+            </div>
+            <div class="dim-mini-card moon filterable" data-company="moon">
+                <h5>🌙 月之暗面 <span style="font-size:0.78rem;opacity:0.6;">👤🏢</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">C 端订阅 + B 端 API</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">👤 C 端</span> <span class="attr-badge neutral">🏢 B 端</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge yes">海外优先</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">ARR 半年 1→2 亿美元，20 天收入超 2025 全年</span>
+                </div>
+            </div>
+            <div class="dim-mini-card step filterable" data-company="step">
+                <h5>⚡ 阶跃星辰 <span style="font-size:0.78rem;opacity:0.6;">🏢👤</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">行业大单 + 终端授权 + API</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">🏢 B 端</span> <span class="attr-badge neutral">👤 C 端</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge no">国内为主</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">吉利/OPPO/荣耀终端绑定，2025 冲击 10 亿收入</span>
+                </div>
+            </div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax">
+                <h5>🌊 MiniMax <span style="font-size:0.78rem;opacity:0.6;">👤🏢</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">AI 原生产品 + 开放平台 API</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">👤 海外 C 端</span> <span class="attr-badge neutral">🏢 B 端</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge yes">出海标杆</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">Talkie/星野/海螺产品矩阵，原生收入 5310 万美元 +143%</span>
+                </div>
+            </div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun">
+                <h5>🦅 昆仑万维 <span style="font-size:0.78rem;opacity:0.6;">👤🏢</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">短剧 + 广告 + AI 音乐/社交</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">👤 全球 C 端</span> <span class="attr-badge neutral">🏢 B 端</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge yes">海外占 93%</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">多应用变现矩阵，前三季度营收 58 亿，唯一有真实利润</span>
+                </div>
+            </div>
+            <div class="dim-mini-card dify filterable" data-company="dify">
+                <h5>🧩 Dify <span style="font-size:0.78rem;opacity:0.6;">👨‍💻</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">云订阅 + 企业版</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">👨‍💻 开发团队</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge yes">全球分布式</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">开源社区 → 云订阅 → 企业版三层漏斗，10 万 Star 转化</span>
+                </div>
+            </div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon">
+                <h5>⚙️ 硅基流动 <span style="font-size:0.78rem;opacity:0.6;">👨‍💻</span></h5>
+                <div class="dim-attr">
+                    <span class="attr-label">主要收入</span><span class="attr-value">Token 计费推理云 + MaaS 私有化</span>
+                    <span class="attr-label">客户类型</span><span class="attr-value"><span class="attr-badge neutral">👨‍💻 企业开发者</span></span>
+                    <span class="attr-label">出海</span><span class="attr-value"><span class="attr-badge neutral">国内为主</span></span>
+                    <span class="attr-label">差异化</span><span class="attr-value">阿里云/携程战投背书，B 轮 20 亿，已递表港交所</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1153,15 +1380,15 @@
         </div>
         <div class="step-desc">通过组织结构、人才体系、资本与算力、系统工具等基础设施支撑运营过程落地。基础设施必须与 Order Winners 对齐，否则"想赢的赢不了"。</div>
         <div class="step-cards-grid">
-            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🐋 深度求索</h5><p><strong>组织：</strong>200 人，工程文化驱动<br><strong>人才：</strong>年轻工程师为主，无大厂包袱<br><strong>资本：</strong>幻方自有资金，不依赖外部融资<br><strong>算力：</strong>幻方万卡集群自有</p></div>
-            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧠 智谱</h5><p><strong>组织：</strong>900 人，清华系学术血统<br><strong>人才：</strong>学术+工程双轨团队<br><strong>资本：</strong>港股上市募资 43 亿港元<br><strong>算力：</strong>上市资金支撑持续训练</p></div>
+            <div class="dim-mini-card deepseek filterable" data-company="deepseek" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🐋 深度求索</h5><p><strong>组织：</strong>200 人，工程文化驱动<br><strong>人才：</strong>年轻工程师为主，无大厂包袱<br><strong>资本：</strong>首轮 70 亿美元，投后估值 590 亿<br><strong>算力：</strong>幻方万卡集群自有</p></div>
+            <div class="dim-mini-card zhipu filterable" data-company="zhipu" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧠 智谱</h5><p><strong>组织：</strong>900 人，清华系学术血统<br><strong>人才：</strong>学术+工程双轨团队<br><strong>资本：</strong>港股市值约 7800 亿港元<br><strong>算力：</strong>上市资金支撑持续训练</p></div>
             <div class="dim-mini-card mianbi filterable" data-company="mianbi" style="border-left-color:#64748b;"><h5 style="color:#64748b;">📱 面壁智能</h5><p><strong>组织：</strong>300 人，清华+OpenBMB 背景<br><strong>人才：</strong>端侧模型优化专家<br><strong>资本：</strong>中国电信领投，运营商渠道加持<br><strong>算力：</strong>端侧训练需求相对低</p></div>
-            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌙 月之暗面</h5><p><strong>组织：</strong>300 人精锐，无 OKR 无部门墙，联创直管<br><strong>人才：</strong>偏好偏执、有抽象能力者<br><strong>资本：</strong>D 轮 20 亿美元，估值 200 亿<br><strong>算力：</strong>融资支撑大规模训练</p></div>
-            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚡ 阶跃星辰</h5><p><strong>组织：</strong>800 人，产业联盟型（印奇董事长）<br><strong>人才：</strong>多模态研究 + 行业 BD 复合团队<br><strong>资本：</strong>B+ 轮 50 亿元，刷新纪录<br><strong>算力：</strong>融资支撑多模态训练</p></div>
-            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌊 MiniMax</h5><p><strong>组织：</strong>700 人，商汤系团队<br><strong>人才：</strong>多模态 + 社交产品运营<br><strong>资本：</strong>港股上市，市值 700 亿港元<br><strong>算力：</strong>视频生成需高算力投入</p></div>
-            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🦅 昆仑万维</h5><p><strong>组织：</strong>数千人，集团化运营<br><strong>人才：</strong>AI 研究 + 海外产品运营双轨<br><strong>资本：</strong>A 股上市，市值 509 亿，现金 36 亿+<br><strong>算力：</strong>控股艾捷科芯芯片，自研算力</p></div>
+            <div class="dim-mini-card moon filterable" data-company="moon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌙 月之暗面</h5><p><strong>组织：</strong>300 人精锐，无 OKR 无部门墙，联创直管<br><strong>人才：</strong>偏好偏执、有抽象能力者<br><strong>资本：</strong>D 轮 20 亿美元，新轮投前估值 315 亿<br><strong>算力：</strong>融资支撑大规模训练</p></div>
+            <div class="dim-mini-card step filterable" data-company="step" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚡ 阶跃星辰</h5><p><strong>组织：</strong>800 人，产业联盟型（印奇董事长）<br><strong>人才：</strong>多模态研究 + 行业 BD 复合团队<br><strong>资本：</strong>Pre-IPO 25 亿美元，估值约 120 亿美元<br><strong>算力：</strong>融资支撑多模态训练</p></div>
+            <div class="dim-mini-card minimax filterable" data-company="minimax" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🌊 MiniMax</h5><p><strong>组织：</strong>700 人，商汤系团队<br><strong>人才：</strong>多模态 + 社交产品运营<br><strong>资本：</strong>港股市值约 1120 亿港元<br><strong>算力：</strong>视频生成需高算力投入</p></div>
+            <div class="dim-mini-card kunlun filterable" data-company="kunlun" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🦅 昆仑万维</h5><p><strong>组织：</strong>数千人，集团化运营<br><strong>人才：</strong>AI 研究 + 海外产品运营双轨<br><strong>资本：</strong>A 股市值约 585 亿，现金 36 亿+<br><strong>算力：</strong>控股艾捷科芯芯片，自研算力</p></div>
             <div class="dim-mini-card dify filterable" data-company="dify" style="border-left-color:#64748b;"><h5 style="color:#64748b;">🧩 Dify</h5><p><strong>组织：</strong>100 人，全球分布式团队<br><strong>人才：</strong>开源工程 + 开发者关系<br><strong>资本：</strong>Pre-A 3000 万美元，红杉领投<br><strong>算力：</strong>无需自建，云服务托管</p></div>
-            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚙️ 硅基流动</h5><p><strong>组织：</strong>200 人，系统+硬件工程团队<br><strong>人才：</strong>推理加速 + 异构算力专家<br><strong>资本：</strong>B 轮 20 亿，阿里云/携程战投<br><strong>算力：</strong>核心基础设施，大规模 GPU 集群</p></div>
+            <div class="dim-mini-card silicon filterable" data-company="silicon" style="border-left-color:#64748b;"><h5 style="color:#64748b;">⚙️ 硅基流动</h5><p><strong>组织：</strong>200 人，系统+硬件工程团队<br><strong>人才：</strong>推理加速 + 异构算力专家<br><strong>资本：</strong>B 轮 20 亿，已递表港交所<br><strong>算力：</strong>核心基础设施，大规模 GPU 集群</p></div>
         </div>
     </div>
 
@@ -1180,10 +1407,10 @@
 <!-- Charts -->
 <section class="section container">
     <h2 class="section-title">关键指标可视化</h2>
-    <p class="section-subtitle">融资规模、团队、商业化进度横向对比（随勾选动态更新）</p>
+    <p class="section-subtitle">融资规模、团队、商业化进度横向对比（随勾选动态更新）· 数据截至 2026 年 7 月</p>
 
     <div class="chart-container">
-        <div class="chart-title">最新一轮融资 / 估值规模对比</div>
+        <div class="chart-title">最新一轮融资金额对比（亿元 RMB 等价）</div>
         <div class="chart-wrapper"><canvas id="fundingChart"></canvas></div>
     </div>
 
@@ -1196,6 +1423,18 @@
             <div class="chart-title">2025-2026 年化收入对比（亿美元，估算）</div>
             <div class="chart-wrapper"><canvas id="arrChart"></canvas></div>
         </div>
+    </div>
+
+    <div class="chart-container" style="margin-top:30px;">
+        <div class="chart-title">股东结构与持股比例</div>
+        <div class="fund-legend">
+            <span><span class="dot" style="background:#059669;"></span>创始团队/员工</span>
+            <span><span class="dot" style="background:#2563eb;"></span>战略投资</span>
+            <span><span class="dot" style="background:#7c3aed;"></span>国资/产业</span>
+            <span><span class="dot" style="background:#64748b;"></span>财务投资</span>
+            <span><span class="dot" style="background:#94a3b8;"></span>流通股</span>
+        </div>
+        <div id="fundingTable" style="overflow-x:auto;"></div>
     </div>
 </section>
 </div><!-- end tab-charts -->
@@ -1233,11 +1472,11 @@
     <!-- Company 1: 智谱 -->
     <div class="dimension-block" style="border-top:4px solid #10b981;">
         <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#10b981,#059669);">Z</span>智谱（2513.HK）· 港股上市 2026.01</div>
-        <div class="dimension-sub">市值 ~511 亿港元（IPO 2026.01）· IPO 募资 43 亿港元 · 清华系政企本地化部署龙头</div>
+        <div class="dimension-sub">市值 ~7,800 亿港元（2026.07）· IPO 募资 43 亿港元 · 清华系政企本地化部署龙头</div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card" style="border-left-color:#1e40af;">
                 <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>GLM-5 模型矩阵 + 政企本地化部署现金流 + AutoGLM 智能体生态<br><strong>市场价格：</strong>511 亿港元（IPO 价），对应高增长预期，PS 估值偏高<br><strong>安全边际：</strong>⚠️ 偏薄。当前估值已反映高增长预期，若政企订单增速放缓，估值承压。格雷厄姆或认为"价格不够便宜"。</p>
+                <p><strong>内在价值：</strong>GLM-5 模型矩阵 + 政企本地化部署现金流 + AutoGLM 智能体生态<br><strong>市场价格：</strong>7,800 亿港元（2026.07，仅 2.67% 可交易），对应极高增长预期，PS 估值极高<br><strong>安全边际：</strong>🔴 严重不足。IPO 价仅 511 亿港元，半年暴涨至 7,800 亿（15 倍），流通盘仅 2.67% 导致价格失真。7 月解禁后面临巨大抛压。格雷厄姆会坚决回避。</p>
             </div>
             <div class="dim-mini-card" style="border-left-color:#b45309;">
                 <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
@@ -1257,11 +1496,11 @@
     <!-- Company 2: MiniMax -->
     <div class="dimension-block" style="border-top:4px solid #06b6d4;">
         <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">X</span>MiniMax（00100.HK）· 港股上市 2026.01</div>
-        <div class="dimension-sub">市值 ~700 亿港元（IPO 2026.01）· 阿里/米哈游/腾讯加持 · AI 出海标杆 + 视频生成领先</div>
+        <div class="dimension-sub">市值 ~1,120 亿港元（2026.07）· 阿里/米哈游/腾讯加持 · AI 出海标杆 + 视频生成领先</div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card" style="border-left-color:#1e40af;">
                 <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>Talkie 全球月活破亿 + 海螺视频生成 + 开放平台 API 三条收入线<br><strong>市场价格：</strong>700 亿港元（IPO 价），2025 AI 原生收入仅 5310 万美元，PS 极高<br><strong>安全边际：</strong>🔴 不足。格雷厄姆原则会回避——当前价格完全基于未来增长预期，无安全垫。营收与市值严重不匹配。</p>
+                <p><strong>内在价值：</strong>Talkie 全球月活破亿 + 海螺视频生成 + 开放平台 API 三条收入线<br><strong>市场价格：</strong>1,120 亿港元（2026.07，较 IPO 700 亿涨 60%），2025 AI 原生收入仅 5310 万美元，PS 极高<br><strong>安全边际：</strong>🔴 不足。股价已从高点回落近 50%，但营收与市值仍严重不匹配。7 月解禁压力巨大。格雷厄姆原则会回避。</p>
             </div>
             <div class="dim-mini-card" style="border-left-color:#b45309;">
                 <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
@@ -1281,11 +1520,11 @@
     <!-- Company 3: 昆仑万维 -->
     <div class="dimension-block" style="border-top:4px solid #f97316;">
         <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);">K</span>昆仑万维（300418.SZ）· 深交所上市 2015</div>
-        <div class="dimension-sub">市值 ~509 亿元（2025.11）· 2025 前三季度营收 58 亿 · 海外收入占比 93% · 全栈 AI 布局</div>
+        <div class="dimension-sub">市值 ~585 亿元（2026.07）· 2025 前三季度营收 58 亿 · 海外收入占比 93% · 全栈 AI 布局</div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card" style="border-left-color:#1e40af;">
                 <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>Opera 全球流量 + DramaWave 短剧 + Skywork 模型 + 艾捷科芯芯片，多元资产组合<br><strong>市场价格：</strong>509 亿元（2025.11），2025 前三季度营收 58 亿（含非 AI 业务），PS 约 5-6 倍<br><strong>安全边际：</strong>🟢 相对充足。有真实营收和现金流支撑（非纯概念），PS 低于纯 AI 公司。资产负债率仅 19.6%，现金 36 亿+。格雷厄姆会认可财务稳健性。</p>
+                <p><strong>内在价值：</strong>Opera 全球流量 + DramaWave 短剧 + Skywork 模型 + 艾捷科芯芯片，多元资产组合<br><strong>市场价格：</strong>585 亿元（2026.07），2025 前三季度营收 58 亿（含非 AI 业务），PS 约 5-6 倍<br><strong>安全边际：</strong>🟢 相对充足。有真实营收和现金流支撑（非纯概念），PS 低于纯 AI 公司。资产负债率仅 19.6%，现金 36 亿+。格雷厄姆会认可财务稳健性。</p>
             </div>
             <div class="dim-mini-card" style="border-left-color:#b45309;">
                 <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
@@ -1318,8 +1557,8 @@
                 <tbody>
                     <tr>
                         <td>格雷厄姆安全边际</td>
-                        <td><span class="tag q">⚠️ 偏薄</span> PS 高，政企增速预期已定价</td>
-                        <td><span class="tag l">🔴 不足</span> 营收与市值严重不匹配</td>
+                        <td><span class="tag l">🔴 严重不足</span> IPO 511 亿→7800 亿（15 倍），流通盘仅 2.67%</td>
+                        <td><span class="tag l">🔴 不足</span> 营收与市值严重不匹配，解禁压力大</td>
                         <td><span class="tag w">🟢 相对充足</span> 有营收现金流，PS 5-6 倍</td>
                     </tr>
                     <tr>
@@ -1342,23 +1581,23 @@
                     </tr>
                     <tr>
                         <td>财务稳健性</td>
-                        <td>上市募资 43 亿，现金流待验证</td>
-                        <td>亏损收窄中，尚未盈利</td>
+                        <td>年营收仅 7 亿，市值 7800 亿（PS>1000）</td>
+                        <td>亏损收窄中，尚未盈利，解禁压力</td>
                         <td><span class="tag w">负债率 19.6%，现金 36 亿+</span></td>
                     </tr>
                     <tr>
                         <td>投资吸引力综合</td>
-                        <td>⭐⭐⭐ 政企龙头但估值偏高</td>
-                        <td>⭐⭐ 出海标杆但泡沫风险大</td>
+                        <td>⭐⭐ 政企龙头但估值泡沫严重</td>
+                        <td>⭐⭐ 出海标杆但解禁+泡沫风险大</td>
                         <td><span class="tag w">⭐⭐⭐⭐ 基本面+估值+全栈叙事</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <p><strong>格雷厄姆视角结论：</strong>三家都非传统"烟蒂股"，但昆仑万维有真实营收和安全垫，最接近格雷厄姆"财务稳健 + 价格合理"标准。</p>
-        <p><strong>巴菲特视角结论：</strong>昆仑全栈协同 + Opera 流量入口最接近"经济护城河"，但需观察 ROIC 能否持续改善。智谱政企转换成本是真实护城河。</p>
+        <p><strong>格雷厄姆视角结论：</strong>智谱 IPO 半年暴涨 15 倍至 7800 亿港元（年营收仅 7 亿），流通盘仅 2.67% 导致价格失真，7 月解禁后面临巨大抛压——格雷厄姆会坚决回避。昆仑万维有真实营收和安全垫，最接近格雷厄姆"财务稳健 + 价格合理"标准。</p>
+        <p><strong>巴菲特视角结论：</strong>昆仑全栈协同 + Opera 流量入口最接近"经济护城河"，但需观察 ROIC 能否持续改善。智谱政企转换成本是真实护城河，但 PS>1000 已脱离基本面。</p>
         <p><strong>芒格视角结论：</strong>昆仑最符合"合理价格买好公司"——即使 AI 叙事落空，短剧+Opera 仍有价值。MiniMax 需等估值回归。</p>
-        <p><strong>马克斯视角结论：</strong>当前 AI 板块整体处于周期高位，昆仑因有基本面支撑，下行保护最好，不对称性最优。MiniMax 风险收益比最差。</p>
+        <p><strong>马克斯视角结论：</strong>智谱处于典型泡沫周期顶部（15 倍涨幅 + 2.67% 流通盘 + 解禁临近），是不对称风险最差的标的。昆仑因有基本面支撑，下行保护最好。MiniMax 从高点回落 50% 但仍偏贵。</p>
         <p style="margin-top:16px; padding:14px; background:#fef2f2; border-radius:10px; border-left:4px solid #dc2626; font-size:0.88rem;"><strong>⚠️ 免责声明：</strong>以上分析基于公开信息与经典投资框架，不构成投资建议。AI 行业变化快、不确定性高，请独立判断并注意风险。</p>
     </div>
 </section>
@@ -1372,15 +1611,67 @@
 
 <script>
     const companyData = {
-        deepseek: { name:'深度求索', color:'#3b82f6', funding:0,   team:200, arr:0.5, fundingNote:'幻方自有' },
-        zhipu:    { name:'智谱',     color:'#10b981', funding:43,  team:900, arr:1.0, fundingNote:'港股募资43亿港元（估值未公开）' },
-        mianbi:   { name:'面壁智能', color:'#ec4899', funding:5,   team:300, arr:0.4, fundingNote:'电信领投数亿' },
-        moon:     { name:'月之暗面', color:'#6366f1', funding:140, team:300, arr:2.0, fundingNote:'D轮20亿美元' },
-        step:     { name:'阶跃星辰', color:'#f59e0b', funding:50,  team:800, arr:1.0, fundingNote:'B+轮50亿（2025目标10亿RMB）' },
-        minimax:  { name:'MiniMax', color:'#06b6d4', funding:0,   team:700, arr:0.8, fundingNote:'港股上市' },
-        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,   team:3000, arr:10.0, fundingNote:'A股上市（总营收含非AI业务）' },
-        dify:     { name:'Dify',    color:'#8b5cf6', funding:2.1, team:100, arr:0.15,fundingNote:'Pre-A 3000万美元' },
-        silicon:  { name:'硅基流动', color:'#64748b', funding:20,  team:200, arr:0.6, fundingNote:'B轮20亿' }
+        deepseek: { name:'深度求索', color:'#3b82f6', funding:500, team:200, arr:0.5, fundingNote:'首轮70亿美元，投后估值590亿美元', fundingRound:'首轮', shareholders:[
+            {name:'幻方量化（梁文锋）', pct:100, type:'创始人'}
+        ]},
+        zhipu:    { name:'智谱',     color:'#10b981', funding:43,  team:900, arr:1.0, fundingNote:'港股市值约7800亿港元（2026.07）', fundingRound:'港股 IPO', shareholders:[
+            {name:'唐杰（创始人）+ 员工持股平台', pct:60, type:'创始团队'},
+            {name:'君联资本（社保基金）', pct:6.7, type:'财务投资'},
+            {name:'美团', pct:3, type:'战投'},
+            {name:'阿里 / 腾讯 / 蚂蚁 / 小米', pct:8, type:'战投'},
+            {name:'其他机构（红杉/IDG/今日/启明等）', pct:22.3, type:'财务投资'}
+        ]},
+        mianbi:   { name:'面壁智能', color:'#ec4899', funding:10,  team:300, arr:0.4, fundingNote:'Q1累计融资超10亿，投后独角兽', fundingRound:'B 轮', shareholders:[
+            {name:'李大海 / 刘知远（创始团队）', pct:45, type:'创始人'},
+            {name:'中国电信（战略领投）', pct:10, type:'战投'},
+            {name:'深创投 / 汇川产投（联合领投）', pct:12, type:'财务投资'},
+            {name:'知乎（早期战略）', pct:5, type:'战投'},
+            {name:'其他（道禾/武岳峰/京国瑞/茅台基金等）', pct:28, type:'财务投资'}
+        ]},
+        moon:     { name:'月之暗面', color:'#6366f1', funding:140, team:300, arr:3.0, fundingNote:'D轮20亿美元，新轮投前估值315亿美元', fundingRound:'D 轮', shareholders:[
+            {name:'杨植麟（创始人 CEO）', pct:31.2, type:'创始人'},
+            {name:'阿里巴巴', pct:15, type:'战投'},
+            {name:'美团龙珠（D轮领投）', pct:10, type:'战投'},
+            {name:'腾讯 / 红杉 / 小红书', pct:12, type:'战投/财务'},
+            {name:'中国移动 / CPE源峰 / 水木资本', pct:8, type:'财务投资'},
+            {name:'其他（含员工持股）', pct:23.8, type:'员工/其他'}
+        ]},
+        step:     { name:'阶跃星辰', color:'#f59e0b', funding:170, team:800, arr:1.0, fundingNote:'Pre-IPO 25亿美元，估值约120亿美元，已递表港交所', fundingRound:'Pre-IPO', shareholders:[
+            {name:'姜大昕（创始人 CEO）+ 员工持股', pct:40, type:'创始团队'},
+            {name:'印奇（旷视董事长，B+轮入主）', pct:15, type:'战略控股'},
+            {name:'上海国投先导 / 国寿股权（B+领投）', pct:15, type:'国资/财务'},
+            {name:'腾讯 / 启明 / 五源（老股东）', pct:12, type:'战投/财务'},
+            {name:'其他产业资本（浦东/徐汇/厦门国贸/华勤）', pct:18, type:'产业投资'}
+        ]},
+        minimax:  { name:'MiniMax', color:'#06b6d4', funding:0,   team:700, arr:0.8, fundingNote:'港股市值约1120亿港元（2026.07）', fundingRound:'港股 IPO', shareholders:[
+            {name:'闫俊杰（创始人）+ Alpha EXP 员工平台', pct:29.86, type:'创始团队'},
+            {name:'阿里巴巴（最大外部股东）', pct:13.66, type:'战投'},
+            {name:'米哈游', pct:6.4, type:'战投'},
+            {name:'腾讯', pct:2.58, type:'战投'},
+            {name:'IDG / 高瓴 / 红杉 / 云启等', pct:15, type:'财务投资'},
+            {name:'其他（含 IPO 流通）', pct:32.5, type:'其他/流通'}
+        ]},
+        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,   team:3000, arr:10.0, fundingNote:'A股市值约585亿元（2026.07）', fundingRound:'A 股上市', shareholders:[
+            {name:'周亚辉（创始人，实控人 19.84%）', pct:19.84, type:'创始人'},
+            {name:'盈瑞世纪（周亚辉关联）', pct:15.11, type:'创始人'},
+            {name:'李琼（周亚辉前妻）', pct:7.67, type:'关联方'},
+            {name:'香港中央结算（陆股通）', pct:1.93, type:'北向资金'},
+            {name:'其他流通股东', pct:55.45, type:'流通股'}
+        ]},
+        dify:     { name:'Dify',    color:'#8b5cf6', funding:2.1, team:100, arr:0.15,fundingNote:'Pre-A 3000万美元，估值1.8亿美元', fundingRound:'Pre-A', shareholders:[
+            {name:'张路宇（创始人）+ 团队', pct:55, type:'创始团队'},
+            {name:'红杉中国（领投）', pct:15, type:'财务投资'},
+            {name:'高瓴创投（GL Ventures）', pct:8, type:'财务投资'},
+            {name:'五源资本', pct:5, type:'财务投资'},
+            {name:'其他（Alt-Alpha/瑞穗力合/NYX）', pct:17, type:'财务投资'}
+        ]},
+        silicon:  { name:'硅基流动', color:'#64748b', funding:20,  team:200, arr:0.6, fundingNote:'B轮20亿，已递表港交所（18C章程）', fundingRound:'B 轮', shareholders:[
+            {name:'袁进辉（创始人）+ 团队', pct:40, type:'创始团队'},
+            {name:'阿里云（A轮领投）', pct:12, type:'战投'},
+            {name:'携程战投 / 蔚来资本 / 商汤战投', pct:15, type:'产业投资'},
+            {name:'壁仞战投 / 金蝶 / 联通新沃', pct:10, type:'产业投资'},
+            {name:'创新工场（A轮跟投）/ 其他', pct:23, type:'财务投资'}
+        ]}
     };
     const allKeys = ['deepseek','zhipu','mianbi','moon','step','minimax','kunlun','dify','silicon'];
     let selected = new Set(allKeys);
@@ -1462,6 +1753,42 @@
         arrChart.data.datasets[0].backgroundColor = bgColors;
         arrChart.data.datasets[0].borderColor = colors;
         arrChart.update();
+
+        // 更新融资来源表格
+        const tbl = document.getElementById('fundingTable');
+        if (tbl) {
+            let html = '<table class="fund-table"><thead><tr><th>公司</th><th>最新轮次</th><th>股东结构（持股比例）</th><th>规模 / 估值</th></tr></thead><tbody>';
+            keys.forEach(k => {
+                const d = companyData[k];
+                const roundBg = d.color + '22';
+                // 股东条形图
+                let barHtml = '<div style="display:flex;flex-direction:column;gap:5px;min-width:420px;">';
+                d.shareholders.forEach(s => {
+                    let typeColor = '#64748b';
+                    if (s.type.indexOf('创始') >= 0 || s.type.indexOf('员工') >= 0) typeColor = '#059669';
+                    else if (s.type.indexOf('战投') >= 0 || s.type.indexOf('战略') >= 0 || s.type.indexOf('产业') >= 0) typeColor = '#2563eb';
+                    else if (s.type.indexOf('国资') >= 0) typeColor = '#7c3aed';
+                    else if (s.type.indexOf('流通') >= 0) typeColor = '#94a3b8';
+                    barHtml += `<div style="display:flex;align-items:center;gap:8px;font-size:0.78rem;">
+                        <span style="width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary);">${s.name}</span>
+                        <span style="flex:1;height:14px;background:#f1f5f9;border-radius:7px;overflow:hidden;position:relative;">
+                            <span style="display:block;height:100%;width:${Math.min(s.pct,100)}%;background:${typeColor};border-radius:7px;"></span>
+                        </span>
+                        <span style="width:48px;text-align:right;font-weight:600;color:${typeColor};">${s.pct}%</span>
+                        <span style="width:70px;font-size:0.7rem;color:var(--text-secondary);">${s.type}</span>
+                    </div>`;
+                });
+                barHtml += '</div>';
+                html += `<tr>
+                    <td class="col-company" style="color:${d.color};">● ${d.name}</td>
+                    <td><span class="col-round" style="background:${roundBg};color:${d.color};">${d.fundingRound}</span></td>
+                    <td>${barHtml}</td>
+                    <td class="col-note">${d.fundingNote}</td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            tbl.innerHTML = html;
+        }
     }
 
     function applyFilter() {
