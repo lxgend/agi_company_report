@@ -65,8 +65,8 @@
         .hero-content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
         .hero h1 {
             font-size: 2.4rem; font-weight: 800; margin-bottom: 14px;
-            background: linear-gradient(90deg, #a5b4fc, #fbbf24, #67e8f9);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            color: #fde047;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .hero .subtitle { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 20px; }
         .report-meta { margin-top: 16px; font-size: 0.86rem; color: #94a3b8; }
@@ -1255,25 +1255,31 @@
         <div class="dim-common">
             <strong>🟰 共同点：</strong>九强都瞄准 <span class="common-tag">AGI</span>，都以 <span class="common-tag">大模型为核心</span>，都接受 <span class="common-tag">资本驱动</span>。差异在于：<span class="common-tag">"赢什么"不同</span>——有人追求技术上限，有人追求规模变现，有人追求生态壁垒。
         </div>
+        <div class="hill-legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:0.78rem;justify-content:center;">
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3b82f6;margin-right:4px;vertical-align:middle;"></span>开源生态（深度求索/智谱/面壁）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f97316;margin-right:4px;vertical-align:middle;"></span>出海全球化（MiniMax/昆仑）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#8b5cf6;margin-right:4px;vertical-align:middle;"></span>基础设施（Dify/硅基流动）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f59e0b;margin-right:4px;vertical-align:middle;"></span>技术/多模态（月之暗面/阶跃）</span>
+        </div>
         <div class="step-cards-grid">
             <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
                 <div class="hill-kw" style="background:#3b82f6;color:white;">AI 民主化</div>
                 <h5 style="color:#1d4ed8;">🐋 深度求索</h5>
                 <p>以<span class="hill-highlight">极致性价比开源</span>倒逼全行业降价，不追求短期商业化</p>
             </div>
-            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">政企第一</div>
-                <h5 style="color:#047857;">🧠 智谱</h5>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">政企第一</div>
+                <h5 style="color:#1d4ed8;">🧠 智谱</h5>
                 <p>成为<span class="hill-highlight">政企本地化部署首选</span>，学术血统+合规资质构建闭环</p>
             </div>
-            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#ec4899;background:linear-gradient(135deg,#fdf2f8,#fce7f3);">
-                <div class="hill-kw" style="background:#ec4899;color:white;">端侧无处不在</div>
-                <h5 style="color:#9d174d;">📱 面壁智能</h5>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">端侧无处不在</div>
+                <h5 style="color:#1d4ed8;">📱 面壁智能</h5>
                 <p>让 AI 跑在<span class="hill-highlight">每一个终端</span>上，用小参数撬动大市场</p>
             </div>
-            <div class="hill-card filterable" data-company="moon" style="border-left-color:#6366f1;background:linear-gradient(135deg,#eef2ff,#e0e7ff);">
-                <div class="hill-kw" style="background:#6366f1;color:white;">智能上限优先</div>
-                <h5 style="color:#4338ca;">🌙 月之暗面</h5>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#f59e0b;background:linear-gradient(135deg,#fffbeb,#fef3c7);">
+                <div class="hill-kw" style="background:#f59e0b;color:white;">智能上限优先</div>
+                <h5 style="color:#b45309;">🌙 月之暗面</h5>
                 <p>做<span class="hill-highlight">"不被定义的 LLM"</span>，底层架构重构追求智能天花板</p>
             </div>
             <div class="hill-card filterable" data-company="step" style="border-left-color:#f59e0b;background:linear-gradient(135deg,#fffbeb,#fef3c7);">
@@ -1281,9 +1287,9 @@
                 <h5 style="color:#b45309;">⚡ 阶跃星辰</h5>
                 <p>多模态 AGI 领跑者，通过<span class="hill-highlight">终端生态绑定</span>实现规模化落地</p>
             </div>
-            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#06b6d4;background:linear-gradient(135deg,#ecfeff,#cffafe);">
-                <div class="hill-kw" style="background:#06b6d4;color:white;">全球化变现</div>
-                <h5 style="color:#0e7490;">🌊 MiniMax</h5>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">全球化变现</div>
+                <h5 style="color:#9a3412;">🌊 MiniMax</h5>
                 <p>做中国 AI <span class="hill-highlight">出海标杆</span>，视频生成+社交产品双轮驱动</p>
             </div>
             <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
@@ -1296,9 +1302,9 @@
                 <h5 style="color:#6d28d9;">🧩 Dify</h5>
                 <p>成为 AI 应用开发的<span class="hill-highlight">标准基础设施</span>，不造模型做"操作系统"</p>
             </div>
-            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">Token 工厂</div>
-                <h5 style="color:#334155;">⚙️ 硅基流动</h5>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">Token 工厂</div>
+                <h5 style="color:#6d28d9;">⚙️ 硅基流动</h5>
                 <p>做大模型时代的<span class="hill-highlight">"水电煤"</span>，不赌模型胜负只赚 Token 流量</p>
             </div>
         </div>
@@ -1316,50 +1322,55 @@
         <div class="dim-common">
             <strong>🟰 共同点：</strong>九强 <span class="common-tag">9 家均有 API</span>，<span class="common-tag">7 家 B+C 双线</span>，<span class="common-tag">5 家出海</span>。差异在于：<span class="common-tag">"服务谁"不同</span>——政企 vs 终端 vs C 端 vs 开发者。
         </div>
+        <div class="hill-legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:0.78rem;justify-content:center;">
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3b82f6;margin-right:4px;vertical-align:middle;"></span>开发者导向（深度求索/Dify/硅基）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#10b981;margin-right:4px;vertical-align:middle;"></span>政企/终端导向（智谱/面壁）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f97316;margin-right:4px;vertical-align:middle;"></span>B+C 双线/出海（月之暗面/阶跃/MiniMax/昆仑）</span>
+        </div>
         <div class="step-cards-grid">
-            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤👨‍💻 性价比之王</div>
-                <h5 style="color:#6d28d9;">🐋 深度求索</h5>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">👤👨‍💻 性价比之王</div>
+                <h5 style="color:#1d4ed8;">🐋 深度求索</h5>
                 <p>开发者+大众 · 开源模型+App · <span class="hill-highlight">不重营销</span>，口碑自传播</p>
             </div>
-            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">🏛️👤 政企可信</div>
-                <h5 style="color:#6d28d9;">🧠 智谱</h5>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">🏛️👤 政企可信</div>
+                <h5 style="color:#047857;">🧠 智谱</h5>
                 <p>政企+C端 · GLM+清言+AutoGLM · <span class="hill-highlight">清华学术背书</span></p>
             </div>
-            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">🏛️🏢 端侧小钢炮</div>
-                <h5 style="color:#6d28d9;">📱 面壁智能</h5>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">🏛️🏢 端侧小钢炮</div>
+                <h5 style="color:#047857;">📱 面壁智能</h5>
                 <p>终端厂商+政务 · MiniCPM SDK · <span class="hill-highlight">运营商渠道</span></p>
             </div>
-            <div class="hill-card filterable" data-company="moon" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤🏢 不被定义</div>
-                <h5 style="color:#6d28d9;">🌙 月之暗面</h5>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">👤🏢 不被定义</div>
+                <h5 style="color:#9a3412;">🌙 月之暗面</h5>
                 <p>知识工作者+程序员 · Kimi 单品 · <span class="hill-highlight">产品即营销</span>，海外优先</p>
             </div>
-            <div class="hill-card filterable" data-company="step" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">🏢👤 多模态第一</div>
-                <h5 style="color:#6d28d9;">⚡ 阶跃星辰</h5>
+            <div class="hill-card filterable" data-company="step" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">🏢👤 多模态第一</div>
+                <h5 style="color:#9a3412;">⚡ 阶跃星辰</h5>
                 <p>B端龙头+C端 · 30+ Step 矩阵 · <span class="hill-highlight">吉利/OPPO/荣耀</span>背书</p>
             </div>
-            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤🏢 出海标杆</div>
-                <h5 style="color:#6d28d9;">🌊 MiniMax</h5>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">👤🏢 出海标杆</div>
+                <h5 style="color:#9a3412;">🌊 MiniMax</h5>
                 <p>海外C端+B端 · Talkie/星野/海螺 · <span class="hill-highlight">社交病毒传播</span></p>
             </div>
-            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">👤🏢 全栈出海</div>
-                <h5 style="color:#6d28d9;">🦅 昆仑万维</h5>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">👤🏢 全栈出海</div>
+                <h5 style="color:#9a3412;">🦅 昆仑万维</h5>
                 <p>全球C端+B端 · 天工+Opera+DramaWave · <span class="hill-highlight">Opera 全球流量</span></p>
             </div>
-            <div class="hill-card filterable" data-company="dify" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">👨‍💻 中立平台</div>
-                <h5 style="color:#6d28d9;">🧩 Dify</h5>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">👨‍💻 中立平台</div>
+                <h5 style="color:#1d4ed8;">🧩 Dify</h5>
                 <p>开发团队 · 开源 LLMOps · <span class="hill-highlight">社区漏斗</span>→云订阅→企业版</p>
             </div>
-            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
-                <div class="hill-kw" style="background:#8b5cf6;color:white;">👨‍💻 一价全包</div>
-                <h5 style="color:#6d28d9;">⚙️ 硅基流动</h5>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">👨‍💻 一价全包</div>
+                <h5 style="color:#1d4ed8;">⚙️ 硅基流动</h5>
                 <p>企业开发者 · 推理云+MaaS · <span class="hill-highlight">阿里云/携程渠道</span></p>
             </div>
         </div>
@@ -1460,10 +1471,16 @@
         <div class="dim-common">
             <strong>🟰 共同点：</strong>九强都 <span class="common-tag">开源模型</span>，都 <span class="common-tag">API 标准化</span>。差异在于：<span class="common-tag">"怎么造"不同</span>——精锐突击 vs 规模矩阵，开源驱动 vs B 端定制。
         </div>
+        <div class="hill-legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:0.78rem;justify-content:center;">
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3b82f6;margin-right:4px;vertical-align:middle;"></span>开源驱动（深度求索/Dify）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#10b981;margin-right:4px;vertical-align:middle;"></span>交付驱动（智谱/面壁/阶跃）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f97316;margin-right:4px;vertical-align:middle;"></span>产品/飞轮（月之暗面/MiniMax/昆仑）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#8b5cf6;margin-right:4px;vertical-align:middle;"></span>规模运营（硅基流动）</span>
+        </div>
         <div class="step-cards-grid">
-            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">工程驱动·开源交付</div>
-                <h5 style="color:#047857;">🐋 深度求索</h5>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">工程驱动·开源交付</div>
+                <h5 style="color:#1d4ed8;">🐋 深度求索</h5>
                 <p>200 人极简研发，发布即交付，<span class="hill-highlight">不设销售团队</span></p>
             </div>
             <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
@@ -1476,9 +1493,9 @@
                 <h5 style="color:#047857;">📱 面壁智能</h5>
                 <p><span class="hill-highlight">SDK 即产品</span>，联合终端厂商预装</p>
             </div>
-            <div class="hill-card filterable" data-company="moon" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">精锐研发型</div>
-                <h5 style="color:#047857;">🌙 月之暗面</h5>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">精锐研发型</div>
+                <h5 style="color:#9a3412;">🌙 月之暗面</h5>
                 <p>300 人扁平，单品极致迭代，<span class="hill-highlight">研发即壁垒</span></p>
             </div>
             <div class="hill-card filterable" data-company="step" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
@@ -1486,24 +1503,24 @@
                 <h5 style="color:#047857;">⚡ 阶跃星辰</h5>
                 <p><span class="hill-highlight">30+ 模型矩阵</span>，与吉利/OPPO 共建</p>
             </div>
-            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">多产品线敏捷型</div>
-                <h5 style="color:#047857;">🌊 MiniMax</h5>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">多产品线敏捷型</div>
+                <h5 style="color:#9a3412;">🌊 MiniMax</h5>
                 <p>C 端敏捷迭代+B 端 API，<span class="hill-highlight">数据飞轮</span>驱动</p>
             </div>
-            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">全栈闭环飞轮型</div>
-                <h5 style="color:#047857;">🦅 昆仑万维</h5>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">全栈闭环飞轮型</div>
+                <h5 style="color:#9a3412;">🦅 昆仑万维</h5>
                 <p><span class="hill-highlight">"芯片-模型-平台-应用"全链路</span>自研飞轮</p>
             </div>
-            <div class="hill-card filterable" data-company="dify" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">开源社区驱动型</div>
-                <h5 style="color:#047857;">🧩 Dify</h5>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">开源社区驱动型</div>
+                <h5 style="color:#1d4ed8;">🧩 Dify</h5>
                 <p><span class="hill-highlight">GitHub 社区贡献</span>驱动，社区→云→企业三层漏斗</p>
             </div>
-            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
-                <div class="hill-kw" style="background:#10b981;color:white;">推理云标准化运营</div>
-                <h5 style="color:#047857;">⚙️ 硅基流动</h5>
+            <div class="hill-card filterable" data-company="silicon" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">推理云标准化运营</div>
+                <h5 style="color:#6d28d9;">⚙️ 硅基流动</h5>
                 <p>MaaS 聚合多模型，<span class="hill-highlight">边际成本持续下降</span></p>
             </div>
         </div>
@@ -1521,45 +1538,52 @@
         <div class="dim-common">
             <strong>🟰 共同点：</strong>九强都 <span class="common-tag">资本充裕</span>，都 <span class="common-tag">高薪抢人</span>。差异在于：<span class="common-tag">"用什么撑"不同</span>——自有算力 vs 融资支撑，精锐团队 vs 集团化，自研芯片 vs 云托管。
         </div>
+        <div class="hill-legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:0.78rem;justify-content:center;">
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3b82f6;margin-right:4px;vertical-align:middle;"></span>自有算力/芯片（深度求索/昆仑）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#10b981;margin-right:4px;vertical-align:middle;"></span>学术/产业背景（智谱/面壁/阶跃/MiniMax）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f97316;margin-right:4px;vertical-align:middle;"></span>精锐组织（月之暗面）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#8b5cf6;margin-right:4px;vertical-align:middle;"></span>轻资产（Dify）</span>
+            <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#64748b;margin-right:4px;vertical-align:middle;"></span>基础设施商（硅基流动）</span>
+        </div>
         <div class="step-cards-grid">
-            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">幻方自有算力</div>
-                <h5 style="color:#334155;">🐋 深度求索</h5>
+            <div class="hill-card filterable" data-company="deepseek" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">幻方自有算力</div>
+                <h5 style="color:#1d4ed8;">🐋 深度求索</h5>
                 <p>200 人 · 投后 590 亿美元 · <span class="hill-highlight">幻方万卡集群自有</span></p>
             </div>
-            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">清华学术血统</div>
-                <h5 style="color:#334155;">🧠 智谱</h5>
+            <div class="hill-card filterable" data-company="zhipu" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">清华学术血统</div>
+                <h5 style="color:#047857;">🧠 智谱</h5>
                 <p>900 人 · 港股市值 7800 亿 · <span class="hill-highlight">学术+工程双轨</span></p>
             </div>
-            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">运营商渠道加持</div>
-                <h5 style="color:#334155;">📱 面壁智能</h5>
+            <div class="hill-card filterable" data-company="mianbi" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">运营商渠道加持</div>
+                <h5 style="color:#047857;">📱 面壁智能</h5>
                 <p>300 人 · 中国电信领投 · <span class="hill-highlight">端侧算力需求低</span></p>
             </div>
-            <div class="hill-card filterable" data-company="moon" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">无 OKR 无部门墙</div>
-                <h5 style="color:#334155;">🌙 月之暗面</h5>
+            <div class="hill-card filterable" data-company="moon" style="border-left-color:#f97316;background:linear-gradient(135deg,#fff7ed,#ffedd5);">
+                <div class="hill-kw" style="background:#f97316;color:white;">无 OKR 无部门墙</div>
+                <h5 style="color:#9a3412;">🌙 月之暗面</h5>
                 <p>300 人精锐 · 投前 315 亿 · <span class="hill-highlight">联创直管</span></p>
             </div>
-            <div class="hill-card filterable" data-company="step" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">产业联盟型</div>
-                <h5 style="color:#334155;">⚡ 阶跃星辰</h5>
+            <div class="hill-card filterable" data-company="step" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">产业联盟型</div>
+                <h5 style="color:#047857;">⚡ 阶跃星辰</h5>
                 <p>800 人 · 估值 120 亿 · <span class="hill-highlight">印奇董事长加持</span></p>
             </div>
-            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">商汤系团队</div>
-                <h5 style="color:#334155;">🌊 MiniMax</h5>
+            <div class="hill-card filterable" data-company="minimax" style="border-left-color:#10b981;background:linear-gradient(135deg,#ecfdf5,#d1fae5);">
+                <div class="hill-kw" style="background:#10b981;color:white;">商汤系团队</div>
+                <h5 style="color:#047857;">🌊 MiniMax</h5>
                 <p>700 人 · 港股市值 1120 亿 · <span class="hill-highlight">阿里控股 13.66%</span></p>
             </div>
-            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">自研 NPU 芯片</div>
-                <h5 style="color:#334155;">🦅 昆仑万维</h5>
+            <div class="hill-card filterable" data-company="kunlun" style="border-left-color:#3b82f6;background:linear-gradient(135deg,#eff6ff,#dbeafe);">
+                <div class="hill-kw" style="background:#3b82f6;color:white;">自研 NPU 芯片</div>
+                <h5 style="color:#1d4ed8;">🦅 昆仑万维</h5>
                 <p>数千人 · A 股市值 585 亿 · <span class="hill-highlight">控股艾捷科芯</span></p>
             </div>
-            <div class="hill-card filterable" data-company="dify" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
-                <div class="hill-kw" style="background:#64748b;color:white;">全球分布式</div>
-                <h5 style="color:#334155;">🧩 Dify</h5>
+            <div class="hill-card filterable" data-company="dify" style="border-left-color:#8b5cf6;background:linear-gradient(135deg,#f5f3ff,#ede9fe);">
+                <div class="hill-kw" style="background:#8b5cf6;color:white;">全球分布式</div>
+                <h5 style="color:#6d28d9;">🧩 Dify</h5>
                 <p>100 人 · 红杉领投 · <span class="hill-highlight">无需自建算力</span></p>
             </div>
             <div class="hill-card filterable" data-company="silicon" style="border-left-color:#64748b;background:linear-gradient(135deg,#f8fafc,#e2e8f0);">
@@ -1677,78 +1701,6 @@
             <div class="hill-concept q" style="border-top-color:#dc2626;">
                 <h4 style="color:#dc2626;">🔄 霍华德·马克斯</h4>
                 <p>周期 · 风险 · 第二层次思维<br>关注：当前处于周期什么位置，风险是否被正确定价，是否有不对称机会</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Company 1: 智谱 -->
-    <div class="dimension-block" style="border-top:4px solid #10b981;">
-        <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#10b981,#059669);">Z</span>智谱（2513.HK）· 港股上市 2026.01</div>
-        <div class="dimension-sub">市值 ~7,800 亿港元（2026.07）· IPO 募资 43 亿港元 · 清华系政企本地化部署龙头</div>
-        <div class="dim-cards-grid">
-            <div class="dim-mini-card" style="border-left-color:#1e40af;">
-                <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>GLM-5 模型矩阵 + 政企本地化部署现金流 + AutoGLM 智能体生态<br><strong>市场价格：</strong>7,800 亿港元（2026.07，仅 2.67% 可交易），对应极高增长预期，PS 估值极高<br><strong>安全边际：</strong>🔴 严重不足。IPO 价仅 511 亿港元，半年暴涨至 7,800 亿（15 倍），流通盘仅 2.67% 导致价格失真。7 月解禁后面临巨大抛压。格雷厄姆会坚决回避。</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#b45309;">
-                <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
-                <p><strong>护城河类型：</strong>转换成本（政企本地化部署粘性高）+ 无形资产（清华学术血统 + 合规资质）<br><strong>护城河强度：</strong>🟢 中等偏强。政企客户切换成本高，但面临 DeepSeek 开源冲击<br><strong>ROIC：</strong>本地化部署重人力，资本效率待验证<br><strong>管理层：</strong>唐杰学术背景深厚，商业化执行力待观察</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#7c3aed;">
-                <h5 style="color:#7c3aed;">🧠 芒格：反向思考</h5>
-                <p><strong>哪里会出错？</strong>① DeepSeek 开源持续冲击政企付费意愿；② 港股流动性不足导致估值折价；③ 清华系人才流失到竞品<br><strong>值得长期持有吗？</strong>芒格或认为"合理价格的国产政企 AI 龙头"值得关注，但需确认护城河不被开源侵蚀。Lollapalooza 效应：学术血统 + 合规 + 政企信任三重叠加。</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#dc2626;">
-                <h5 style="color:#dc2626;">🔄 霍华德·马克斯：周期</h5>
-                <p><strong>周期位置：</strong>AI 概念高位区，港股 AI 板块情绪偏热<br><strong>风险定价：</strong>市场对政企 AI 部署增速过于乐观，风险溢价不足<br><strong>第二层次思维：</strong>"大家都知道智谱是政企龙头"→ 共识已定价。超额收益需来自"政企订单超预期"或"开源反而做大政企蛋糕"</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Company 2: MiniMax -->
-    <div class="dimension-block" style="border-top:4px solid #06b6d4;">
-        <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">X</span>MiniMax（00100.HK）· 港股上市 2026.01</div>
-        <div class="dimension-sub">市值 ~1,120 亿港元（2026.07）· 阿里/米哈游/腾讯加持 · AI 出海标杆 + 视频生成领先</div>
-        <div class="dim-cards-grid">
-            <div class="dim-mini-card" style="border-left-color:#1e40af;">
-                <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>Talkie 全球月活破亿 + 海螺视频生成 + 开放平台 API 三条收入线<br><strong>市场价格：</strong>1,120 亿港元（2026.07，较 IPO 700 亿涨 60%），2025 AI 原生收入仅 5310 万美元，PS 极高<br><strong>安全边际：</strong>🔴 不足。股价已从高点回落近 50%，但营收与市值仍严重不匹配。7 月解禁压力巨大。格雷厄姆原则会回避。</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#b45309;">
-                <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
-                <p><strong>护城河类型：</strong>网络效应（Talkie 社交）+ 技术（视频生成领先）+ 资本（上市信誉）<br><strong>护城河强度：</strong>🟡 中等。社交产品有网络效应但用户粘性待验证，视频生成竞争激烈<br><strong>ROIC：</strong>亏损中，经调整亏损快速收窄但尚未盈利<br><strong>管理层：</strong>闫俊杰商汤系背景，产品+技术双能力突出</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#7c3aed;">
-                <h5 style="color:#7c3aed;">🧠 芒格：反向思考</h5>
-                <p><strong>哪里会出错？</strong>① Talkie 用户增长见顶后变现不及预期；② 视频生成被大厂（字节/腾讯）追平；③ 海外监管风险（数据合规）；④ 港股 AI 泡沫破裂<br><strong>值得长期持有吗？</strong>芒格或认为"有趣的生意但价格不够合理"。出海 + 视频是稀缺组合，但需等估值回归。反向思考：如果 Talkie 月活下滑，700 亿市值能撑住吗？</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#dc2626;">
-                <h5 style="color:#dc2626;">🔄 霍华德·马克斯：周期</h5>
-                <p><strong>周期位置：</strong>AI 出海概念顶部区域，市场情绪极度乐观<br><strong>风险定价：</strong>🔥 高风险。PS 估值隐含了未来 5 年高速增长，任何增速不及预期都将剧烈调整<br><strong>第二层次思维：</strong>"大家都知道 MiniMax 是出海标杆"→ 已定价。超额收益需来自"视频生成商业化爆发"超预期，而非社交产品线性增长。不对称性偏弱——下行风险大于上行空间。</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Company 3: 昆仑万维 -->
-    <div class="dimension-block" style="border-top:4px solid #f97316;">
-        <div class="dimension-title"><span class="dimension-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);">K</span>昆仑万维（300418.SZ）· 深交所上市 2015</div>
-        <div class="dimension-sub">市值 ~585 亿元（2026.07）· 2025 前三季度营收 58 亿 · 海外收入占比 93% · 全栈 AI 布局</div>
-        <div class="dim-cards-grid">
-            <div class="dim-mini-card" style="border-left-color:#1e40af;">
-                <h5 style="color:#1e40af;">🛡️ 格雷厄姆：安全边际</h5>
-                <p><strong>内在价值：</strong>Opera 全球流量 + DramaWave 短剧 + Skywork 模型 + 艾捷科芯芯片，多元资产组合<br><strong>市场价格：</strong>585 亿元（2026.07），2025 前三季度营收 58 亿（含非 AI 业务），PS 约 5-6 倍<br><strong>安全边际：</strong>🟢 相对充足。有真实营收和现金流支撑（非纯概念），PS 低于纯 AI 公司。资产负债率仅 19.6%，现金 36 亿+。格雷厄姆会认可财务稳健性。</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#b45309;">
-                <h5 style="color:#b45309;">🏰 巴菲特：护城河</h5>
-                <p><strong>护城河类型：</strong>规模效应（Opera 全球流量）+ 全栈协同（芯片-模型-应用）+ 转换成本（海外用户）<br><strong>护城河强度：</strong>🟢 中等偏强。Opera 流量入口 + DramaWave 短剧变现已验证，全栈布局形成协同<br><strong>ROIC：</strong>2025 Q3 已扭亏，机构预测 2025-2027 净利增速 75%/134%/179%<br><strong>管理层：</strong>周亚辉战略眼光独到，All in AGI 决策果断</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#7c3aed;">
-                <h5 style="color:#7c3aed;">🧠 芒格：反向思考</h5>
-                <p><strong>哪里会出错？</strong>① 芯片量产不及预期拖累全栈叙事；② 短剧赛道竞争加剧；③ A 股 AI 板块泡沫破裂联动下跌；④ 海外政策监管风险<br><strong>值得长期持有吗？</strong>✅ 芒格或最认可这家——有真实营收、全栈协同、合理估值。Lollapalooza 效应：流量 + 模型 + 芯片 + 应用四重叠加。反向思考：即使 AI 失败，Opera + 短剧仍有基本盘。</p>
-            </div>
-            <div class="dim-mini-card" style="border-left-color:#dc2626;">
-                <h5 style="color:#dc2626;">🔄 霍华德·马克斯：周期</h5>
-                <p><strong>周期位置：</strong>A 股 AI 概念中高位，但昆仑有基本面支撑，非纯泡沫<br><strong>风险定价：</strong>🟡 适中。PS 5-6 倍 + 已扭亏，下行空间相对有限<br><strong>第二层次思维：</strong>"市场只把它当短剧/游戏公司"→ AI 全栈价值未被充分定价。若芯片量产 + 天工智能体爆发，存在估值重估机会。不对称性较好——下行有营收兜底，上行有 AI 重估。</p>
             </div>
         </div>
     </div>
