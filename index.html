@@ -965,20 +965,20 @@
             </div>
             <p class="card-desc">不参与九强排名的生态参照系：Qwen 系列全球累计下载破 30 亿次（HF 生态第一大基座，为 Meta 的 9 倍、Google 的 5 倍）；千问 App 上线两个月 MAU 破 1 亿，"AI 办事"接入淘宝/支付宝/高德；2026.3 成立 ATH 事业群由吴泳铭直管，目标九个字——创造 Token、输送 Token、应用 Token。</p>
             <div class="paper-section">
-                <div class="paper-title">📄 生态数据 / 相关报道</div>
-                <a class="paper-link" href="https://global.chinadaily.com.cn/a/202608/16/WS6a8159d4a31073853ec5389c.html" target="_blank" style="border-left-color:#ff6a00;">
-                    <span class="paper-name">Qwen becomes world's most downloaded open AI model</span>
-                    <span class="paper-venue">China Daily · 2026.08 · HF 报告：下载 30 亿+、衍生模型 15 万+（全平台 30 万+）</span>
+                <div class="paper-title">📄 关键技术报告</div>
+                <a class="paper-link" href="https://arxiv.org/abs/2609.25611" target="_blank" style="border-left-color:#ff6a00;">
+                    <span class="paper-name">Qwen3.8-Omni: Towards Native Omni-Modal Agents</span>
+                    <span class="paper-venue">arXiv:2609.25611 · 2026.09 · 原生全模态智能体，MoE 骨干扩展至 1M 上下文，Thinker-Talker 架构 + Qwen-Live-Harness 开源框架</span>
                     <span class="paper-arrow">↗</span>
                 </a>
-                <a class="paper-link" href="https://www.alibabagroup.com/document-1948497434959151104" target="_blank" style="border-left-color:#ff6a00;">
-                    <span class="paper-name">千问 App 推进 Agentic AI 战略</span>
-                    <span class="paper-venue">阿里集团官网 · 千问 App"AI 办事"升级，两个月 MAU 破 1 亿</span>
+                <a class="paper-link" href="https://arxiv.org/abs/2608.30320" target="_blank" style="border-left-color:#ff6a00;">
+                    <span class="paper-name">On the Design of Qwen3.8-Next Architecture: Evaluation, Efficiency, and Training Stability</span>
+                    <span class="paper-venue">arXiv:2608.30320 · 2026.08 · 125B MoE / 激活 6B，Gated DeltaNet 混合注意力 + QSA 稀疏注意力 + Muon 优化器，1/9 训练 FLOPs 追平 397B 前代</span>
                     <span class="paper-arrow">↗</span>
                 </a>
-                <a class="paper-link" href="https://m.thepaper.cn/newsDetail_forward_34279920" target="_blank" style="border-left-color:#ff6a00;">
-                    <span class="paper-name">阿里 AI 战事升级：ATH 事业群组织架构解析</span>
-                    <span class="paper-venue">澎湃新闻 · 2026.10 · 千问/千问办公/千问 AI 平台三大业务单元归属 ATH</span>
+                <a class="paper-link" href="https://arxiv.org/abs/2505.09388" target="_blank" style="border-left-color:#ff6a00;">
+                    <span class="paper-name">Qwen3 Technical Report</span>
+                    <span class="paper-venue">arXiv:2505.09388 · 2025.05 · 思考/非思考统一框架 + 思考预算机制，36 万亿 token 预训练，119 语言，Apache 2.0 开源</span>
                     <span class="paper-arrow">↗</span>
                 </a>
             </div>
@@ -1065,7 +1065,7 @@
 
     <div class="dimension-block">
         <div class="dim-common">
-            <strong>🟰 共同点：</strong>九强中 <span class="common-tag">7 家开源旗舰模型</span>（DeepSeek/智谱/面壁/月之暗面/阶跃/MiniMax/昆仑），<span class="common-tag">8 家采用 MoE 架构</span>（面壁为 Dense 端侧），<span class="common-tag">9 家均有 API 服务</span>，<span class="common-tag">7 家覆盖多模态</span>（Dify/硅基流动/面壁除外）。差异在于：模型规模、模态侧重、算力来源、是否自研芯片。
+            <strong>🟰 共同点：</strong>九强中 <span class="common-tag">7 家开源旗舰模型</span>（DeepSeek/智谱/面壁/月之暗面/阶跃/MiniMax/昆仑），<span class="common-tag">6 家自研基模采用 MoE</span>（面壁为 Dense 端侧；Dify/硅基流动不自研模型），<span class="common-tag">9 家均有 API 服务</span>，<span class="common-tag">7 家覆盖多模态</span>（Dify/硅基流动/面壁除外）。差异在于：模型规模、模态侧重、算力来源、是否自研芯片。
         </div>
         <div class="dim-cards-grid">
             <div class="dim-mini-card deepseek filterable" data-company="deepseek">
@@ -1098,7 +1098,7 @@
             <div class="dim-mini-card moon filterable" data-company="moon">
                 <h5>🌙 月之暗面</h5>
                 <div class="dim-attr">
-                    <span class="attr-label">架构</span><span class="attr-value">MoE 1T / 激活 32B</span>
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 2.8T / 激活 104B（K3）</span>
                     <span class="attr-label">模态</span><span class="attr-value">文本 · Agent · 编程</span>
                     <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">K2→K3 开源（首个 3T 级）</span></span>
                     <span class="attr-label">核心创新</span><span class="attr-value">自研 MuonClip 优化器 + Linear 注意力，300 Agent 集群并发</span>
@@ -1116,7 +1116,7 @@
             <div class="dim-mini-card minimax filterable" data-company="minimax">
                 <h5>🌊 MiniMax</h5>
                 <div class="dim-attr">
-                    <span class="attr-label">架构</span><span class="attr-value">MoE 456B（M1）</span>
+                    <span class="attr-label">架构</span><span class="attr-value">MoE 456B（M1）· M3 已迭代</span>
                     <span class="attr-label">模态</span><span class="attr-value">文本 · 视频 · 多模态 · 社交</span>
                     <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">M1→M2.7 多代开源</span></span>
                     <span class="attr-label">核心创新</span><span class="attr-value">abab 语言 + 海螺视频生成双线，Lightning Attention</span>
@@ -1137,7 +1137,7 @@
                     <span class="attr-label">架构</span><span class="attr-value"><span class="attr-badge neutral">不自研模型</span></span>
                     <span class="attr-label">模态</span><span class="attr-value">模型无关 · 多模型接入</span>
                     <span class="attr-label">开源</span><span class="attr-value"><span class="attr-badge yes">平台开源</span></span>
-                    <span class="attr-label">核心创新</span><span class="attr-value">Agentic 工作流引擎，可视化编排，10 万 GitHub Star</span>
+                    <span class="attr-label">核心创新</span><span class="attr-value">Agentic 工作流引擎，可视化编排，16 万 GitHub Star</span>
                 </div>
             </div>
             <div class="dim-mini-card silicon filterable" data-company="silicon">
@@ -1704,7 +1704,7 @@
         </div>
         <div class="step-desc">选择能支撑 Order Winners 的研发与交付过程——是精锐突击还是规模矩阵，是开源社区驱动还是 B 端定制交付。过程必须与制胜要素对齐。</div>
         <div class="dim-common">
-            <strong>🟰 共同点：</strong>九强都 <span class="common-tag">开源模型</span>，都 <span class="common-tag">API 标准化</span>。差异在于：<span class="common-tag">"怎么造"不同</span>——精锐突击 vs 规模矩阵，开源驱动 vs B 端定制。
+            <strong>🟰 共同点：</strong>九强中七家 <span class="common-tag">开源模型</span>（Dify/硅基流动开源平台与项目），九家均 <span class="common-tag">API/平台标准化</span>。差异在于：<span class="common-tag">"怎么造"不同</span>——精锐突击 vs 规模矩阵，开源驱动 vs B 端定制。
         </div>
         <div class="hill-legend" style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:0.78rem;justify-content:center;">
             <span><span class="dot" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3b82f6;margin-right:4px;vertical-align:middle;"></span>开源驱动（深度求索/Dify）</span>
@@ -2020,7 +2020,7 @@
             {name:'梁文锋（控制84%以上表决权）', pct:88, type:'创始人'},
             {name:'腾讯/宁德时代/中芯聚源/吉利等（两轮，无投票权）', pct:12, type:'战投/财务'}
         ]},
-        zhipu:    { name:'智谱',     color:'#10b981', funding:43,  team:900, arr:16.0, fundingNote:'港股市值约2,433亿港元（2026.10），2026H1营收9.54亿元+400%', fundingRound:'港股 IPO', shareholders:[
+        zhipu:    { name:'智谱',     color:'#10b981', funding:356, team:900, arr:2.7,  fundingNote:'2026.9 配售+可转债约390亿港元，上市9个月累计再融资约750亿港元；港股市值约2,433亿港元（2026.10），2026H1营收9.54亿元+400%', fundingRound:'配售+可转债', shareholders:[
             {name:'唐杰（创始人）+ 员工持股平台', pct:60, type:'创始团队'},
             {name:'君联资本（社保基金）', pct:6.7, type:'财务投资'},
             {name:'美团', pct:3, type:'战投'},
@@ -2042,14 +2042,14 @@
             {name:'社保长三角科创基金 / 人民日报等国资', pct:6, type:'国资/财务'},
             {name:'其他（含员工持股）', pct:12.17, type:'员工/其他'}
         ]},
-        step:     { name:'阶跃星辰', color:'#f59e0b', funding:170, team:800, arr:1.0, fundingNote:'Pre-IPO 25亿美元，估值传最高120亿美元，冲刺港股IPO（传已递表）', fundingRound:'Pre-IPO', shareholders:[
-            {name:'姜大昕（创始人 CEO）+ 员工持股', pct:40, type:'创始团队'},
-            {name:'印奇（旷视董事长，B+轮入主）', pct:15, type:'战略控股'},
+        step:     { name:'阶跃星辰', color:'#f59e0b', funding:170, team:800, arr:1.7, fundingNote:'Pre-IPO 25亿美元，估值传最高120亿美元，冲刺港股IPO（传已递表）', fundingRound:'Pre-IPO', shareholders:[
+            {name:'姜大昕（创始人·首席科学家）+ 员工持股', pct:40, type:'创始团队'},
+            {name:'印奇（CEO，B+轮入主）', pct:15, type:'战略控股'},
             {name:'上海国投先导 / 国寿股权（B+领投）', pct:15, type:'国资/财务'},
             {name:'腾讯 / 启明 / 五源（老股东）', pct:12, type:'战投/财务'},
             {name:'其他产业资本（浦东/徐汇/厦门国贸/华勤）', pct:18, type:'产业投资'}
         ]},
-        minimax:  { name:'MiniMax', color:'#06b6d4', funding:0,   team:700, arr:8.0, fundingNote:'港股市值约661亿港元（2026.10），2026H1营收1.17亿美元+283%', fundingRound:'港股 IPO', shareholders:[
+        minimax:  { name:'MiniMax', color:'#06b6d4', funding:146, team:700, arr:2.3, fundingNote:'2026.7 配售+零息可转债约160亿港元；港股市值约661亿港元（2026.10），2026H1营收1.17亿美元+283%', fundingRound:'配售+可转债', shareholders:[
             {name:'闫俊杰（创始人）+ Alpha EXP 员工平台', pct:29.86, type:'创始团队'},
             {name:'阿里巴巴（最大外部股东）', pct:13.66, type:'战投'},
             {name:'米哈游', pct:6.4, type:'战投'},
@@ -2057,7 +2057,7 @@
             {name:'IDG / 高瓴 / 红杉 / 云启等', pct:15, type:'财务投资'},
             {name:'其他（含 IPO 流通）', pct:32.5, type:'其他/流通'}
         ]},
-        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,   team:3000, arr:10.0, fundingNote:'A股市值约519亿元（2026.10），2026H1归母净利10.9亿扭亏', fundingRound:'A 股上市', shareholders:[
+        kunlun:   { name:'昆仑万维', color:'#f97316', funding:0,    team:3000, arr:15.0, fundingNote:'A股市值约519亿元（2026.10），2026H1归母净利10.9亿扭亏', fundingRound:'A 股上市', shareholders:[
             {name:'周亚辉（创始人，实控人 19.84%）', pct:19.84, type:'创始人'},
             {name:'盈瑞世纪（周亚辉关联）', pct:15.11, type:'创始人'},
             {name:'李琼（周亚辉前妻）', pct:7.67, type:'关联方'},
@@ -2083,6 +2083,7 @@
     let selected = new Set(allKeys);
 
     let fundingChart, teamChart, arrChart, ossChart;
+    let currentKeys = [];
 
     function initCharts() {
         if (typeof Chart === 'undefined') {
@@ -2100,7 +2101,7 @@
                 responsive: true, maintainAspectRatio: false,
                 plugins: {
                     legend: { labels: { color:'#475569', font:{size:13} } },
-                    tooltip: { callbacks: { label: (ctx) => companyData[allKeys[ctx.dataIndex]].fundingNote } }
+                    tooltip: { callbacks: { label: (ctx) => companyData[currentKeys[ctx.dataIndex]].fundingNote } }
                 },
                 scales: {
                     x: { ticks: { color:'#64748b', font:{size:11} }, grid:{display:false} },
@@ -2161,6 +2162,7 @@
     function updateCharts() {
         if (!fundingChart || !teamChart || !arrChart) return;
         const keys = allKeys.filter(k => selected.has(k));
+        currentKeys = keys;
         const labels = keys.map(k => companyData[k].name);
         const colors = keys.map(k => companyData[k].color);
         const bgColors = colors.map(c => c + 'cc');
